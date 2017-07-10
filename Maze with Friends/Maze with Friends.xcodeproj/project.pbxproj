@@ -1,0 +1,363 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615051F13E2DE00C46CAD /* AppDelegate.swift */; };
+		107615081F13E2DE00C46CAD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 107615071F13E2DE00C46CAD /* GameScene.sks */; };
+		1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 107615091F13E2DE00C46CAD /* Actions.sks */; };
+		1076150C1F13E2DE00C46CAD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076150B1F13E2DE00C46CAD /* GameScene.swift */; };
+		1076150E1F13E2DE00C46CAD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076150D1F13E2DE00C46CAD /* GameViewController.swift */; };
+		107615111F13E2DE00C46CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1076150F1F13E2DE00C46CAD /* Main.storyboard */; };
+		107615131F13E2DE00C46CAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 107615121F13E2DE00C46CAD /* Assets.xcassets */; };
+		107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 107615141F13E2DE00C46CAD /* LaunchScreen.storyboard */; };
+		107615201F13E3D500C46CAD /* BuildingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1076151F1F13E3D500C46CAD /* BuildingAMaze.sks */; };
+		107615221F13E6B800C46CAD /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615211F13E6B800C46CAD /* Maze.swift */; };
+		107615241F13F93C00C46CAD /* GridPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615231F13F93C00C46CAD /* GridPiece.swift */; };
+		107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615261F14202A00C46CAD /* BuildingAMaze.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		107615021F13E2DE00C46CAD /* Maze with Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Maze with Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		107615051F13E2DE00C46CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		107615071F13E2DE00C46CAD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		107615091F13E2DE00C46CAD /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		1076150B1F13E2DE00C46CAD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		1076150D1F13E2DE00C46CAD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		107615101F13E2DE00C46CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		107615121F13E2DE00C46CAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		107615151F13E2DE00C46CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		107615171F13E2DE00C46CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1076151F1F13E3D500C46CAD /* BuildingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BuildingAMaze.sks; sourceTree = "<group>"; };
+		107615211F13E6B800C46CAD /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
+		107615231F13F93C00C46CAD /* GridPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPiece.swift; sourceTree = "<group>"; };
+		107615261F14202A00C46CAD /* BuildingAMaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingAMaze.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		107614FF1F13E2DE00C46CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		107614F91F13E2DE00C46CAD = {
+			isa = PBXGroup;
+			children = (
+				107615041F13E2DE00C46CAD /* Maze with Friends */,
+				107615031F13E2DE00C46CAD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		107615031F13E2DE00C46CAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				107615021F13E2DE00C46CAD /* Maze with Friends.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		107615041F13E2DE00C46CAD /* Maze with Friends */ = {
+			isa = PBXGroup;
+			children = (
+				1076151D1F13E2FC00C46CAD /* Swift */,
+				1076151E1F13E31300C46CAD /* SKS */,
+				1076150F1F13E2DE00C46CAD /* Main.storyboard */,
+				107615121F13E2DE00C46CAD /* Assets.xcassets */,
+				107615141F13E2DE00C46CAD /* LaunchScreen.storyboard */,
+				107615171F13E2DE00C46CAD /* Info.plist */,
+			);
+			path = "Maze with Friends";
+			sourceTree = "<group>";
+		};
+		1076151D1F13E2FC00C46CAD /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				1076150B1F13E2DE00C46CAD /* GameScene.swift */,
+				1076150D1F13E2DE00C46CAD /* GameViewController.swift */,
+				107615251F13F94100C46CAD /* CreateMaze */,
+				107615051F13E2DE00C46CAD /* AppDelegate.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		1076151E1F13E31300C46CAD /* SKS */ = {
+			isa = PBXGroup;
+			children = (
+				1076151F1F13E3D500C46CAD /* BuildingAMaze.sks */,
+				107615071F13E2DE00C46CAD /* GameScene.sks */,
+				107615091F13E2DE00C46CAD /* Actions.sks */,
+			);
+			name = SKS;
+			sourceTree = "<group>";
+		};
+		107615251F13F94100C46CAD /* CreateMaze */ = {
+			isa = PBXGroup;
+			children = (
+				107615261F14202A00C46CAD /* BuildingAMaze.swift */,
+				107615211F13E6B800C46CAD /* Maze.swift */,
+				107615231F13F93C00C46CAD /* GridPiece.swift */,
+			);
+			name = CreateMaze;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		107615011F13E2DE00C46CAD /* Maze with Friends */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1076151A1F13E2DE00C46CAD /* Build configuration list for PBXNativeTarget "Maze with Friends" */;
+			buildPhases = (
+				107614FE1F13E2DE00C46CAD /* Sources */,
+				107614FF1F13E2DE00C46CAD /* Frameworks */,
+				107615001F13E2DE00C46CAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Maze with Friends";
+			productName = "Maze with Friends";
+			productReference = 107615021F13E2DE00C46CAD /* Maze with Friends.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		107614FA1F13E2DE00C46CAD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Ethan;
+				TargetAttributes = {
+					107615011F13E2DE00C46CAD = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = SKVKVL3U56;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 107614FD1F13E2DE00C46CAD /* Build configuration list for PBXProject "Maze with Friends" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 107614F91F13E2DE00C46CAD;
+			productRefGroup = 107615031F13E2DE00C46CAD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				107615011F13E2DE00C46CAD /* Maze with Friends */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		107615001F13E2DE00C46CAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				107615111F13E2DE00C46CAD /* Main.storyboard in Resources */,
+				107615081F13E2DE00C46CAD /* GameScene.sks in Resources */,
+				107615131F13E2DE00C46CAD /* Assets.xcassets in Resources */,
+				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
+				107615201F13E3D500C46CAD /* BuildingAMaze.sks in Resources */,
+				1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		107614FE1F13E2DE00C46CAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1076150C1F13E2DE00C46CAD /* GameScene.swift in Sources */,
+				1076150E1F13E2DE00C46CAD /* GameViewController.swift in Sources */,
+				107615221F13E6B800C46CAD /* Maze.swift in Sources */,
+				107615241F13F93C00C46CAD /* GridPiece.swift in Sources */,
+				107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */,
+				107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1076150F1F13E2DE00C46CAD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				107615101F13E2DE00C46CAD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		107615141F13E2DE00C46CAD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				107615151F13E2DE00C46CAD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		107615181F13E2DE00C46CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		107615191F13E2DE00C46CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1076151B1F13E2DE00C46CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SKVKVL3U56;
+				INFOPLIST_FILE = "Maze with Friends/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-with-Friends";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1076151C1F13E2DE00C46CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SKVKVL3U56;
+				INFOPLIST_FILE = "Maze with Friends/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-with-Friends";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		107614FD1F13E2DE00C46CAD /* Build configuration list for PBXProject "Maze with Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				107615181F13E2DE00C46CAD /* Debug */,
+				107615191F13E2DE00C46CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1076151A1F13E2DE00C46CAD /* Build configuration list for PBXNativeTarget "Maze with Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1076151B1F13E2DE00C46CAD /* Debug */,
+				1076151C1F13E2DE00C46CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 107614FA1F13E2DE00C46CAD /* Project object */;
+}
