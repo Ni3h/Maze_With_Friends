@@ -15,14 +15,19 @@ class Maze: SKSpriteNode {
     
     var tileWidth: CGFloat = 0
     var tileHeight: CGFloat = 0
+    
+    var gridXSize: CGFloat = 0
+    var gridYSize: CGFloat = 0
+    
     var backroundTileWidth: CGFloat = 0
     var backroundTileHeight: CGFloat = 0
     
     
     
     func mazeDimensions() -> (x: CGFloat, y: CGFloat) {
-        x =
-        return
+        let x = gridXSize
+        let y = gridYSize
+        return (x, y)
     }
     
     
@@ -47,6 +52,9 @@ class Maze: SKSpriteNode {
                 if( col % 5 == 0) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
             }
         }
+        gridYSize = tileHeight * CGFloat(rows)
+        gridXSize = tileWidth * CGFloat(columns)
+        
     }
 
 

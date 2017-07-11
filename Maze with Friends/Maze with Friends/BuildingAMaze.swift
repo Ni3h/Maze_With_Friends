@@ -38,28 +38,37 @@ class BuildingAMaze: SKScene {
         
         
         mazeObject.generateGrid(rows: 49, columns: 49, width: Int(width), yOffset: toolBarHeight)
+        
+        mazeObject.mazeDimensions()
      
         
         
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        clampCamera()
+    }
+    
     func clampCamera(){
-        let lBoundary = -world.size.width/2 + size.width/2
+        let clampTuple = mazeObject.mazeDimensions()
+    
+        
+        let lBoundary = self.size.width/2
+        let bBoundary = self.size.height/2
+        let rBoundary = clampTuple.x - (self.size.width/2)
+        let tBoundary = clampTuple.y - (self.size.height/2)
         
         
-        let lBoundary = -self.size.width/2 + 
         
-        
-//        let rBoundary = world.size.width/2 - size.width/2
-//        let bBoundary = -world.size.height/2 + size.height/2
-//        let tBoundary = world.size.height/2 - size.height/2
-        
-        
-        let targetX = camera?.position.x
-        let targetY = camera?.position.y
+        let targetX = camera!.position.x
+        let targetY = camera!.position.y
 
+        
         let x = clamp(value: targetX, lower: lBoundary, upper: rBoundary)
         let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
+        
+        cam.position.x = x
+        cam.position.y = y
         
         
         
