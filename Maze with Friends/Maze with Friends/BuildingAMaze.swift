@@ -6,15 +6,29 @@
 //  Copyright © 2017 Ethan. All rights reserved.
 //
 
-import Foundation
+
+
 import SpriteKit
+
+func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
+    return min(max(value, lower), upper)
+}
+
 
 class BuildingAMaze: SKScene {
     var toolBar: SKSpriteNode!
+    
+    var cam: SKCameraNode!
+    
     let mazeObject = Maze()
     
     
     override func didMove(to view: SKView) {
+        cam = SKCameraNode() //initialize and assign an instance of SKCameraNode to the cam variable.
+        self.camera = cam //set the scene's camera to reference cam
+        self.addChild(cam) //make the cam a childElement of the scene itself.
+        cam.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        
         toolBar = self.childNode(withName: "toolBar") as! SKSpriteNode
         self.addChild(mazeObject)
         
@@ -23,12 +37,40 @@ class BuildingAMaze: SKScene {
         let toolBarHeight = toolBar.size.height
         
         
-        mazeObject.generateGrid(rows: 4, columns: 4, width: Int(width), yOffset: toolBarHeight)
+        mazeObject.generateGrid(rows: 49, columns: 49, width: Int(width), yOffset: toolBarHeight)
      
         
         
     }
     
+    func clampCamera(){
+        let lBoundary = -world.size.width/2 + size.width/2
+        
+        
+        let lBoundary = -self.size.width/2 + 
+        
+        
+//        let rBoundary = world.size.width/2 - size.width/2
+//        let bBoundary = -world.size.height/2 + size.height/2
+//        let tBoundary = world.size.height/2 - size.height/2
+        
+        
+        let targetX = camera?.position.x
+        let targetY = camera?.position.y
+
+        let x = clamp(value: targetX, lower: lBoundary, upper: rBoundary)
+        let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
+        
+        
+        
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let firstTouch = touches.first
+        let location = (firstTouch?.location(in: self))!
+        cam.position = location
+    }
     
     
     

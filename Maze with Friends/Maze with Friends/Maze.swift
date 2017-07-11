@@ -20,7 +20,10 @@ class Maze: SKSpriteNode {
     
     
     
-    
+    func mazeDimensions() -> (x: CGFloat, y: CGFloat) {
+        x =
+        return
+    }
     
     
     func generateGrid(rows: Int, columns: Int, width: Int, yOffset: CGFloat) {
