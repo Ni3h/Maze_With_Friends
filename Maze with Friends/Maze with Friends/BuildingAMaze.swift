@@ -20,8 +20,10 @@ class BuildingAMaze: SKScene {
         
         let width = self.size.width
         
+        let toolBarHeight = toolBar.size.height
         
-        mazeObject.generateGrid(rows: 5, columns: 5, width: Int(width))
+        
+        mazeObject.generateGrid(rows: 4, columns: 4, width: Int(width), yOffset: toolBarHeight)
      
         
         

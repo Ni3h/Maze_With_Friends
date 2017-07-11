@@ -11,67 +11,92 @@ import SpriteKit
 
 class Maze: SKSpriteNode {
     var gridArray =  [[GridPiece]]()
-    
-    let gridPieceObject = GridPiece()
-    
-    let BuildingAMaze = GridPiece().size.height
+    var floorTileArray = [[FloorTiles]]()
     
     var tileWidth: CGFloat = 0
     var tileHeight: CGFloat = 0
+    var backroundTileWidth: CGFloat = 0
+    var backroundTileHeight: CGFloat = 0
     
     
     
-    func generateGrid(rows: Int, columns: Int, width: Int) {
+    
+    
+    
+    func generateGrid(rows: Int, columns: Int, width: Int, yOffset: CGFloat) {
         let  rowsForSize = 5
         
         tileWidth = CGFloat(width/rowsForSize)
         tileHeight = tileWidth
         
-        let numRows = rows
-        let numColumns = columns
+        backroundTileWidth = tileWidth * 5
+        backroundTileHeight = tileWidth * 5
         
-        gridPieceObject.size.width = CGFloat(tileWidth)
-        gridPieceObject.size.height = CGFloat(tileHeight)
-        
-        for row in 0 ... numRows {
+        for row in 0 ... rows {
             
             /* Initialize empty column */
             gridArray.append([])
+            if (row % 5 == 0) { floorTileArray.append([]) }
             
-            for col in 0 ... numColumns {
+            for col in 0 ... columns {
                 /* Create a new creature at row / column position */
-                addGridObjectAtGrid(row: row, col: col)
+                addGridObjectAtGrid(row: row, col: col, yOffset: yOffset)
+                if( col % 5 == 0) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
             }
         }
     }
-    
-    
-    func tilePosition(row:Int, col:Int) -> CGPoint {
-        let x = (CGFloat(row) * tileWidth) + (tileWidth  / 2.0)
-        let y = (CGFloat(col) * tileHeight) + (tileHeight / 2.0)
-        return CGPoint(x: x, y: y)
-    }
-    
 
 
-    func addGridObjectAtGrid(row: Int, col: Int) {
-        /* Add a new creature at grid position*/
+    func addGridObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
+        /* Add a new gridPiece at grid position*/
         
-        /* New creature object */
+        /* New gridPiece object */
         let gridObject = GridPiece()
+        
         /* Calculate position on screen */
-        let gridPosition = CGPoint(x: (CGFloat(row) * tileWidth) + (tileWidth  / 2.0), y: (CGFloat(col) * tileHeight) + (tileHeight / 2.0))
+        let gridPosition = CGPoint(x: (CGFloat(row) * tileWidth) , y: ((CGFloat(col) * tileHeight) + yOffset))
+
+        gridObject.size.width = CGFloat(tileWidth)
+        gridObject.size.height = CGFloat(tileHeight)
+
         
         gridObject.position = gridPosition
         
         /* Set default isAlive */
         
-        /* Add creature to grid node */
+        /* Add gridPiece to grid node */
         addChild(gridObject)
         
-        /* Add creature to grid array */
+        /* Add gridPiece to grid array */
         gridArray[row].append(gridObject)
     }
+    
+    func addFloorObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
+        /* Add a new gridPiece at grid position*/
+        
+        /* New gridPiece object */
+        let floorObject = FloorTiles()
+        
+        /* Calculate position on screen */
+        let gridPosition = CGPoint(x: (CGFloat(row) * backroundTileWidth) , y: ((CGFloat(col) * backroundTileHeight) + yOffset))
+        
+        floorObject.size.width = CGFloat(backroundTileWidth)
+        floorObject.size.height = CGFloat(backroundTileHeight)
+        
+        
+        floorObject.position = gridPosition
+        
+        /* Set default isAlive */
+        
+        /* Add gridPiece to grid node */
+        addChild(floorObject)
+        
+        /* Add gridPiece to grid array */
+        floorTileArray[row/5].append(floorObject)
+    }
+    
+    
+    
 
     
 }

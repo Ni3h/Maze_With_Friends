@@ -8,16 +8,17 @@
 
 import SpriteKit
 
-class GridPiece: SKSpriteNode {
+class FloorTiles: SKSpriteNode {
     
     init() {
-        /* Initialize with 'GridPiece' asset */
-        let texture = SKTexture(imageNamed: "GridPiece")
+        /* Initialize with 'FloorTiles' asset */
+        let texture = SKTexture(imageNamed: "FloorTiles")
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
-
+        
+        
         
         /* Set Z-Position, ensure it's on top of grid */
-        zPosition = 2
+        zPosition = 1
         
         /* Set anchor point to bottom-left */
         anchorPoint = CGPoint(x: 0, y: 0)

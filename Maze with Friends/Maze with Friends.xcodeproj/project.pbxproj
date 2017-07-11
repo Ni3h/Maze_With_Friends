@@ -19,6 +19,7 @@
 		107615221F13E6B800C46CAD /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615211F13E6B800C46CAD /* Maze.swift */; };
 		107615241F13F93C00C46CAD /* GridPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615231F13F93C00C46CAD /* GridPiece.swift */; };
 		107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615261F14202A00C46CAD /* BuildingAMaze.swift */; };
+		108540191F147B5800BFF4FD /* FloorTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108540181F147B5800BFF4FD /* FloorTiles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		107615211F13E6B800C46CAD /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		107615231F13F93C00C46CAD /* GridPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPiece.swift; sourceTree = "<group>"; };
 		107615261F14202A00C46CAD /* BuildingAMaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingAMaze.swift; sourceTree = "<group>"; };
+		108540181F147B5800BFF4FD /* FloorTiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorTiles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				107615261F14202A00C46CAD /* BuildingAMaze.swift */,
 				107615211F13E6B800C46CAD /* Maze.swift */,
 				107615231F13F93C00C46CAD /* GridPiece.swift */,
+				108540181F147B5800BFF4FD /* FloorTiles.swift */,
 			);
 			name = CreateMaze;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				107615241F13F93C00C46CAD /* GridPiece.swift in Sources */,
 				107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */,
 				107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */,
+				108540191F147B5800BFF4FD /* FloorTiles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +360,7 @@
 				1076151C1F13E2DE00C46CAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
