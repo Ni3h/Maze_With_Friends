@@ -17,6 +17,9 @@ func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
 
 class BuildingAMaze: SKScene {
     var toolBar: SKSpriteNode!
+    var settingsButton: SKSpriteNode!
+    var saveButton: SKSpriteNode!
+    
     
     var cam: SKCameraNode!
     
@@ -24,12 +27,16 @@ class BuildingAMaze: SKScene {
     
     
     override func didMove(to view: SKView) {
-        cam = SKCameraNode() //initialize and assign an instance of SKCameraNode to the cam variable.
-        self.camera = cam //set the scene's camera to reference cam
-        self.addChild(cam) //make the cam a childElement of the scene itself.
-        cam.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        /* Create a new Camera */
+        cam = childNode(withName: "cameraNode") as! SKCameraNode
+        self.camera = cam
+      //  cam.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         
-        toolBar = self.childNode(withName: "toolBar") as! SKSpriteNode
+        /*Initializing toolbar/buttons */
+        toolBar = self.childNode(withName: "//toolBar") as! SKSpriteNode
+        settingsButton = self.childNode(withName: "//settingsButton") as! SKSpriteNode
+        saveButton = self.childNode(withName: "//saveButton") as! SKSpriteNode
+        
         self.addChild(mazeObject)
         
         let width = self.size.width
@@ -38,9 +45,6 @@ class BuildingAMaze: SKScene {
         
         
         mazeObject.generateGrid(rows: 49, columns: 49, width: Int(width), yOffset: toolBarHeight)
-        
-        mazeObject.mazeDimensions()
-     
         
         
     }
