@@ -12,10 +12,7 @@ import SpriteKit
 class Maze: SKSpriteNode {
     var gridArray =  [[GridPiece]]()
     var floorTileArray = [[FloorTiles]]()
-    
     var wallArray = [[Wall]]()
-    var isometricWallArray = [[IsometricMazeWall]]()
-    var wallTopArray = [[WallTop]]()
     
     var tileWidth: CGFloat = 0
     var tileHeight: CGFloat = 0
@@ -121,58 +118,6 @@ class Maze: SKSpriteNode {
                 /* Add gridPiece to grid array */
                 wallArray[row].append(wallObject)
     }
-    
-//    func addIsometricMazeWallAtGrid(row: Int, col: Int, yOffset: CGFloat) {
-//        /* Add a new gridPiece at grid position*/
-//        
-//        /* New gridPiece object */
-//        let isoMetricWallObject = IsometricMazeWall()
-//        
-//        /* Calculate position on screen */
-//        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
-//        
-//        isoMetricWallObject.size.width = CGFloat(tileWidth)
-//        isoMetricWallObject.size.height = CGFloat(tileHeight)
-//        
-//        isoMetricWallObject.position = gridPosition
-//        
-//        /* Set default creature to dead */
-//        isoMetricWallObject.isAlive = false
-//        
-//        /* Add gridPiece to grid node */
-//        addChild(isoMetricWallObject)
-//        
-//        /* Add gridPiece to grid array */
-//        isometricWallArray[row].append(isoMetricWallObject)
-//    }
-//
-//    /* add the WallTop to the grid */
-//    func addWallTopAtGrid(row: Int, col: Int, yOffset: CGFloat) {
-//        /* Add a new gridPiece at grid position*/
-//        
-//        /* New gridPiece object */
-//        let wallTopObject = WallTop()
-//        
-//        /* Calculate position on screen */
-//        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
-//        
-//        wallTopObject.size.width = CGFloat(tileWidth)
-//        wallTopObject.size.height = CGFloat(tileHeight)
-//        
-//        wallTopObject.position = gridPosition
-//        
-//        /* Set default creature to dead */
-//        wallTopObject.isAlive = false
-//        
-//        /* Add gridPiece to grid node */
-//        addChild(wallTopObject)
-//        
-//        /* Add gridPiece to grid array */
-//        wallTopArray[row].append(wallTopObject)
-//    }
-//    
-    
-    
     
     func addFloorObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
         /* Add a new gridPiece at grid position*/

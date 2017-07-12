@@ -126,7 +126,7 @@ class BuildingAMaze: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if didItScroll == false {
            
-            let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
+            let wallPiece = mazeObject.wallArray[gridY][gridX]
             wallPiece.isAlive = !wallPiece.isAlive
         } else { return }
     }
