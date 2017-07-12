@@ -49,7 +49,7 @@ class BuildingAMaze: SKScene {
         toolBarHeight = toolBar.size.height
         
         
-        mazeObject.generateGrid(rows: 10, columns: 10, width: Int(width), yOffset: toolBarHeight)
+        mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         
     }
@@ -83,6 +83,7 @@ class BuildingAMaze: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         didItScroll = false
+        print (didItScroll)
         print("touch regisered")
         let tileSize = mazeObject.tileSize()
         let touch = touches.first!
@@ -102,11 +103,17 @@ class BuildingAMaze: SKScene {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            didItScroll = true
             let location = touch.location(in: self)
             let previousLocation = touch.previousLocation(in: self)
+            
             let deltaX = previousLocation.x - location.x
-            let deltaY = previousLocation.y - location.y 
+            let deltaY = previousLocation.y - location.y
+            
+            if (abs(deltaX) > 1 || abs(deltaY) > 1 ) {
+                didItScroll = true
+            }
+            
+            
             cam.position.x += deltaX
             cam.position.y += deltaY
             
@@ -118,24 +125,13 @@ class BuildingAMaze: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if didItScroll == false {
-            print("touches ended")
-            print(gridX)
-            print(gridY)
+           
             let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
             wallPiece.isAlive = !wallPiece.isAlive
         } else { return }
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if didItScroll == false {
-            print("touches canceled")
-            print(gridX)
-            print(gridY)
-            let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
-            wallPiece.isAlive = !wallPiece.isAlive
-        } else { return }
-    }
-    
+
     
     
 }
