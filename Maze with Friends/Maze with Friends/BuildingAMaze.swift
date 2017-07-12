@@ -20,6 +20,10 @@ class BuildingAMaze: SKScene {
     var settingsButton: SKSpriteNode!
     var saveButton: SKSpriteNode!
     var toolBarHeight: CGFloat = 0
+    var gridX = 0
+    var gridY = 0
+    
+    var didItScroll = false
     
     
     var cam: SKCameraNode!
@@ -77,15 +81,28 @@ class BuildingAMaze: SKScene {
         
     }
     
-    
-
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        didItScroll = false
+        print("touch regisered")
+        let tileSize = mazeObject.tileSize()
+        let touch = touches.first!
+        let location = touch.location(in: self)
         
+        gridX = Int(location.x / tileSize.tileWidth)
+        gridY = Int((location.y - toolBarHeight) / tileSize.tileHeight)
+        print(gridX)
+        print(gridY)
+        
+//        let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
+//        wallPiece.isAlive = !wallPiece.isAlive
+        
+
     }
+    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
+            didItScroll = true
             let location = touch.location(in: self)
             let previousLocation = touch.previousLocation(in: self)
             let deltaX = previousLocation.x - location.x
@@ -95,7 +112,28 @@ class BuildingAMaze: SKScene {
             
             
         }
+        
 
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if didItScroll == false {
+            print("touches ended")
+            print(gridX)
+            print(gridY)
+            let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
+            wallPiece.isAlive = !wallPiece.isAlive
+        } else { return }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if didItScroll == false {
+            print("touches canceled")
+            print(gridX)
+            print(gridY)
+            let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
+            wallPiece.isAlive = !wallPiece.isAlive
+        } else { return }
     }
     
     

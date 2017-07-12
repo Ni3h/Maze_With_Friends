@@ -25,11 +25,19 @@ class Maze: SKSpriteNode {
     var backroundTileHeight: CGFloat = 0
     
     
+    /* Calculate grid array position */
     
     func mazeDimensions() -> (x: CGFloat, y: CGFloat) {
         let x = gridXSize
         let y = gridYSize
         return (x, y)
+    }
+    
+    func tileSize() -> (tileWidth: CGFloat, tileHeight: CGFloat){
+        let x = tileWidth
+        let y = tileHeight
+        return(x, y)
+        
     }
     
     
@@ -130,7 +138,7 @@ class Maze: SKSpriteNode {
         wallTopObject.position = gridPosition
         
         /* Set default creature to dead */
-        wallTopObject.isAlive = true
+        wallTopObject.isAlive = false
         
         /* Add gridPiece to grid node */
         addChild(wallTopObject)
