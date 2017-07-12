@@ -19,6 +19,7 @@ class BuildingAMaze: SKScene {
     var toolBar: SKSpriteNode!
     var settingsButton: SKSpriteNode!
     var saveButton: SKSpriteNode!
+    var toolBarHeight: CGFloat = 0
     
     
     var cam: SKCameraNode!
@@ -41,10 +42,10 @@ class BuildingAMaze: SKScene {
         
         let width = self.size.width
         
-        let toolBarHeight = toolBar.size.height
+        toolBarHeight = toolBar.size.height
         
         
-        mazeObject.generateGrid(rows: 49, columns: 49, width: Int(width), yOffset: toolBarHeight)
+        mazeObject.generateGrid(rows: 10, columns: 10, width: Int(width), yOffset: toolBarHeight)
         
         
     }
@@ -55,7 +56,6 @@ class BuildingAMaze: SKScene {
     
     func clampCamera(){
         let clampTuple = mazeObject.mazeDimensions()
-    
         
         let lBoundary = self.size.width/2
         let bBoundary = self.size.height/2
@@ -67,7 +67,6 @@ class BuildingAMaze: SKScene {
         let targetX = camera!.position.x
         let targetY = camera!.position.y
 
-        
         let x = clamp(value: targetX, lower: lBoundary, upper: rBoundary)
         let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
         

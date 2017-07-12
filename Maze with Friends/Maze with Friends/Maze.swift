@@ -40,20 +40,20 @@ class Maze: SKSpriteNode {
         backroundTileWidth = tileWidth * 5
         backroundTileHeight = tileWidth * 5
         
-        for row in 0 ... rows {
+        for row in 0 ..< rows {
             
             /* Initialize empty column */
             gridArray.append([])
-            if (row % 5 == 0) { floorTileArray.append([]) }
+            if ( row % 5 == 0 ) { floorTileArray.append([]) }
             
-            for col in 0 ... columns {
+            for col in 0 ..< columns {
                 /* Create a new creature at row / column position */
                 addGridObjectAtGrid(row: row, col: col, yOffset: yOffset)
-                if( col % 5 == 0) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
+                if( (row % 5 == 0) && (col % 5 == 0)) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
             }
         }
-        gridYSize = tileHeight * CGFloat(rows)
-        gridXSize = tileWidth * CGFloat(columns)
+        gridYSize = tileHeight * CGFloat( rows ) + yOffset
+        gridXSize = tileWidth * CGFloat( columns )
         
     }
 
@@ -65,7 +65,7 @@ class Maze: SKSpriteNode {
         let gridObject = GridPiece()
         
         /* Calculate position on screen */
-        let gridPosition = CGPoint(x: (CGFloat(row) * tileWidth) , y: ((CGFloat(col) * tileHeight) + yOffset))
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
 
         gridObject.size.width = CGFloat(tileWidth)
         gridObject.size.height = CGFloat(tileHeight)
@@ -81,7 +81,9 @@ class Maze: SKSpriteNode {
         /* Add gridPiece to grid array */
         gridArray[row].append(gridObject)
     }
+
     
+
     func addFloorObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
         /* Add a new gridPiece at grid position*/
         
@@ -89,10 +91,16 @@ class Maze: SKSpriteNode {
         let floorObject = FloorTiles()
         
         /* Calculate position on screen */
-        let gridPosition = CGPoint(x: (CGFloat(row) * backroundTileWidth) , y: ((CGFloat(col) * backroundTileHeight) + yOffset))
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
+        
+//        print(gridPosition)
+//        print("row: \(row)")
+//        print("col: \(col)")
+        
         
         floorObject.size.width = CGFloat(backroundTileWidth)
         floorObject.size.height = CGFloat(backroundTileHeight)
+        
         
         
         floorObject.position = gridPosition
