@@ -17,7 +17,7 @@ class GridPiece: SKSpriteNode {
 
         
         /* Set Z-Position, ensure it's on top of grid */
-        zPosition = 2
+        zPosition = 4
         
         /* Set anchor point to bottom-left */
         anchorPoint = CGPoint(x: 0, y: 0)
