@@ -12,6 +12,8 @@ import SpriteKit
 class Maze: SKSpriteNode {
     var gridArray =  [[GridPiece]]()
     var floorTileArray = [[FloorTiles]]()
+    var isoMetricWallArray = [[IsometricMazeWall]]()
+    var wallTopArray = [[WallTop]]()
     
     var tileWidth: CGFloat = 0
     var tileHeight: CGFloat = 0
@@ -44,11 +46,14 @@ class Maze: SKSpriteNode {
             
             /* Initialize empty column */
             gridArray.append([])
+            isoMetricWallArray.append([])
             if ( row % 5 == 0 ) { floorTileArray.append([]) }
             
             for col in 0 ..< columns {
                 /* Create a new creature at row / column position */
                 addGridObjectAtGrid(row: row, col: col, yOffset: yOffset)
+                addIsometricMazeWallAtGrid(row: row, col: col, yOffset: yOffset)
+                
                 if( (row % 5 == 0) && (col % 5 == 0)) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
             }
         }
@@ -83,7 +88,32 @@ class Maze: SKSpriteNode {
     }
 
     
+    func addIsometricMazeWallAtGrid(row: Int, col: Int, yOffset: CGFloat) {
+        /* Add a new gridPiece at grid position*/
+        
+        /* New gridPiece object */
+        let isoMetricWallObject = IsometricMazeWall()
+        
+        /* Calculate position on screen */
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
+        
+        isoMetricWallObject.size.width = CGFloat(tileWidth)
+        isoMetricWallObject.size.height = CGFloat(tileHeight)
+        
+        isoMetricWallObject.position = gridPosition
+        
+        /* Set default creature to dead */
+        isoMetricWallObject.isAlive = true
+        
+        /* Add gridPiece to grid node */
+        addChild(isoMetricWallObject)
+        
+        /* Add gridPiece to grid array */
+        isoMetricWallArray[row].append(isoMetricWallObject)
+    }
 
+    
+    
     func addFloorObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
         /* Add a new gridPiece at grid position*/
         
@@ -93,19 +123,10 @@ class Maze: SKSpriteNode {
         /* Calculate position on screen */
         let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
         
-//        print(gridPosition)
-//        print("row: \(row)")
-//        print("col: \(col)")
-        
-        
         floorObject.size.width = CGFloat(backroundTileWidth)
         floorObject.size.height = CGFloat(backroundTileHeight)
         
-        
-        
         floorObject.position = gridPosition
-        
-        /* Set default isAlive */
         
         /* Add gridPiece to grid node */
         addChild(floorObject)
