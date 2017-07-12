@@ -79,14 +79,25 @@ class BuildingAMaze: SKScene {
     }
     
     
+
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let firstTouch = touches.first
-        let location = (firstTouch?.location(in: self))!
-        cam.position = location
+        
     }
     
-    
-    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let previousLocation = touch.previousLocation(in: self)
+            let deltaX = previousLocation.x - location.x
+            let deltaY = previousLocation.y - location.y 
+            cam.position.x += deltaX
+            cam.position.y += deltaY
+            
+            
+        }
+
+    }
     
     
     
