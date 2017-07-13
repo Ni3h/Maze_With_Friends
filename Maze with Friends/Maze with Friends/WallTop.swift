@@ -14,6 +14,9 @@ class WallTop: Wall {
         /* Initialize with 'FloorTiles' asset */
         let texture = SKTexture(imageNamed: "WallTop")
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
+      //  self.size.width = Wall.size.width
+      //  self.size.height = Wall.size.height
+        
         
     }
     

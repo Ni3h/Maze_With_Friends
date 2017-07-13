@@ -19,6 +19,9 @@ class Maze: SKSpriteNode {
     
     var gridXSize: CGFloat = 0
     var gridYSize: CGFloat = 0
+    var maxRows = 0
+    var maxCols = 0
+    
     
     var backroundTileWidth: CGFloat = 0
     var backroundTileHeight: CGFloat = 0
@@ -39,12 +42,112 @@ class Maze: SKSpriteNode {
         
     }
     
+    func placeAWall(gridX: Int, gridY: Int){
+        let wallPiece = wallArray[gridY][gridX]
+        
+        if(gridY > 0 && wallArray[gridY - 1][gridX].isAlive){
+            
+            let newWallTop = WallTop()
+            newWallTop.zPosition = 3
+            newWallTop.position = wallPiece.position
+            
+            newWallTop.size.width = wallPiece.size.width
+            newWallTop.size.height = wallPiece.size.height
+            newWallTop.isAlive = true
+            
+            self.addChild(newWallTop)
+            
+            wallArray[gridY][gridX] = newWallTop
+            
+            
+            wallPiece.isAlive = false
+            wallPiece.removeFromParent()
+        } else {
+            let newIsoWall = IsometricMazeWall()
+            newIsoWall.zPosition = 3
+            newIsoWall.position = wallPiece.position
+            
+            newIsoWall.size.width = wallPiece.size.width
+            newIsoWall.size.height = wallPiece.size.height
+            newIsoWall.isAlive = true
+            
+            self.addChild(newIsoWall)
+            
+            wallArray[gridY][gridX] = newIsoWall
+            
+            
+            wallPiece.isAlive = false
+            wallPiece.removeFromParent()
+        }
+        if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
+            
+            let N = wallArray[gridY + 1][gridX]
+            let newWallTop = WallTop()
+            newWallTop.zPosition = 3
+            newWallTop.position = N.position
+            
+            newWallTop.size.width = N.size.width
+            newWallTop.size.height = N.size.height
+            newWallTop.isAlive = true
+            
+            self.addChild(newWallTop)
+            
+            wallArray[gridY + 1][gridX] = newWallTop
+            
+            
+            N.isAlive = false
+            N.removeFromParent()
+        }
+        
+    }
+    
+    func removeAWall(gridX: Int, gridY: Int){
+        let wallPiece = wallArray[gridY][gridX]
+        
+        let newWall = Wall()
+
+        newWall.zPosition = 3
+        newWall.position = wallPiece.position
+        
+        newWall.size.width = wallPiece.size.width
+        newWall.size.height = wallPiece.size.height
+        newWall.isAlive = false
+        
+        self.addChild(newWall)
+        
+        wallArray[gridY][gridX] = newWall
+        
+        wallPiece.isAlive = false
+        wallPiece.removeFromParent()
+        
+        if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
+            
+            let N = wallArray[gridY + 1][gridX]
+            let newIsoWall = IsometricMazeWall()
+            newIsoWall.zPosition = 3
+            newIsoWall.position = N.position
+            
+            newIsoWall.size.width = N.size.width
+            newIsoWall.size.height = N.size.height
+            newIsoWall.isAlive = true
+            
+            self.addChild(newIsoWall)
+            
+            wallArray[gridY + 1][gridX] = newIsoWall
+            
+            N.isAlive = false
+            N.removeFromParent()
+        }
+    }
+    
     
     func generateGrid(rows: Int, columns: Int, width: Int, yOffset: CGFloat) {
         let  rowsForSize = 5
         
         tileWidth = CGFloat(width/rowsForSize)
         tileHeight = tileWidth
+        
+        
         
         backroundTileWidth = tileWidth * 5
         backroundTileHeight = tileWidth * 5
@@ -65,10 +168,12 @@ class Maze: SKSpriteNode {
         }
         gridYSize = tileHeight * CGFloat( rows ) + yOffset
         gridXSize = tileWidth * CGFloat( columns )
+        maxRows = rows
+        maxCols = columns
         
     }
-
-
+    
+    
     func addGridObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
         /* Add a new gridPiece at grid position*/
         
@@ -77,10 +182,10 @@ class Maze: SKSpriteNode {
         
         /* Calculate position on screen */
         let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
-
+        
         gridObject.size.width = CGFloat(tileWidth)
         gridObject.size.height = CGFloat(tileHeight)
-
+        
         
         gridObject.position = gridPosition
         
@@ -92,31 +197,31 @@ class Maze: SKSpriteNode {
         /* Add gridPiece to grid array */
         gridArray[row].append(gridObject)
     }
-
+    
     /* add the IsometricWall Pieces to the grid */
     
     func addWallAtGrid(row: Int, col: Int, yOffset: CGFloat) {
-                /* Add a new gridPiece at grid position*/
+        /* Add a new gridPiece at grid position*/
         
-                /* New gridPiece object */
-                let wallObject = Wall()
+        /* New gridPiece object */
+        let wallObject = Wall()
         
-                /* Calculate position on screen */
-                let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
+        /* Calculate position on screen */
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
         
-                wallObject.size.width = CGFloat(tileWidth)
-                wallObject.size.height = CGFloat(tileHeight)
+        wallObject.size.width = CGFloat(tileWidth)
+        wallObject.size.height = CGFloat(tileHeight)
         
-                wallObject.position = gridPosition
+        wallObject.position = gridPosition
         
-                /* Set default creature to dead */
-                wallObject.isAlive = false
+        /* Set default creature to dead */
+        wallObject.isAlive = false
         
-                /* Add gridPiece to grid node */
-                addChild(wallObject)
-                
-                /* Add gridPiece to grid array */
-                wallArray[row].append(wallObject)
+        /* Add gridPiece to grid node */
+        addChild(wallObject)
+        
+        /* Add gridPiece to grid array */
+        wallArray[row].append(wallObject)
     }
     
     func addFloorObjectAtGrid(row: Int, col: Int, yOffset: CGFloat) {
@@ -142,6 +247,6 @@ class Maze: SKSpriteNode {
     
     
     
-
+    
     
 }

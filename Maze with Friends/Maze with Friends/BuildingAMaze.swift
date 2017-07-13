@@ -83,19 +83,13 @@ class BuildingAMaze: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         didItScroll = false
-        print (didItScroll)
-        print("touch regisered")
+
         let tileSize = mazeObject.tileSize()
         let touch = touches.first!
         let location = touch.location(in: self)
         
         gridX = Int(location.x / tileSize.tileWidth)
         gridY = Int((location.y - toolBarHeight) / tileSize.tileHeight)
-        print(gridX)
-        print(gridY)
-        
-//        let wallPiece = mazeObject.isometricWallArray[gridY][gridX]
-//        wallPiece.isAlive = !wallPiece.isAlive
         
 
     }
@@ -127,8 +121,15 @@ class BuildingAMaze: SKScene {
         if didItScroll == false {
            
             let wallPiece = mazeObject.wallArray[gridY][gridX]
-            wallPiece.isAlive = !wallPiece.isAlive
-        } else { return }
+            
+            if wallPiece.isAlive {
+                mazeObject.removeAWall(gridX: gridX, gridY: gridY)
+            } else {
+                mazeObject.placeAWall(gridX: gridX, gridY: gridY)
+
+            }
+            
+        }
     }
     
 
