@@ -42,37 +42,26 @@ class Maze: SKSpriteNode {
         
     }
     
+    /*WallTop Helper Function */
+    func wallHelper(newWallPiece: Wall, gridX: Int, gridY: Int){
+        newWallPiece.isAlive = true
+        self.addChild(newWallPiece)
+    }
+    
+    
     func placeAWall(gridX: Int, gridY: Int){
         let wallPiece = wallArray[gridY][gridX]
         
         if(gridY > 0 && wallArray[gridY - 1][gridX].isAlive){
-            
-            let newWallTop = WallTop()
-            newWallTop.zPosition = 3
-            newWallTop.position = wallPiece.position
-            
-            newWallTop.size.width = wallPiece.size.width
-            newWallTop.size.height = wallPiece.size.height
-            newWallTop.isAlive = true
-            
-            self.addChild(newWallTop)
-            
+            let newWallTop = WallTop(size: wallPiece.size, position: wallPiece.position)
+            wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
             wallArray[gridY][gridX] = newWallTop
-            
             
             wallPiece.isAlive = false
             wallPiece.removeFromParent()
         } else {
-            let newIsoWall = IsometricMazeWall()
-            newIsoWall.zPosition = 3
-            newIsoWall.position = wallPiece.position
-            
-            newIsoWall.size.width = wallPiece.size.width
-            newIsoWall.size.height = wallPiece.size.height
-            newIsoWall.isAlive = true
-            
-            self.addChild(newIsoWall)
-            
+            let newIsoWall = IsometricMazeWall(size: wallPiece.size, position: wallPiece.position)
+            wallHelper(newWallPiece: newIsoWall, gridX: gridX, gridY: gridY)
             wallArray[gridY][gridX] = newIsoWall
             
             
@@ -80,20 +69,10 @@ class Maze: SKSpriteNode {
             wallPiece.removeFromParent()
         }
         if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
-            
             let N = wallArray[gridY + 1][gridX]
-            let newWallTop = WallTop()
-            newWallTop.zPosition = 3
-            newWallTop.position = N.position
-            
-            newWallTop.size.width = N.size.width
-            newWallTop.size.height = N.size.height
-            newWallTop.isAlive = true
-            
-            self.addChild(newWallTop)
-            
+            let newWallTop = WallTop(size: wallPiece.size, position: N.position)
+            wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
             wallArray[gridY + 1][gridX] = newWallTop
-            
             
             N.isAlive = false
             N.removeFromParent()
@@ -106,9 +85,8 @@ class Maze: SKSpriteNode {
         
         let newWall = Wall()
 
-        newWall.zPosition = 3
         newWall.position = wallPiece.position
-        
+
         newWall.size.width = wallPiece.size.width
         newWall.size.height = wallPiece.size.height
         newWall.isAlive = false
@@ -121,18 +99,9 @@ class Maze: SKSpriteNode {
         wallPiece.removeFromParent()
         
         if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
-            
             let N = wallArray[gridY + 1][gridX]
-            let newIsoWall = IsometricMazeWall()
-            newIsoWall.zPosition = 3
-            newIsoWall.position = N.position
-            
-            newIsoWall.size.width = N.size.width
-            newIsoWall.size.height = N.size.height
-            newIsoWall.isAlive = true
-            
-            self.addChild(newIsoWall)
-            
+            let newIsoWall = IsometricMazeWall(size: N.size, position: N.position)
+            wallHelper(newWallPiece: newIsoWall, gridX: gridX, gridY: gridY)
             wallArray[gridY + 1][gridX] = newIsoWall
             
             N.isAlive = false

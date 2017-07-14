@@ -1,0 +1,6 @@
+framework module Pods_Maze_with_Friends {
+  umbrella header "Pods-Maze with Friends-umbrella.h"
+
+  export *
+  module * { export * }
+}

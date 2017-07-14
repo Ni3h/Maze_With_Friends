@@ -10,10 +10,13 @@ import SpriteKit
 
 class IsometricMazeWall: Wall {
     
-    init() {
+    init(size: CGSize, position: CGPoint) {
         /* Initialize with 'FloorTiles' asset */
         let texture = SKTexture(imageNamed: "IsometricWall")
-        super.init(texture: texture, color: UIColor.clear, size: texture.size())
+        super.init(texture: texture, color: UIColor.clear, size: size)
+        
+        self.position = position
+        self.type = "iso"
     }
     
     /* You are required to implement this for your sublcass to work */
