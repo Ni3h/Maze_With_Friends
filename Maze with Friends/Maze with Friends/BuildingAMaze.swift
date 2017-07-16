@@ -16,9 +16,16 @@ func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
 
 
 class BuildingAMaze: SKScene {
-    var toolBar: SKSpriteNode!
-    var settingsButton: SKSpriteNode!
-    var saveButton: SKSpriteNode!
+    
+    let mazeSave = SaveMazeManager()
+    
+    var toolBar: ToolBarNode!
+    var toolBox: ToolBarNode!
+    var settingsButton: MSButtonNode!
+    var saveButton: MSButtonNode!
+    var loadButton: MSButtonNode!
+    
+    
     var toolBarHeight: CGFloat = 0
     var gridX = 0
     var gridY = 0
@@ -28,9 +35,6 @@ class BuildingAMaze: SKScene {
     
     var cam: SKCameraNode!
     
-    let mazeObject = Maze()
-    
-    
     override func didMove(to view: SKView) {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode
@@ -38,19 +42,28 @@ class BuildingAMaze: SKScene {
       //  cam.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         
         /*Initializing toolbar/buttons */
-        toolBar = self.childNode(withName: "//toolBar") as! SKSpriteNode
-        settingsButton = self.childNode(withName: "//settingsButton") as! SKSpriteNode
-        saveButton = self.childNode(withName: "//saveButton") as! SKSpriteNode
+        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
+        settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
+        saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
+        loadButton = self.childNode(withName: "//loadButton") as! MSButtonNode
         
-        self.addChild(mazeObject)
+        self.addChild(mazeSave.mazeObject)
         
         let width = self.size.width
         
         toolBarHeight = toolBar.size.height
         
         
-        mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+        //mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
+        saveButton.selectedHandler = {
+            self.mazeSave.save()
+        }
+        
+        loadButton.selectedHandler = {
+            
+        }
         
     }
     
@@ -59,7 +72,7 @@ class BuildingAMaze: SKScene {
     }
     
     func clampCamera(){
-        let clampTuple = mazeObject.mazeDimensions()
+        let clampTuple = mazeSave.mazeObject.mazeDimensions()
         
         let lBoundary = self.size.width/2
         let bBoundary = self.size.height/2
@@ -84,7 +97,7 @@ class BuildingAMaze: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         didItScroll = false
 
-        let tileSize = mazeObject.tileSize()
+        let tileSize = mazeSave.mazeObject.tileSize()
         let touch = touches.first!
         let location = touch.location(in: self)
         
@@ -120,12 +133,12 @@ class BuildingAMaze: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if didItScroll == false {
            
-            let wallPiece = mazeObject.wallArray[gridY][gridX]
+            let wallPiece = mazeSave.mazeObject.wallArray[gridY][gridX]
             
             if wallPiece.isAlive {
-                mazeObject.removeAWall(gridX: gridX, gridY: gridY)
+                mazeSave.mazeObject.removeAWall(gridX: gridX, gridY: gridY)
             } else {
-                mazeObject.placeAWall(gridX: gridX, gridY: gridY)
+                mazeSave.mazeObject.placeAWall(gridX: gridX, gridY: gridY)
 
             }
             

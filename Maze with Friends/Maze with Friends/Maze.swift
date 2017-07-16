@@ -118,21 +118,21 @@ class Maze: SKSpriteNode {
         
         
         
-        backroundTileWidth = tileWidth * 5
-        backroundTileHeight = tileWidth * 5
+        backroundTileWidth = tileWidth * 2
+        backroundTileHeight = tileWidth * 2
         
         for row in 0 ..< rows {
             
             /* Initialize empty column */
             gridArray.append([])
             wallArray.append([])
-            if ( row % 5 == 0 ) { floorTileArray.append([]) }
+            if ( row % 2 == 0 ) { floorTileArray.append([]) }
             
             for col in 0 ..< columns {
                 /* Create a new creature at row / column position */
                 addGridObjectAtGrid(row: row, col: col, yOffset: yOffset)
                 addWallAtGrid(row: row, col: col, yOffset: yOffset)
-                if( (row % 5 == 0) && (col % 5 == 0)) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
+                if( (row % 2 == 0) && (col % 2 == 0)) { addFloorObjectAtGrid(row: row, col: col, yOffset: yOffset) }
             }
         }
         gridYSize = tileHeight * CGFloat( rows ) + yOffset

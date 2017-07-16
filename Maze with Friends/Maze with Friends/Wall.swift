@@ -35,14 +35,15 @@ class Wall: SKSpriteNode {
     /* You are required to implement this for your sublcass to work */
     required init?(coder aDecoder: NSCoder) {
         self.type = aDecoder.decodeObject(forKey: "wallSave") as! String
+//        self.isAlive = aDecoder.decodeObject(forKey: "aliveState") as! Bool
         super.init(coder: aDecoder)
-        
         
     }
 
     override func encode(with aCoder: NSCoder) {
         aCoder.encode(self.type, forKey: "wallSave")
         super.encode(with: aCoder)
+     //   aCoder.encode(self.isAlive, forKey: "aliveState")
     }
     
     
