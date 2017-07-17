@@ -39,7 +39,6 @@ class BuildingAMaze: SKScene {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
-      //  cam.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
@@ -55,7 +54,7 @@ class BuildingAMaze: SKScene {
         toolBarHeight = toolBar.size.height
         
         
-        //mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+      //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         saveButton.selectedHandler = {
             self.mazeSave.save()

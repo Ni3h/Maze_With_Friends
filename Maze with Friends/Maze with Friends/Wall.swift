@@ -24,7 +24,7 @@ class Wall: SKSpriteNode {
          
         /* Set Z-Position, ensure it's on top of grid */
         zPosition = 3
-        
+        print(self.isAlive)
         /* Set anchor point to bottom-left */
         anchorPoint = CGPoint(x: 0, y: 0)
         
@@ -35,15 +35,14 @@ class Wall: SKSpriteNode {
     /* You are required to implement this for your sublcass to work */
     required init?(coder aDecoder: NSCoder) {
         self.type = aDecoder.decodeObject(forKey: "wallSave") as! String
-//        self.isAlive = aDecoder.decodeObject(forKey: "aliveState") as! Bool
+        self.isAlive = aDecoder.decodeBool(forKey: "aliveState")
         super.init(coder: aDecoder)
-        
     }
 
     override func encode(with aCoder: NSCoder) {
         aCoder.encode(self.type, forKey: "wallSave")
+        aCoder.encode(self.isAlive, forKey: "aliveState")
         super.encode(with: aCoder)
-     //   aCoder.encode(self.isAlive, forKey: "aliveState")
     }
     
     

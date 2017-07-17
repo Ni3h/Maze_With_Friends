@@ -41,13 +41,16 @@ class SaveMazeManager {
             // do we get serialized data back from the attempted path?
             // if so, unarchive it into an AnyObject, and then convert to an array of HighScores, if possible
             let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData as Data)
-            let realWallArray = wallArray as? [Wall]
 
-            self.mazeObject.wallArray[0] = realWallArray!
-            for wall in mazeObject.wallArray[0] {
-                mazeObject.addChild(wall)
+            self.mazeObject.wallArray = wallArray as! [[Wall]]
+            
+            
+            for wall1d in mazeObject.wallArray {
+                for wall in wall1d{
+                    mazeObject.addChild(wall)
+
+                }
             }
-            //self.mazeObject.wallArray[0] = wallArray as? [Wall] ?? []
         } catch {
             //whoops
         }
@@ -57,7 +60,7 @@ class SaveMazeManager {
         // find the save directory our app has permission to use, and save the serialized version of self.scores - the HighScores array.
         print("Save occured")
 
-        let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray[0]);
+        let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray);
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray;
         let documentsDirectory = paths.object(at: 0) as! NSString;
         let path = URL(fileURLWithPath: documentsDirectory.appendingPathComponent("WallSaves.plist"))
