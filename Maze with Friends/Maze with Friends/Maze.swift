@@ -21,8 +21,10 @@ class Maze: SKSpriteNode {
     var gridYSize: CGFloat = 0
     var maxRows = 0
     var maxCols = 0
+    var gridLayer = SKNode()
     
-    
+
+    var backroundSizeDifference: Int = 2
     var backroundTileWidth: CGFloat = 0
     var backroundTileHeight: CGFloat = 0
     
@@ -115,11 +117,12 @@ class Maze: SKSpriteNode {
         
         tileWidth = CGFloat(width/rowsForSize)
         tileHeight = tileWidth
-        
-        
-        
+
         backroundTileWidth = tileWidth * 2
         backroundTileHeight = tileWidth * 2
+        
+        self.addChild(gridLayer)
+
         
         for row in 0 ..< rows {
             
@@ -139,7 +142,6 @@ class Maze: SKSpriteNode {
         gridXSize = tileWidth * CGFloat( columns )
         maxRows = rows
         maxCols = columns
-        
     }
     
     
@@ -161,7 +163,7 @@ class Maze: SKSpriteNode {
         /* Set default isAlive */
         
         /* Add gridPiece to grid node */
-        addChild(gridObject)
+        gridLayer.addChild(gridObject)
         
         /* Add gridPiece to grid array */
         gridArray[row].append(gridObject)

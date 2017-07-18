@@ -24,8 +24,7 @@ class Wall: SKSpriteNode {
          
         /* Set Z-Position, ensure it's on top of grid */
         zPosition = 3
-        print(self.isAlive)
-        /* Set anchor point to bottom-left */
+            /* Set anchor point to bottom-left */
         anchorPoint = CGPoint(x: 0, y: 0)
         
     }

@@ -20,7 +20,7 @@ class BuildingAMaze: SKScene {
     let mazeSave = SaveMazeManager()
     
     var toolBar: ToolBarNode!
-    var toolBox: ToolBarNode!
+ //   var toolBox: ToolBarNode!
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
     var loadButton: MSButtonNode!
@@ -42,7 +42,7 @@ class BuildingAMaze: SKScene {
         
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
+      //  toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
         settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
         loadButton = self.childNode(withName: "//loadButton") as! MSButtonNode

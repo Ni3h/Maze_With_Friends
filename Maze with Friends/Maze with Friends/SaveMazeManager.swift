@@ -13,7 +13,6 @@ class SaveMazeManager {
     
     init() {
         // load existing high scores or set up an empty array
-        print("This Happened")
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0] as String
         let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")

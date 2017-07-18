@@ -11,22 +11,77 @@ import SpriteKit
 class MainMenu: SKScene {
     
     /* UI Connections */
-    var solveButton: MSButtonNode!
     var buildButton: MSButtonNode!
-    var toolBar: ToolBarNode!
+    var playButton: MSButtonNode!
+    
     
     override func didMove(to view: SKView) {
-        /* Setup your scene here */
-
         /* Set UI connections */
-        solveButton = self.childNode(withName: "solveButton") as! MSButtonNode
         buildButton = self.childNode(withName: "buildButton") as! MSButtonNode
-        toolBar = self.childNode(withName: "toolBar") as! ToolBarNode
+        playButton = self.childNode(withName: "playButton") as! MSButtonNode
+        
+        buildButton.selectedHandler = {
+            self.loadBuildScene()
+        }
+        
+        playButton.selectedHandler = {
+            self.loadPlayScene()
+        }
+        
+    }
+    
 
+    
+    func loadBuildScene() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = BuildingAMaze(fileNamed:"BuildingAMaze") else {
+            print("Could not make BuildingAMaze, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
+    func loadPlayScene() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = PlayingAMaze(fileNamed:"PlayingAMaze") else {
+            print("Could not make PlayingAMaze, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
     }
     
     
-    
-    
-    
+
 }

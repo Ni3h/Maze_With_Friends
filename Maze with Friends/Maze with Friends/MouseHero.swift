@@ -8,11 +8,11 @@
 
 import SpriteKit
 
-class Hero: SKSpriteNode {
+class MouseHero: SKSpriteNode {
     
     init() {
         // Make a texture from an image, a color, and size
-        let texture = SKTexture(imageNamed: "flyingpenguin")
+        let texture = SKTexture(imageNamed: "MouseHero")
         let color = UIColor.clear
         let size = texture.size()
         
