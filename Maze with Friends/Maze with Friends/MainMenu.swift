@@ -20,11 +20,11 @@ class MainMenu: SKScene {
         buildButton = self.childNode(withName: "buildButton") as! MSButtonNode
         playButton = self.childNode(withName: "playButton") as! MSButtonNode
         
-        buildButton.selectedHandler = {
+        buildButton.selectedHandler = { [unowned self] in
             self.loadBuildScene()
         }
         
-        playButton.selectedHandler = {
+        playButton.selectedHandler = { [unowned self] in
             self.loadPlayScene()
         }
         

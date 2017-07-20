@@ -59,11 +59,11 @@ class BuildingAMaze: SKScene {
         
       //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
-        saveButton.selectedHandler = {
+        saveButton.selectedHandler = { [unowned self] in
             self.mazeSave.save()
         }
         
-        backMainMenu.selectedHandler = {
+        backMainMenu.selectedHandler = { [unowned self] in
             self.loadMainMenu()
         }
         

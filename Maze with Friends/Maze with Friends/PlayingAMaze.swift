@@ -42,7 +42,7 @@ class PlayingAMaze: SKScene {
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         
-        backMainMenu.selectedHandler = {
+        backMainMenu.selectedHandler = { [unowned self] in
             self.loadMainMenu()
         }
         
