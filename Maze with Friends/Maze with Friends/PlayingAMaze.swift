@@ -15,8 +15,7 @@ class PlayingAMaze: SKScene {
     }
 
     
-    
-    let mazeSave = SaveMazeManager()
+    var mazeSave: SaveMazeManager!
     
     var gridX = 0
     var gridY = 0
@@ -25,8 +24,11 @@ class PlayingAMaze: SKScene {
     var didItScroll = false
     let screenSize = UIScreen.main.bounds
     var cam: SKCameraNode!
+    
     var toolBar: ToolBarNode!
+    var backMainMenu: MSButtonNode!
     var toolBarHeight: CGFloat = 0
+    var width = 0
 
     let mouseHeroObject = MouseHero()
 
@@ -36,24 +38,27 @@ class PlayingAMaze: SKScene {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
+        
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         
+        backMainMenu.selectedHandler = {
+            self.loadMainMenu()
+        }
         
-        self.addChild(mazeSave.mazeObject)
-        let width = self.size.width
-        
-        toolBarHeight = toolBar.size.height
 
-        mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+        width = Int(self.size.width)
+        toolBarHeight = toolBar.size.height
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: Int(toolBarHeight) )
+        self.addChild(mazeSave.mazeObject)
+
         
-        
-        mazeSave.mazeObject.gridLayer.zPosition = 7
+        mazeSave.mazeObject.gridLayer.zPosition = 6
         
         addMouse(row: 0, col: 1, yOffset: 140)
 
     }
-    
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         didItScroll = false
         
@@ -66,11 +71,6 @@ class PlayingAMaze: SKScene {
         gridY = Int((location.y - 140) / tileSize.tileHeight)
         heroGridX = Int(heroLocation.x / tileSize.tileWidth)
         heroGridY = Int((heroLocation.y - 140) / tileSize.tileHeight)
-        
-    
-//        let dir = travelDirection(gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY)
-//        moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY )
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -258,6 +258,34 @@ class PlayingAMaze: SKScene {
     }
     
 
+    
+    
+    /* Button handlers */
+    func loadMainMenu() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = MainMenu(fileNamed:"MainMenu") else {
+            print("Could not make MainMenu, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
     
     
 }

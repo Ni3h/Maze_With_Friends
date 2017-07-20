@@ -87,6 +87,14 @@
 			name = Gameplay;
 			sourceTree = "<group>";
 		};
+		1039AF251F211EEE00AFC194 /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */,
+			);
+			name = Save;
+			sourceTree = "<group>";
+		};
 		10728F041F1D2E6E003A18B1 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,9 +181,9 @@
 				10728F041F1D2E6E003A18B1 /* MainMenu */,
 				100300691F15E2A500C59159 /* MSButtonNode.swift */,
 				1076150D1F13E2DE00C46CAD /* GameViewController.swift */,
-				105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */,
 				10728F1C1F1E8818003A18B1 /* Play */,
 				107615251F13F94100C46CAD /* Build */,
+				1039AF251F211EEE00AFC194 /* Save */,
 			);
 			name = Swift;
 			sourceTree = "<group>";

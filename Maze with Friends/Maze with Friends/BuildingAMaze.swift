@@ -14,16 +14,17 @@ func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
     return min(max(value, lower), upper)
 }
 
+
 class BuildingAMaze: SKScene {
     
-    let mazeSave = SaveMazeManager()
+    var mazeSave: SaveMazeManager!
     
     var toolBar: ToolBarNode!
  //   var toolBox: ToolBarNode!
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
-    var loadButton: MSButtonNode!
- 
+    var backMainMenu: MSButtonNode!
+    
     
     var toolBarHeight: CGFloat = 0
     var gridX = 0
@@ -39,37 +40,50 @@ class BuildingAMaze: SKScene {
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
         
-      
-        
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
       //  toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
         settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
-        loadButton = self.childNode(withName: "//loadButton") as! MSButtonNode
-        
-        self.addChild(mazeSave.mazeObject)
+        backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         
         let width = self.size.width
         
         toolBarHeight = toolBar.size.height
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: Int(toolBarHeight) )
+        self.addChild(mazeSave.mazeObject)
+
+        print(width)
         
         
-        mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+        
+      //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         saveButton.selectedHandler = {
             self.mazeSave.save()
         }
         
-        loadButton.selectedHandler = {
-            
+        backMainMenu.selectedHandler = {
+            self.loadMainMenu()
         }
         
     }
     
+    
+    func widthDimension() -> Int {
+        let width = self.size.width
+        return Int(width)
+    }
+    
+    
+    /* Update override */
+    
     override func update(_ currentTime: TimeInterval) {
         clampCamera()
     }
+    
+    
+    
     
     func clampCamera(){
         let clampTuple = mazeSave.mazeObject.mazeDimensions()
@@ -89,9 +103,9 @@ class BuildingAMaze: SKScene {
         
         cam.position.x = x
         cam.position.y = y
-
-        
     }
+    
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         didItScroll = false
@@ -143,6 +157,35 @@ class BuildingAMaze: SKScene {
             
         }
     }
+    
+    
+    /* Button handlers */
+    
+    func loadMainMenu() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = MainMenu(fileNamed:"MainMenu") else {
+            print("Could not make MainMenu, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
     
 
     
