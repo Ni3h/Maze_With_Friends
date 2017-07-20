@@ -14,7 +14,6 @@ func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
     return min(max(value, lower), upper)
 }
 
-
 class BuildingAMaze: SKScene {
     
     let mazeSave = SaveMazeManager()
@@ -24,7 +23,7 @@ class BuildingAMaze: SKScene {
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
     var loadButton: MSButtonNode!
-    
+ 
     
     var toolBarHeight: CGFloat = 0
     var gridX = 0
@@ -40,6 +39,8 @@ class BuildingAMaze: SKScene {
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
         
+      
+        
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
       //  toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
@@ -54,7 +55,7 @@ class BuildingAMaze: SKScene {
         toolBarHeight = toolBar.size.height
         
         
-      //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+        mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         saveButton.selectedHandler = {
             self.mazeSave.save()
@@ -88,8 +89,7 @@ class BuildingAMaze: SKScene {
         
         cam.position.x = x
         cam.position.y = y
-        
-        
+
         
     }
     

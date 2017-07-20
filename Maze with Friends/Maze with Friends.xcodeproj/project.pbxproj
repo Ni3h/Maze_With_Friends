@@ -78,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1039AF241F1FD05F00AFC194 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				10728F141F1E863A003A18B1 /* PlayingAMaze.sks */,
+				1076151F1F13E3D500C46CAD /* BuildingAMaze.sks */,
+			);
+			name = Gameplay;
+			sourceTree = "<group>";
+		};
 		10728F041F1D2E6E003A18B1 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +175,7 @@
 				1076150D1F13E2DE00C46CAD /* GameViewController.swift */,
 				105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */,
 				10728F1C1F1E8818003A18B1 /* Play */,
-				107615251F13F94100C46CAD /* CreateMaze */,
+				107615251F13F94100C46CAD /* Build */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -174,22 +183,21 @@
 		1076151E1F13E31300C46CAD /* SKS */ = {
 			isa = PBXGroup;
 			children = (
+				1039AF241F1FD05F00AFC194 /* Gameplay */,
 				10728F071F1D348D003A18B1 /* MainMenu Scenes */,
-				1076151F1F13E3D500C46CAD /* BuildingAMaze.sks */,
-				10728F141F1E863A003A18B1 /* PlayingAMaze.sks */,
 				107615091F13E2DE00C46CAD /* Actions.sks */,
 			);
 			name = SKS;
 			sourceTree = "<group>";
 		};
-		107615251F13F94100C46CAD /* CreateMaze */ = {
+		107615251F13F94100C46CAD /* Build */ = {
 			isa = PBXGroup;
 			children = (
 				107615261F14202A00C46CAD /* BuildingAMaze.swift */,
 				107615211F13E6B800C46CAD /* Maze.swift */,
 				10728F181F1E8759003A18B1 /* SKSpriteNode Classes */,
 			);
-			name = CreateMaze;
+			name = Build;
 			sourceTree = "<group>";
 		};
 		B67C9D837DB911620F828776 /* Pods */ = {

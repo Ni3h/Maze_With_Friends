@@ -50,6 +50,11 @@ class Maze: SKSpriteNode {
         self.addChild(newWallPiece)
     }
     
+    /* Checks to see if there is a wall at given gridX, gridY location */
+    func isWall(gridX: Int, gridY: Int) -> Bool {
+        let wallPiece = wallArray[gridY][gridX]
+        return wallPiece.isAlive
+    }
     
     func placeAWall(gridX: Int, gridY: Int){
         let wallPiece = wallArray[gridY][gridX]

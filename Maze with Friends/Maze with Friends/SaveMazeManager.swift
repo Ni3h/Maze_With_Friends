@@ -7,19 +7,24 @@
 //
 
 import Foundation
+import SpriteKit
 
 class SaveMazeManager {
     let mazeObject = Maze()
+    let screenSize = UIScreen.main.bounds
     
+
     init() {
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
         // load existing high scores or set up an empty array
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0] as String
-        let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
-        //let path = NSURL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
         
-        //JUST FOR TESTING
-        mazeObject.generateGrid(rows: 25, columns: 25, width: Int(800), yOffset: 150)
+        let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
+        
+        mazeObject.generateGrid(rows: 25, columns: 25, width: Int(screenWidth), yOffset: 140)
         
         let fileManager = FileManager.default
         
@@ -42,7 +47,6 @@ class SaveMazeManager {
             let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData as Data)
 
             self.mazeObject.wallArray = wallArray as! [[Wall]]
-            
             
             for wall1d in mazeObject.wallArray {
                 for wall in wall1d{
