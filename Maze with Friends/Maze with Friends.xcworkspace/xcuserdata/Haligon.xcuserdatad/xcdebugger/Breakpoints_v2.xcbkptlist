@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "522268776.62085"
+            timestampString = "522367138.021457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "moveHero(dir:gX:gY:hX:hY:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "522268776.62085"
+            timestampString = "522367138.021457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "clampCameraToHero()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,13 +58,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze with Friends/BuildingAMaze.swift"
-            timestampString = "522265518.269849"
+            timestampString = "522353852.482054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maze with Friends/ToolBox.swift"
+            timestampString = "522365330.250399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init(coder:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Maze_with_Friends.ToolBox.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Maze_with_Friends.ToolBox&gt;"
+                  moduleName = "Maze with Friends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/ToolBox.swift"
+                  timestampString = "522352130.228346"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Maze_with_Friends.ToolBox.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Maze_with_Friends.ToolBox&gt;"
+                  moduleName = "Maze with Friends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/ToolBox.swift"
+                  timestampString = "522352130.232147"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

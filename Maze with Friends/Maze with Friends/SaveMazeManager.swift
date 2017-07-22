@@ -12,7 +12,7 @@ import SpriteKit
 class SaveMazeManager {
     let mazeObject = Maze()
 
-    init(width: Int, yOffset: Int) {
+    init(width: Int, yOffset: CGFloat) {
 
         
         // load existing high scores or set up an empty array
@@ -20,7 +20,7 @@ class SaveMazeManager {
         let documentsDirectory = paths[0] as String
         
         let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
-        mazeObject.generateGrid(rows: 25, columns: 25, width: 800, yOffset: 140)
+        mazeObject.generateGrid(rows: 25, columns: 25, width: width, yOffset: yOffset)
         
         let fileManager = FileManager.default
         

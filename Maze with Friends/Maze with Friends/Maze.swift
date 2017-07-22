@@ -159,6 +159,8 @@ class Maze: SKSpriteNode {
         /* Calculate position on screen */
         let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
         
+       
+        
         gridObject.size.width = CGFloat(tileWidth)
         gridObject.size.height = CGFloat(tileHeight)
         

@@ -8,7 +8,13 @@
 
 import SpriteKit
 
+
+
 class PlayingAMaze: SKScene {
+    
+    enum GameSceneState {
+        case active, victory
+    }
     
     enum direction {
         case N, E, S, W, X
@@ -17,20 +23,30 @@ class PlayingAMaze: SKScene {
     
     var mazeSave: SaveMazeManager!
     
+    /* Game management */
+    var gameState: GameSceneState = .active
+    
     var gridX = 0
     var gridY = 0
     var heroGridX = 0
     var heroGridY = 0
+    
+    var finishLineGridX = 0
+    var finishLineGridY = 0
+    
     var didItScroll = false
     let screenSize = UIScreen.main.bounds
     var cam: SKCameraNode!
     
     var toolBar: ToolBarNode!
     var backMainMenu: MSButtonNode!
+    var victoryButton: MSButtonNode!
+    
     var toolBarHeight: CGFloat = 0
     var width = 0
 
     let mouseHeroObject = MouseHero()
+    let finishLineObject = FinishLine()
 
 
     
@@ -41,6 +57,7 @@ class PlayingAMaze: SKScene {
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
+        victoryButton = self.childNode(withName: "//victoryButton") as! MSButtonNode
         
         backMainMenu.selectedHandler = { [unowned self] in
             self.loadMainMenu()
@@ -49,18 +66,55 @@ class PlayingAMaze: SKScene {
 
         width = Int(self.size.width)
         toolBarHeight = toolBar.size.height
-        mazeSave = SaveMazeManager( width: Int(width), yOffset: Int(toolBarHeight) )
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         self.addChild(mazeSave.mazeObject)
 
         
-        mazeSave.mazeObject.gridLayer.zPosition = 6
+        mazeSave.mazeObject.gridLayer.zPosition = 0
         
-        addMouse(row: 0, col: 1, yOffset: 140)
+        addMouse(row: 0, col: 1, yOffset: toolBarHeight)
+        addFinishLine(row: 24, col: 23, yOffset: toolBarHeight)
+        
+        /* Setup restart button selection handler */
+        victoryButton.selectedHandler = { [unowned self] in
+            
+            /* 1) Grab reference to our SpriteKit view */
+            guard let skView = self.view as SKView! else {
+                print("Could not get Skview")
+                return
+            }
+
+            
+            /* 2) Load Game scene */
+            guard let scene = MainMenu(fileNamed:"MainMenu") else {
+                print("Could not make MainMenu, check the name is spelled correctly")
+                return
+            }
+
+            /* 3) Ensure correct aspect mode */
+            scene.scaleMode = .aspectFill
+            
+            /* Show debug */
+            skView.showsPhysics = true
+            skView.showsDrawCount = true
+            skView.showsFPS = true
+            
+            /* 4) Start game scene */
+            skView.presentScene(scene)
+        
+        }
+        
+        /* Hide restart button */
+        victoryButton.state = .MSButtonNodeStateHidden
 
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        /* Disable touch if game state is not active */
+        if gameState != .active { return }
+        
         didItScroll = false
+        
         
         let tileSize = mazeSave.mazeObject.tileSize()
         let touch = touches.first!
@@ -68,12 +122,14 @@ class PlayingAMaze: SKScene {
         let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
         
         gridX = Int(location.x / tileSize.tileWidth)
-        gridY = Int((location.y - 140) / tileSize.tileHeight)
+        gridY = Int((location.y - toolBarHeight) / tileSize.tileHeight)
         heroGridX = Int(heroLocation.x / tileSize.tileWidth)
-        heroGridY = Int((heroLocation.y - 140) / tileSize.tileHeight)
+        heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if gameState != .active { return }
+
         for touch in touches {
             let location = touch.location(in: self)
             let previousLocation = touch.previousLocation(in: self)
@@ -102,8 +158,21 @@ class PlayingAMaze: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
+        /* Skip game update if game no longer active */
+        if gameState != .active { return }
+        
+       
+        
         clampCameraToHero()
         clampCamera()
+        
+        if heroGridX == 23 && heroGridY == 23 {
+            gameState = .victory
+            /* Show restart button */
+            victoryButton.state = .MSButtonNodeStateActive
+        } else {
+            return
+        }
     }
     
     func clampCameraToHero(){
@@ -180,10 +249,37 @@ class PlayingAMaze: SKScene {
 
         
         heroGridX = Int(heroPosition.x / tileSize.tileWidth)
-        heroGridY = Int((heroPosition.y - 140) / tileSize.tileHeight)
+        heroGridY = Int((heroPosition.y - toolBarHeight) / tileSize.tileHeight)
         
         
         addChild(mouseHeroObject)
+        
+    }
+    
+    func addFinishLine(row: Int, col: Int, yOffset: CGFloat) {
+        /* Add a new gridPiece at grid position*/
+        let tileSize = mazeSave.mazeObject.tileSize()
+        let tileWidth = tileSize.tileWidth
+        let tileHeight = tileSize.tileHeight
+        
+        /* New mouseHero object */
+        
+        /* Calculate position on screen */
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
+        
+        finishLineObject.size.width = CGFloat(tileWidth)
+        finishLineObject.size.height = CGFloat(tileHeight)
+        
+        finishLineObject.position = gridPosition
+        
+        let finishLinePosition = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
+        
+        
+        finishLineGridX = Int(finishLinePosition.x / tileSize.tileWidth)
+        finishLineGridY = Int((finishLinePosition.y - toolBarHeight) / tileSize.tileHeight)
+        
+        
+        addChild(finishLineObject)
         
     }
     
@@ -220,7 +316,7 @@ class PlayingAMaze: SKScene {
             }
             nextY -= 1
             nextX = hX
-            move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + 140, duration: Double(abs(nextY - hY)) * baseDuration)
+            move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
         case .S:
             nextY = hY - 1
             while nextY >= gY && !myMaze.isWall(gridX: gX, gridY: nextY){
@@ -228,7 +324,7 @@ class PlayingAMaze: SKScene {
             }
             nextY += 1
             nextX = hX
-            move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + 140, duration: Double(abs(nextY - hY)) * baseDuration)
+            move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
         case .E:
             nextX = hX + 1
             while nextX <= gX && !myMaze.isWall(gridX: nextX, gridY: gY){
@@ -251,7 +347,7 @@ class PlayingAMaze: SKScene {
 
         }
         
-        print("nextX: \(nextX) nextY \(nextY)")
+       // print("nextX: \(nextX) nextY \(nextY)")
 
         
         mouseHeroObject.run(move)

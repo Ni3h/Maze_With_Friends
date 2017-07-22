@@ -20,10 +20,15 @@ class BuildingAMaze: SKScene {
     var mazeSave: SaveMazeManager!
     
     var toolBar: ToolBarNode!
- //   var toolBox: ToolBarNode!
+ //   var toolBox: ToolBox!
+    var toolBoxButton: MSButtonNode!
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
     var backMainMenu: MSButtonNode!
+    
+    /*Toolbox*/
+    var toolBoxReference: ToolBox!
+    
     
     
     var toolBarHeight: CGFloat = 0
@@ -42,15 +47,25 @@ class BuildingAMaze: SKScene {
         
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-      //  toolBox = self.childNode(withName:"//toolBox") as! ToolBarNode
+   //     toolBox = self.childNode(withName:"//toolBox") as! ToolBox
         settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
+        toolBoxButton = self.childNode(withName: "//toolBoxButton") as! MSButtonNode
+        
+        
+        toolBoxReference = self.childNode(withName: "//toolBoxNode") as! ToolBox
+        
+        toolBoxReference.addChildren()
+        
+    //    toolBox = self.childNode(withName: "toolBox") as! ToolBox
+        
         
         let width = self.size.width
         
         toolBarHeight = toolBar.size.height
-        mazeSave = SaveMazeManager( width: Int(width), yOffset: Int(toolBarHeight) )
+        print (toolBarHeight)
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         self.addChild(mazeSave.mazeObject)
 
         print(width)
@@ -58,6 +73,11 @@ class BuildingAMaze: SKScene {
         
         
       //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
+        
+        toolBoxButton.selectedHandler = { [unowned self] in
+            self.toolBoxReference.alpha = 1
+            
+        }
         
         saveButton.selectedHandler = { [unowned self] in
             self.mazeSave.save()
@@ -68,6 +88,9 @@ class BuildingAMaze: SKScene {
         }
         
     }
+    
+    
+    
     
     
     func widthDimension() -> Int {
