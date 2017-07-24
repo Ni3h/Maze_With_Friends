@@ -26,6 +26,10 @@ class BuildingAMaze: SKScene {
     var saveButton: MSButtonNode!
     var backMainMenu: MSButtonNode!
     
+    
+    let mouseHeroObject = MouseHero()
+
+    
     /*Toolbox*/
     var toolBoxReference: ToolBox!
     
@@ -47,7 +51,6 @@ class BuildingAMaze: SKScene {
         
         /*Initializing toolbar/buttons */
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-   //     toolBox = self.childNode(withName:"//toolBox") as! ToolBox
         settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
@@ -58,17 +61,15 @@ class BuildingAMaze: SKScene {
         
         toolBoxReference.addChildren()
         
-    //    toolBox = self.childNode(withName: "toolBox") as! ToolBox
-        
-        
         let width = self.size.width
         
         toolBarHeight = toolBar.size.height
-        print (toolBarHeight)
         mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
+        
+        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+
         self.addChild(mazeSave.mazeObject)
 
-        print(width)
         
         
         
@@ -88,8 +89,6 @@ class BuildingAMaze: SKScene {
         }
         
     }
-    
-    
     
     
     
@@ -131,6 +130,7 @@ class BuildingAMaze: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
         didItScroll = false
 
         let tileSize = mazeSave.mazeObject.tileSize()
@@ -168,6 +168,13 @@ class BuildingAMaze: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if didItScroll == false {
+            if toolBoxReference.currentTBState == .TBPlaceStartPosition {
+                mazeSave.mazeObject.placeStartingPosition(gridX: gridX, gridY: gridY, yOffset: toolBarHeight)
+                print("this occured")
+                
+                toolBoxReference.currentTBState = .TBInactive
+                return
+            }
            
             let wallPiece = mazeSave.mazeObject.wallArray[gridY][gridX]
             

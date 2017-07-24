@@ -8,7 +8,13 @@
 
 import SpriteKit
 
-class MouseHero: SKSpriteNode {
+class MouseHero: Wall {
+    var isAlive: Bool = false {
+        didSet {
+            /* Visibility */
+            isHidden = !isAlive
+        }
+    }
     
     init() {
         // Make a texture from an image, a color, and size

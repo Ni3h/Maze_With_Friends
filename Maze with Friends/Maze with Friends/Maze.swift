@@ -14,6 +14,9 @@ class Maze: SKSpriteNode {
     var floorTileArray = [[FloorTiles]]()
     var wallArray = [[Wall]]()
     
+    let heroObject = MouseHero()
+
+    
     var tileWidth: CGFloat = 0
     var tileHeight: CGFloat = 0
     
@@ -24,6 +27,8 @@ class Maze: SKSpriteNode {
     var gridLayer = SKNode()
     
 
+
+    
     var backroundSizeDifference: Int = 2
     var backroundTileWidth: CGFloat = 0
     var backroundTileHeight: CGFloat = 0
@@ -54,6 +59,43 @@ class Maze: SKSpriteNode {
     func isWall(gridX: Int, gridY: Int) -> Bool {
         let wallPiece = wallArray[gridY][gridX]
         return wallPiece.isAlive
+    }
+    
+    
+    /* Hero Starting Position Functions */
+    func placeInitialHero(row: Int, col: Int, yOffset: CGFloat) {
+        /* Add a new gridPiece at grid position*/
+        /* Calculate position on screen */
+
+        
+        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
+        
+        heroObject.size.width = CGFloat(tileWidth)
+        heroObject.size.height = CGFloat(tileHeight)
+        
+        heroObject.position = gridPosition
+        
+        heroObject.isAlive = false
+    
+        addChild(heroObject)
+        
+    }
+    
+    
+    
+    func placeStartingPosition(gridX: Int, gridY: Int, yOffset: CGFloat) {
+        while isWall(gridX: gridX, gridY: gridY) {
+            self.removeAWall(gridX: gridX, gridY: gridY)
+        }
+        /* New heroObject object */
+        let gridPosition = CGPoint(x: (CGFloat(gridX) * tileWidth) , y: ((CGFloat(gridY) * tileHeight) + yOffset))
+        
+        heroObject.size.width = CGFloat(tileWidth)
+        heroObject.size.height = CGFloat(tileHeight)
+        
+        heroObject.position = gridPosition
+        heroObject.isAlive = true
+
     }
     
     func placeAWall(gridX: Int, gridY: Int){

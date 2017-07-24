@@ -10,30 +10,42 @@ import SpriteKit
 
 class ToolBox: SKNode {
     
+    enum TBState {
+        case TBInactive, TBPlaceStartPosition, TBPlaceEndPosition
+    }
+    
     
     /* UI Connections */
     var toolBoxLeft: MSButtonNode!
     var toolBoxRight: MSButtonNode!
     var closeButton: MSButtonNode!
-    var endFlag: MSButtonNode!
-    var startFlag: MSButtonNode!
+    var startPosition: MSButtonNode!
+    var endPosition: MSButtonNode!
+
     var toolBoxInside: ToolBarNode!
     var toolBoxOutside: ToolBarNode!
     var toolBoxNode: SKNode!
     
-    var startFlagBoolFlag = false
+    
+    /* Bool Flags for buttons */
+    var currentTBState: TBState = .TBInactive
+    
+    var startPositionFlag = false
+    var endPositionFlag = false
 
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func addChildren() -> Bool {
+    func addChildren() {
         toolBoxLeft = self.childNode(withName: "//toolBoxLeft") as! MSButtonNode
         toolBoxRight = self.childNode(withName: "//toolBoxRight") as! MSButtonNode
         closeButton = self.childNode(withName: "//closeButton") as! MSButtonNode
-        endFlag = self.childNode(withName: "//endFlag") as! MSButtonNode
-        startFlag = self.childNode(withName: "//startFlag") as! MSButtonNode
+        
+        startPosition = self.childNode(withName: "//startPosition") as! MSButtonNode
+        endPosition = self.childNode(withName: "//endPosition") as! MSButtonNode
         toolBoxInside = self.childNode(withName: "//toolBoxInside") as! ToolBarNode
         toolBoxOutside = self.childNode(withName: "//toolBoxOutside") as! ToolBarNode
         
@@ -43,8 +55,21 @@ class ToolBox: SKNode {
             
         }
         
+        startPosition.selectedHandler = { [unowned self] in
+            self.currentTBState = .TBPlaceStartPosition
+        }
         
-        return startFlagBoolFlag
+
+        
+        endPosition.selectedHandler = { [unowned self] in
+            self.endPositionFlag = true
+        }
+        
+        
+        
+        
+        
+        
     }
 
     
