@@ -65,6 +65,7 @@ class MainMenu: SKScene {
         }
         
         /* 2) Load Game scene */
+        //EDIT THIS
         guard let scene = PlayingAMaze(fileNamed:"PlayingAMaze") else {
             print("Could not make PlayingAMaze, check the name is spelled correctly")
             return

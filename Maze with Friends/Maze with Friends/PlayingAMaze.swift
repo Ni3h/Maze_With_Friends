@@ -45,8 +45,9 @@ class PlayingAMaze: SKScene {
     var toolBarHeight: CGFloat = 0
     var width = 0
 
-    let mouseHeroObject = MouseHero()
     let finishLineObject = FinishLine()
+    
+    var mouseHeroObject: MouseHero!
 
 
     
@@ -59,6 +60,7 @@ class PlayingAMaze: SKScene {
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         victoryButton = self.childNode(withName: "//victoryButton") as! MSButtonNode
         
+        
         backMainMenu.selectedHandler = { [unowned self] in
             self.loadMainMenu()
         }
@@ -67,12 +69,17 @@ class PlayingAMaze: SKScene {
         width = Int(self.size.width)
         toolBarHeight = toolBar.size.height
         mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
+        
+        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        
+        
         self.addChild(mazeSave.mazeObject)
 
+        mouseHeroObject = mazeSave.mazeObject.heroObject
         
         mazeSave.mazeObject.gridLayer.zPosition = 0
         
-        addMouse(row: 0, col: 1, yOffset: toolBarHeight)
+  //      addMouse(row: 0, col: 1, yOffset: toolBarHeight)
         addFinishLine(row: 24, col: 23, yOffset: toolBarHeight)
         
         /* Setup restart button selection handler */
@@ -228,34 +235,6 @@ class PlayingAMaze: SKScene {
         
     }
     
-    
-    func addMouse(row: Int, col: Int, yOffset: CGFloat) {
-        /* Add a new gridPiece at grid position*/
-        let tileSize = mazeSave.mazeObject.tileSize()
-        let tileWidth = tileSize.tileWidth
-        let tileHeight = tileSize.tileHeight
-
-        /* New mouseHero object */
-        
-        /* Calculate position on screen */
-        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
-        
-        mouseHeroObject.size.width = CGFloat(tileWidth)
-        mouseHeroObject.size.height = CGFloat(tileHeight)
-        
-        mouseHeroObject.position = gridPosition
-        
-        let heroPosition = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
-
-        
-        heroGridX = Int(heroPosition.x / tileSize.tileWidth)
-        heroGridY = Int((heroPosition.y - toolBarHeight) / tileSize.tileHeight)
-        
-        
-        addChild(mouseHeroObject)
-        
-    }
-    
     func addFinishLine(row: Int, col: Int, yOffset: CGFloat) {
         /* Add a new gridPiece at grid position*/
         let tileSize = mazeSave.mazeObject.tileSize()
@@ -311,7 +290,7 @@ class PlayingAMaze: SKScene {
         switch dir {
         case .N:
             nextY = hY + 1
-            while nextY <= gY && !myMaze.isWall(gridX: gX, gridY: nextY){
+            while nextY <= gY && !myMaze.isActualWall(gridX: gX, gridY: nextY){
                 nextY += 1
             }
             nextY -= 1
@@ -319,7 +298,7 @@ class PlayingAMaze: SKScene {
             move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
         case .S:
             nextY = hY - 1
-            while nextY >= gY && !myMaze.isWall(gridX: gX, gridY: nextY){
+            while nextY >= gY && !myMaze.isActualWall(gridX: gX, gridY: nextY){
                 nextY -= 1
             }
             nextY += 1
@@ -327,7 +306,7 @@ class PlayingAMaze: SKScene {
             move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
         case .E:
             nextX = hX + 1
-            while nextX <= gX && !myMaze.isWall(gridX: nextX, gridY: gY){
+            while nextX <= gX && !myMaze.isActualWall(gridX: nextX, gridY: gY){
                 nextX += 1
             }
             nextX -= 1
@@ -335,7 +314,7 @@ class PlayingAMaze: SKScene {
             move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
         case .W:
             nextX = hX - 1
-            while nextX >= gX && !myMaze.isWall(gridX: nextX, gridY: gY){
+            while nextX >= gX && !myMaze.isActualWall(gridX: nextX, gridY: gY){
                 nextX -= 1
             }
             nextX += 1

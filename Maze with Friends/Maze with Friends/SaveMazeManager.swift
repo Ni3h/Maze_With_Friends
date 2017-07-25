@@ -46,8 +46,8 @@ class SaveMazeManager {
             
             for wall1d in mazeObject.wallArray {
                 for wall in wall1d{
+                    
                     mazeObject.addChild(wall)
-
                 }
             }
         } catch {

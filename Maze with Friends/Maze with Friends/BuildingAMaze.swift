@@ -27,7 +27,7 @@ class BuildingAMaze: SKScene {
     var backMainMenu: MSButtonNode!
     
     
-    let mouseHeroObject = MouseHero()
+ //   let mouseHeroObject = MouseHero()
 
     
     /*Toolbox*/
@@ -64,6 +64,7 @@ class BuildingAMaze: SKScene {
         let width = self.size.width
         
         toolBarHeight = toolBar.size.height
+        
         mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
