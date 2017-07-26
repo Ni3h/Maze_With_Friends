@@ -15,6 +15,7 @@ class Maze: SKSpriteNode {
     var wallArray = [[Wall]]()
     
     var heroObject: MouseHero!
+    var finishLineObject: FinishLine!
 
     
     var tileWidth: CGFloat = 0
@@ -33,6 +34,21 @@ class Maze: SKSpriteNode {
     var backroundTileWidth: CGFloat = 0
     var backroundTileHeight: CGFloat = 0
     
+    /* Move this to top later or somewhere more fitting converting gridx/gridy into a cgpoint */
+    
+    func gridPosition(gridX: Int, gridY: Int, yOffset: CGFloat) -> CGPoint {
+        let gridPosition = CGPoint(x: (CGFloat(gridX) * tileWidth) , y: ((CGFloat(gridY) * tileHeight) + yOffset))
+        
+        return gridPosition
+    }
+    
+    
+    func gridLocation(location: CGPoint, yOffset: CGFloat) -> (gridX: Int, gridY: Int) {
+        let gridX = Int(location.x / tileWidth)
+        let gridY = Int((location.y - yOffset) / tileHeight)
+        
+        return(gridX, gridY)
+    }
     
     /* Calculate grid array position */
     
@@ -74,6 +90,8 @@ class Maze: SKSpriteNode {
         return false
     }
     
+    
+    
     /* Hero Starting Position Functions */
     func placeInitialHero(row: Int, col: Int, yOffset: CGFloat) {
         let wallPiece = wallArray[0][0]
@@ -97,25 +115,10 @@ class Maze: SKSpriteNode {
 
     }
     
-    /* Move this to top later or somewhere more fitting converting gridx/gridy into a cgpoint */
-    
-    func gridPosition(gridX: Int, gridY: Int, yOffset: CGFloat) -> CGPoint {
-        let gridPosition = CGPoint(x: (CGFloat(gridX) * tileWidth) , y: ((CGFloat(gridY) * tileHeight) + yOffset))
-        
-        return gridPosition
-    }
-    
-    
-    func gridLocation(location: CGPoint, yOffset: CGFloat) -> (gridX: Int, gridY: Int) {
-        let gridX = Int(location.x / tileWidth)
-        let gridY = Int((location.y - yOffset) / tileHeight)
-        
-        return(gridX, gridY)
-    }
+
     
     
     func placeStartingPosition(gridX: Int, gridY: Int, yOffset: CGFloat) {
-        print(heroObject.position)
         if heroObject.isAlive {
             let lastHeroLocation = gridLocation(location: heroObject.position, yOffset: yOffset)
             self.removeAWall(gridX: lastHeroLocation.gridX, gridY: lastHeroLocation.gridY)
@@ -141,9 +144,58 @@ class Maze: SKSpriteNode {
         
     }
     
-    func whereIsHero() {
+    /* End position functions */
+    
+    func placeInitialFinishLine(row: Int, col: Int, yOffset: CGFloat) {
+        let wallPiece = wallArray[0][0]
+        /* Add a new gridPiece at grid position*/
+        
+        /* Calculate position on screen */
+        for wall1d in self.wallArray {
+            for wall in wall1d {
+                if wall is FinishLine {
+                    finishLineObject = wall as! FinishLine
+                    finishLineObject.isAlive = true
+                }
+            }
+        }
+        if finishLineObject == nil {
+            finishLineObject = FinishLine(size: wallPiece.size, position: wallPiece.position)
+            finishLineObject.isAlive = false
+            addChild(finishLineObject)
+        }
         
     }
+    
+    
+    func placeStartingFinishLine(gridX: Int, gridY: Int, yOffset: CGFloat) {
+        if finishLineObject.isAlive {
+            let lastFinishLineLocation = gridLocation(location: finishLineObject.position, yOffset: yOffset)
+            self.removeAWall(gridX: lastFinishLineLocation.gridX, gridY: lastFinishLineLocation.gridY)
+        }
+        
+        while isWall(gridX: gridX, gridY: gridY) {
+            self.removeAWall(gridX: gridX, gridY: gridY)
+        }
+        
+        
+        
+        /* New heroObject object */
+        let gridPosition = CGPoint(x: (CGFloat(gridX) * tileWidth) , y: ((CGFloat(gridY) * tileHeight) + yOffset))
+        
+        finishLineObject.size.width = CGFloat(tileWidth)
+        finishLineObject.size.height = CGFloat(tileHeight)
+        wallArray[gridY][gridX] = finishLineObject
+        
+        finishLineObject.position = gridPosition
+        finishLineObject.isAlive = true
+        if finishLineObject.parent == nil {
+            addChild(finishLineObject)
+        }
+        
+    }
+    
+
     
     func placeAWall(gridX: Int, gridY: Int){
         let wallPiece = wallArray[gridY][gridX]
@@ -152,7 +204,13 @@ class Maze: SKSpriteNode {
             heroObject.isAlive = false
         }
         
+        if finishLineObject.position == wallPiece.position{
+            finishLineObject.isAlive = false
+        }
+        
+        
         if(gridY > 0 && wallArray[gridY - 1][gridX].isAlive){
+            
             let newWallTop = WallTop(size: wallPiece.size, position: wallPiece.position)
             wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
             wallArray[gridY][gridX] = newWallTop
@@ -170,12 +228,15 @@ class Maze: SKSpriteNode {
         }
         if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
             let N = wallArray[gridY + 1][gridX]
-            let newWallTop = WallTop(size: wallPiece.size, position: N.position)
-            wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
-            wallArray[gridY + 1][gridX] = newWallTop
-            
-            N.isAlive = false
-            N.removeFromParent()
+            if (N.type == "top" || N.type == "iso"){
+                let newWallTop = WallTop(size: wallPiece.size, position: N.position)
+                wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
+                wallArray[gridY + 1][gridX] = newWallTop
+                
+                N.isAlive = false
+                N.removeFromParent()
+            }
+          
         }
         
     }
@@ -200,12 +261,15 @@ class Maze: SKSpriteNode {
         
         if(gridY < maxRows - 1 && wallArray[gridY + 1][gridX].isAlive) {
             let N = wallArray[gridY + 1][gridX]
+            if (N.type == "top" || N.type == "iso"){
+                
             let newIsoWall = IsometricMazeWall(size: N.size, position: N.position)
             wallHelper(newWallPiece: newIsoWall, gridX: gridX, gridY: gridY)
             wallArray[gridY + 1][gridX] = newIsoWall
             
             N.isAlive = false
             N.removeFromParent()
+            }
         }
     }
     

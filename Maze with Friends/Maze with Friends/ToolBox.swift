@@ -11,7 +11,7 @@ import SpriteKit
 class ToolBox: SKNode {
     
     enum TBState {
-        case TBInactive, TBPlaceStartPosition, TBPlaceEndPosition
+        case TBInactive, TBPlaceStartPosition, TBFinishLinePosition
     }
     
     
@@ -20,7 +20,7 @@ class ToolBox: SKNode {
     var toolBoxRight: MSButtonNode!
     var closeButton: MSButtonNode!
     var startPosition: MSButtonNode!
-    var endPosition: MSButtonNode!
+    var finishLinePosition: MSButtonNode!
 
     var toolBoxInside: ToolBarNode!
     var toolBoxOutside: ToolBarNode!
@@ -45,7 +45,7 @@ class ToolBox: SKNode {
         closeButton = self.childNode(withName: "//closeButton") as! MSButtonNode
         
         startPosition = self.childNode(withName: "//startPosition") as! MSButtonNode
-        endPosition = self.childNode(withName: "//endPosition") as! MSButtonNode
+        finishLinePosition = self.childNode(withName: "//finishLinePosition") as! MSButtonNode
         toolBoxInside = self.childNode(withName: "//toolBoxInside") as! ToolBarNode
         toolBoxOutside = self.childNode(withName: "//toolBoxOutside") as! ToolBarNode
         
@@ -61,8 +61,8 @@ class ToolBox: SKNode {
         
 
         
-        endPosition.selectedHandler = { [unowned self] in
-            self.endPositionFlag = true
+        finishLinePosition.selectedHandler = { [unowned self] in
+            self.currentTBState = .TBFinishLinePosition
         }
         
         

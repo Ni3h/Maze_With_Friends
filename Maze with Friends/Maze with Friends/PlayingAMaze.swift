@@ -44,11 +44,10 @@ class PlayingAMaze: SKScene {
     
     var toolBarHeight: CGFloat = 0
     var width = 0
-
-    let finishLineObject = FinishLine()
     
     var mouseHeroObject: MouseHero!
-
+    var finishLineObject: FinishLine!
+    
 
     
     override func didMove(to view: SKView) {
@@ -76,11 +75,11 @@ class PlayingAMaze: SKScene {
         self.addChild(mazeSave.mazeObject)
 
         mouseHeroObject = mazeSave.mazeObject.heroObject
+        finishLineObject = mazeSave.mazeObject.finishLineObject
         
         mazeSave.mazeObject.gridLayer.zPosition = 0
         
   //      addMouse(row: 0, col: 1, yOffset: toolBarHeight)
-        addFinishLine(row: 24, col: 23, yOffset: toolBarHeight)
         
         /* Setup restart button selection handler */
         victoryButton.selectedHandler = { [unowned self] in
@@ -195,11 +194,10 @@ class PlayingAMaze: SKScene {
         let heroPosition = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
 
         
-        let rBoundary = heroPosition.x + screenWidth
+        let rBoundary = heroPosition.x + screenWidth - (heroWidth)
         let lBoundary = heroPosition.x - (screenWidth-heroWidth)
-        
-        let tBoundary = heroPosition.y + screenHeight
-        let bBoundary = heroPosition.y - (screenHeight-tileHeight) - (heroHeight*2)
+        let tBoundary = heroPosition.y + screenHeight - toolBarHeight
+        let bBoundary = heroPosition.y - (screenHeight) - (heroHeight/2) + toolBarHeight
         
         
         let targetX = camera!.position.x
@@ -234,34 +232,8 @@ class PlayingAMaze: SKScene {
         
         
     }
-    
-    func addFinishLine(row: Int, col: Int, yOffset: CGFloat) {
-        /* Add a new gridPiece at grid position*/
-        let tileSize = mazeSave.mazeObject.tileSize()
-        let tileWidth = tileSize.tileWidth
-        let tileHeight = tileSize.tileHeight
-        
-        /* New mouseHero object */
-        
-        /* Calculate position on screen */
-        let gridPosition = CGPoint(x: (CGFloat(col) * tileWidth) , y: ((CGFloat(row) * tileHeight) + yOffset))
-        
-        finishLineObject.size.width = CGFloat(tileWidth)
-        finishLineObject.size.height = CGFloat(tileHeight)
-        
-        finishLineObject.position = gridPosition
-        
-        let finishLinePosition = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
-        
-        
-        finishLineGridX = Int(finishLinePosition.x / tileSize.tileWidth)
-        finishLineGridY = Int((finishLinePosition.y - toolBarHeight) / tileSize.tileHeight)
-        
-        
-        addChild(finishLineObject)
-        
-    }
-    
+
+
     /* Figuring out the direction for the hero to move */
     func travelDirection(gX: Int, gY: Int, hX: Int, hY: Int) -> direction {
         if gX == hX {

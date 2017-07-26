@@ -124,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				10DC89B21F26AE1000C4E327 /* toolBox Object */,
-				103D8D081F22A87E00918DA0 /* FinishLine.swift */,
 				107615231F13F93C00C46CAD /* GridPiece.swift */,
 				108540181F147B5800BFF4FD /* FloorTiles.swift */,
 				10728F191F1E87AA003A18B1 /* Wall Pieces */,
@@ -137,6 +136,7 @@
 			children = (
 				1003006D1F16D74B00C59159 /* Wall.swift */,
 				10DEB54B1F1AB2D7003A7B22 /* MouseHero.swift */,
+				103D8D081F22A87E00918DA0 /* FinishLine.swift */,
 				1003006B1F168BFC00C59159 /* WallTop.swift */,
 				100300671F15B46700C59159 /* IsometricMazeWall.swift */,
 			);

@@ -68,6 +68,7 @@ class BuildingAMaze: SKScene {
         mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
 
         self.addChild(mazeSave.mazeObject)
 
@@ -173,6 +174,13 @@ class BuildingAMaze: SKScene {
                 mazeSave.mazeObject.placeStartingPosition(gridX: gridX, gridY: gridY, yOffset: toolBarHeight)
                 print("this occured")
                 
+                toolBoxReference.currentTBState = .TBInactive
+                return
+            }
+            
+            if toolBoxReference.currentTBState == .TBFinishLinePosition {
+                mazeSave.mazeObject.placeStartingFinishLine(gridX: gridX, gridY: gridY, yOffset: toolBarHeight)
+                print("this occured")
                 toolBoxReference.currentTBState = .TBInactive
                 return
             }
