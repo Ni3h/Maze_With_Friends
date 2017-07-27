@@ -208,15 +208,27 @@ class Maze: SKSpriteNode {
             finishLineObject.isAlive = false
         }
         
-        
+        let newWall: Wall
         if(gridY > 0 && wallArray[gridY - 1][gridX].isAlive){
+            let S = wallArray[gridY - 1][gridX]
+            if (S.type == "top" || S.type == "iso"){
+                newWall = WallTop(size: wallPiece.size, position: wallPiece.position)
+                let newWallTop = WallTop(size: wallPiece.size, position: wallPiece.position)
+                wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
+                wallArray[gridY][gridX] = newWallTop
+                
+                wallPiece.isAlive = false
+                wallPiece.removeFromParent()
+            } else {
+                let newIsoWall = IsometricMazeWall(size: wallPiece.size, position: wallPiece.position)
+                wallHelper(newWallPiece: newIsoWall, gridX: gridX, gridY: gridY)
+                wallArray[gridY][gridX] = newIsoWall
+                
+                
+                wallPiece.isAlive = false
+                wallPiece.removeFromParent()
+            }
             
-            let newWallTop = WallTop(size: wallPiece.size, position: wallPiece.position)
-            wallHelper(newWallPiece: newWallTop, gridX: gridX, gridY: gridY)
-            wallArray[gridY][gridX] = newWallTop
-            
-            wallPiece.isAlive = false
-            wallPiece.removeFromParent()
         } else {
             let newIsoWall = IsometricMazeWall(size: wallPiece.size, position: wallPiece.position)
             wallHelper(newWallPiece: newIsoWall, gridX: gridX, gridY: gridY)

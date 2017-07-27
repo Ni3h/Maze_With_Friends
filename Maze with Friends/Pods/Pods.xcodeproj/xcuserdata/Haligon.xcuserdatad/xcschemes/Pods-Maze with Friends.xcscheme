@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5E6C639DF8DA30CE2322145970337A87"
+               BlueprintIdentifier = "243A9A436443042FE837EA7A03839A25"
                BuildableName = "Pods_Maze_with_Friends.framework"
                BlueprintName = "Pods-Maze with Friends"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5E6C639DF8DA30CE2322145970337A87"
+            BlueprintIdentifier = "243A9A436443042FE837EA7A03839A25"
             BuildableName = "Pods_Maze_with_Friends.framework"
             BlueprintName = "Pods-Maze with Friends"
             ReferencedContainer = "container:Pods.xcodeproj">

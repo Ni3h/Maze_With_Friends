@@ -10,6 +10,7 @@ target 'Maze with Friends' do
    pod 'Firebase/Core'
    pod 'Firebase/Storage'
    pod 'Firebase/Auth'
+   pod 'FirebaseUI/Auth'
    pod 'Firebase/Database'
 
 
