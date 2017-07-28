@@ -15,6 +15,10 @@
 		1039AF2B1F22628800AFC194 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039AF2A1F22628800AFC194 /* ToolBox.swift */; };
 		103D8D071F226B3200918DA0 /* BuildingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103D8D061F226B3200918DA0 /* BuildingAMaze.sks */; };
 		103D8D091F22A87E00918DA0 /* FinishLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103D8D081F22A87E00918DA0 /* FinishLine.swift */; };
+		105386081F2A8FC0002813F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386071F2A8FC0002813F1 /* User.swift */; };
+		1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */; };
+		1053860C1F2AB44E002813F1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860B1F2AB44E002813F1 /* UserService.swift */; };
+		1053860E1F2BB546002813F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860D1F2BB546002813F1 /* Constants.swift */; };
 		105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */; };
 		10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10728F001F1D247D003A18B1 /* MainMenu.sks */; };
 		10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10728F021F1D2E67003A18B1 /* MainMenu.swift */; };
@@ -49,6 +53,10 @@
 		1039AF2A1F22628800AFC194 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
 		103D8D061F226B3200918DA0 /* BuildingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BuildingAMaze.sks; sourceTree = "<group>"; };
 		103D8D081F22A87E00918DA0 /* FinishLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishLine.swift; sourceTree = "<group>"; };
+		105386071F2A8FC0002813F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUsernameViewController.swift; sourceTree = "<group>"; };
+		1053860B1F2AB44E002813F1 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		1053860D1F2BB546002813F1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMazeManager.swift; sourceTree = "<group>"; };
 		10728F001F1D247D003A18B1 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		10728F021F1D2E67003A18B1 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -190,8 +198,8 @@
 		1076151D1F13E2FC00C46CAD /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				107615051F13E2DE00C46CAD /* AppDelegate.swift */,
 				10DC89BC1F2965C500C4E327 /* Login */,
+				107615051F13E2DE00C46CAD /* AppDelegate.swift */,
 				10DEB54F1F1ACCB3003A7B22 /* ToolBarNode.swift */,
 				10728F041F1D2E6E003A18B1 /* MainMenu */,
 				100300691F15E2A500C59159 /* MSButtonNode.swift */,
@@ -254,6 +262,10 @@
 			isa = PBXGroup;
 			children = (
 				10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */,
+				105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */,
+				105386071F2A8FC0002813F1 /* User.swift */,
+				1053860B1F2AB44E002813F1 /* UserService.swift */,
+				1053860D1F2BB546002813F1 /* Constants.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -413,8 +425,11 @@
 				107615221F13E6B800C46CAD /* Maze.swift in Sources */,
 				10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */,
 				1003006E1F16D74B00C59159 /* Wall.swift in Sources */,
+				1053860E1F2BB546002813F1 /* Constants.swift in Sources */,
+				1053860C1F2AB44E002813F1 /* UserService.swift in Sources */,
 				1003006A1F15E2A500C59159 /* MSButtonNode.swift in Sources */,
 				107615241F13F93C00C46CAD /* GridPiece.swift in Sources */,
+				105386081F2A8FC0002813F1 /* User.swift in Sources */,
 				1003006C1F168BFC00C59159 /* WallTop.swift in Sources */,
 				107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */,
 				107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */,
@@ -426,6 +441,7 @@
 				10728F1B1F1E8810003A18B1 /* PlayingAMaze.swift in Sources */,
 				10DEB54C1F1AB2D7003A7B22 /* MouseHero.swift in Sources */,
 				105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */,
+				1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
