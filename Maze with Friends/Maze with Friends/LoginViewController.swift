@@ -72,25 +72,8 @@ extension LoginViewController: FUIAuthDelegate {
         
         // 3
         
-        userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
-            if let user = User(snapshot: snapshot) {
-                User.setCurrent(user)
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: .main)
-                if let initialViewController = storyboard.instantiateInitialViewController() {
-                    self.view.window?.rootViewController = initialViewController
-                    self.view.window?.makeKeyAndVisible()
-                }
-            } else {
-                self.performSegue(withIdentifier: "toCreateUsername", sender: self)
-            }
-        })
-        
-        
-        
-//        UserService.show(forUID: user.uid) { (user) in
-//            if let user = user {
-//                // handle existing user
+//        userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+//            if let user = User(snapshot: snapshot) {
 //                User.setCurrent(user)
 //                
 //                let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -99,10 +82,43 @@ extension LoginViewController: FUIAuthDelegate {
 //                    self.view.window?.makeKeyAndVisible()
 //                }
 //            } else {
-//                // handle new user
 //                self.performSegue(withIdentifier: "toCreateUsername", sender: self)
 //            }
+//        })
+        
+//        UserService.show(forUID: user.uid) { (user) in
+//            userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+//                if let user = User(snapshot: snapshot) {
+//                    User.setCurrent(user)
+//                    let initialViewController = UIStoryboard.initialViewController(for: .main)
+//                    self.view.window?.rootViewController = initialViewController
+//                    self.view.window?.makeKeyAndVisible()
+//                } else {
+//                    // 1
+//                    self.performSegue(withIdentifier: Constants.Segue.toCreateUsername, sender: self)
+//                }
+//            })
 //        }
+        
+        
+        
+        UserService.show(forUID: user.uid) { (user) in
+            if let user = user {
+                // handle existing user
+                User.setCurrent(user, writeToUserDefaults: true)
+                
+                let initialViewController = UIStoryboard.initialViewController(for: .main)
+                self.view.window?.rootViewController = initialViewController
+                self.view.window?.makeKeyAndVisible()
+            } else {
+                // handle new user
+                self.performSegue(withIdentifier: Constants.Segue.toCreateUsername, sender: self)
+            }
+        }
+        
+        
+        
+
         
         
     }

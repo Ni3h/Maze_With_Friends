@@ -18,7 +18,8 @@
 		105386081F2A8FC0002813F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386071F2A8FC0002813F1 /* User.swift */; };
 		1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */; };
 		1053860C1F2AB44E002813F1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860B1F2AB44E002813F1 /* UserService.swift */; };
-		1053860E1F2BB546002813F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860D1F2BB546002813F1 /* Constants.swift */; };
+		105386101F2BB9F7002813F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860F1F2BB9F7002813F1 /* Constants.swift */; };
+		105386121F2BE134002813F1 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386111F2BE134002813F1 /* Storyboard+Utility.swift */; };
 		105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */; };
 		10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10728F001F1D247D003A18B1 /* MainMenu.sks */; };
 		10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10728F021F1D2E67003A18B1 /* MainMenu.swift */; };
@@ -56,7 +57,8 @@
 		105386071F2A8FC0002813F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUsernameViewController.swift; sourceTree = "<group>"; };
 		1053860B1F2AB44E002813F1 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		1053860D1F2BB546002813F1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1053860F1F2BB9F7002813F1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		105386111F2BE134002813F1 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMazeManager.swift; sourceTree = "<group>"; };
 		10728F001F1D247D003A18B1 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		10728F021F1D2E67003A18B1 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -264,8 +266,9 @@
 				10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */,
 				105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */,
 				105386071F2A8FC0002813F1 /* User.swift */,
+				1053860F1F2BB9F7002813F1 /* Constants.swift */,
 				1053860B1F2AB44E002813F1 /* UserService.swift */,
-				1053860D1F2BB546002813F1 /* Constants.swift */,
+				105386111F2BE134002813F1 /* Storyboard+Utility.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -422,10 +425,11 @@
 				1076150E1F13E2DE00C46CAD /* GameViewController.swift in Sources */,
 				10728F0D1F1D7527003A18B1 /* MenuBar.swift in Sources */,
 				1039AF2B1F22628800AFC194 /* ToolBox.swift in Sources */,
+				105386121F2BE134002813F1 /* Storyboard+Utility.swift in Sources */,
 				107615221F13E6B800C46CAD /* Maze.swift in Sources */,
 				10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */,
 				1003006E1F16D74B00C59159 /* Wall.swift in Sources */,
-				1053860E1F2BB546002813F1 /* Constants.swift in Sources */,
+				105386101F2BB9F7002813F1 /* Constants.swift in Sources */,
 				1053860C1F2AB44E002813F1 /* UserService.swift in Sources */,
 				1003006A1F15E2A500C59159 /* MSButtonNode.swift in Sources */,
 				107615241F13F93C00C46CAD /* GridPiece.swift in Sources */,
