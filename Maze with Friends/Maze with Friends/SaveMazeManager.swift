@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import FirebaseStorage
 import SpriteKit
 
 class SaveMazeManager {
     let mazeObject = Maze()
+    
+    // Get a reference to the storage service using the default Firebase App
+    let storage = Storage.storage()
 
     init(width: Int, yOffset: CGFloat) {
 
@@ -70,6 +74,45 @@ class SaveMazeManager {
             
         }
     }
+    
+    
+    func saveToFirebase() {
+        // Create a storage reference from our storage service
+        let mazeName = mazeObject.mazeName
+        let storageRef = storage.reference()
+        
+//        let nameRef = storageRef.child("mazes/\(mazeName)")
+        let nameRef = storageRef.child("mazes/firstMaze)")
+
+        
+        
+        let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray);
+
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = nameRef.putData(saveData, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            // Metadata contains file metadata such as size, content-type, and download URL.
+            let downloadURL = metadata.downloadURL
+        }
+        
+        
+    }
+    
+    func downloadFromFirebase() {
+        // Create a storage reference from our storage service
+        let mazeName = mazeObject.mazeName
+        let storageRef = storage.reference()
+        
+        //        let nameRef = storageRef.child("mazes/\(mazeName)")
+        let nameRef = storageRef.child("mazes/firstMaze)")
+        
+        
+    }
+    
+    
     
     
 }

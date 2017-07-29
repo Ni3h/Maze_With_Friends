@@ -15,20 +15,20 @@ func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
 }
 
 
-class BuildingAMaze: SKScene {
+class BuildingAMaze: SKScene, UITextFieldDelegate {
     
     var mazeSave: SaveMazeManager!
     
     var toolBar: ToolBarNode!
- //   var toolBox: ToolBox!
     var toolBoxButton: MSButtonNode!
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
     var backMainMenu: MSButtonNode!
     
     
- //   let mouseHeroObject = MouseHero()
-
+    /* textInput */
+    var inputText: UITextField?
+    
     
     /*Toolbox*/
     var toolBoxReference: ToolBox!
@@ -56,14 +56,17 @@ class BuildingAMaze: SKScene {
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         toolBoxButton = self.childNode(withName: "//toolBoxButton") as! MSButtonNode
         
+        /* Text stuff */
+        
         
         toolBoxReference = self.childNode(withName: "//toolBoxNode") as! ToolBox
         
         toolBoxReference.addChildren()
         
         let width = self.size.width
-        
+        print (width)
         toolBarHeight = toolBar.size.height
+
         
         mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         
@@ -71,10 +74,15 @@ class BuildingAMaze: SKScene {
         mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
 
         self.addChild(mazeSave.mazeObject)
+        
 
         
         
         
+        textField()
+        
+        
+
       //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         toolBoxButton.selectedHandler = { [unowned self] in
@@ -83,7 +91,10 @@ class BuildingAMaze: SKScene {
         }
         
         saveButton.selectedHandler = { [unowned self] in
+            self.inputText?.becomeFirstResponder()
+            self.inputText?.alpha = 1
             self.mazeSave.save()
+            self.mazeSave.saveToFirebase()
         }
         
         backMainMenu.selectedHandler = { [unowned self] in
@@ -92,6 +103,36 @@ class BuildingAMaze: SKScene {
         
     }
     
+    
+    /* a
+     
+ */
+    
+    
+    func textField() {
+        inputText = UITextField( frame: CGRect(x: 20 , y: 100, width: 340, height: 40))
+        self.view!.addSubview(inputText!)
+        inputText?.backgroundColor = UIColor.white
+        inputText?.alpha = 0
+        inputText?.placeholder = "Enter Maze Name"
+        inputText?.borderStyle = UITextBorderStyle.roundedRect
+        inputText?.delegate = self
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        inputText?.resignFirstResponder()
+        saveText()
+        inputText?.alpha = 0
+        return true
+    }
+    
+    func saveText() {
+        if inputText?.text != "" {
+            mazeSave.mazeObject.mazeName = (inputText?.text)!
+            inputText!.text = ""
+        }
+    }
     
     
     func widthDimension() -> Int {
@@ -132,7 +173,9 @@ class BuildingAMaze: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
+        self.view?.endEditing(true)
+        inputText?.alpha = 0
+
         didItScroll = false
 
         let tileSize = mazeSave.mazeObject.tileSize()

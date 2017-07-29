@@ -27,6 +27,7 @@ class Maze: SKSpriteNode {
     var maxCols = 0
     var gridLayer = SKNode()
     
+    var mazeName = ""
 
 
     
