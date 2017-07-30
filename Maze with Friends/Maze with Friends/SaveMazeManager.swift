@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseStorage
 import SpriteKit
 
@@ -18,13 +19,22 @@ class SaveMazeManager {
 
     init(width: Int, yOffset: CGFloat) {
 
+        //scene off
+        mazeObject.generateGrid(rows: 25, columns: 25, width: width, yOffset: yOffset)
+        loadFromFirebase()
+        //scene on
+        
+      
+    }
+    
+    func loadFromPlist() {
         
         // load existing high scores or set up an empty array
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0] as String
         
         let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
-        mazeObject.generateGrid(rows: 25, columns: 25, width: width, yOffset: yOffset)
+      
         
         let fileManager = FileManager.default
         
@@ -45,7 +55,7 @@ class SaveMazeManager {
             // do we get serialized data back from the attempted path?
             // if so, unarchive it into an AnyObject, and then convert to an array of HighScores, if possible
             let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData as Data)
-
+            
             self.mazeObject.wallArray = wallArray as! [[Wall]]
             
             for wall1d in mazeObject.wallArray {
@@ -57,7 +67,10 @@ class SaveMazeManager {
         } catch {
             //whoops
         }
+        
     }
+    
+    
     
     func save() {
         // find the save directory our app has permission to use, and save the serialized version of self.scores - the HighScores array.
@@ -80,15 +93,17 @@ class SaveMazeManager {
         // Create a storage reference from our storage service
         let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
+        let uid = Auth.auth().currentUser!.uid
         
 //        let nameRef = storageRef.child("mazes/\(mazeName)")
-        let nameRef = storageRef.child("mazes/firstMaze)")
+        let nameRef = storageRef.child("\(uid)/mazes/firstMaze)")
 
         
         
         let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray);
 
         // Upload the file to the path "images/rivers.jpg"
+    
         let uploadTask = nameRef.putData(saveData, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
@@ -101,7 +116,7 @@ class SaveMazeManager {
         
     }
     
-    func downloadFromFirebase() {
+    func loadFromFirebase() {
         // Create a storage reference from our storage service
         let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
@@ -109,8 +124,27 @@ class SaveMazeManager {
         //        let nameRef = storageRef.child("mazes/\(mazeName)")
         let nameRef = storageRef.child("mazes/firstMaze)")
         
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        nameRef.getData(maxSize: 10 * 1024 * 1024) { rawData, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "mazes/.." is returned
+                let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData as! Data)
+                self.mazeObject.wallArray = wallArray as! [[Wall]]
+                
+                for wall1d in self.mazeObject.wallArray {
+                    for wall in wall1d{
+                        
+                        self.mazeObject.addChild(wall)
+                    }
+                }
+            }
+        }
         
     }
+    
+    
     
     
     

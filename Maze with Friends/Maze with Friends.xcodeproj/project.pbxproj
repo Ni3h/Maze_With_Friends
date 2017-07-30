@@ -42,6 +42,8 @@
 		10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */; };
 		10DEB54C1F1AB2D7003A7B22 /* MouseHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DEB54B1F1AB2D7003A7B22 /* MouseHero.swift */; };
 		10DEB5501F1ACCB3003A7B22 /* ToolBarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DEB54F1F1ACCB3003A7B22 /* ToolBarNode.swift */; };
+		10E7AC581F2D745C00916759 /* myMazes.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10E7AC571F2D745C00916759 /* myMazes.sks */; };
+		10E7AC5A1F2D752200916759 /* myMazes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E7AC591F2D752200916759 /* myMazes.swift */; };
 		2AD26E4E8764199F2E31AF07 /* Pods_Maze_with_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C2C0862AAFBA2C9E9DC9674 /* Pods_Maze_with_Friends.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,8 @@
 		10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		10DEB54B1F1AB2D7003A7B22 /* MouseHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MouseHero.swift; sourceTree = "<group>"; };
 		10DEB54F1F1ACCB3003A7B22 /* ToolBarNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarNode.swift; sourceTree = "<group>"; };
+		10E7AC571F2D745C00916759 /* myMazes.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = myMazes.sks; sourceTree = "<group>"; };
+		10E7AC591F2D752200916759 /* myMazes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myMazes.swift; sourceTree = "<group>"; };
 		69D4399F62D7DD41B0CB3813 /* Pods-Maze with Friends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze with Friends.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze with Friends/Pods-Maze with Friends.release.xcconfig"; sourceTree = "<group>"; };
 		8169AE70260A04104B69070E /* Pods-Maze with Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze with Friends.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maze with Friends/Pods-Maze with Friends.debug.xcconfig"; sourceTree = "<group>"; };
 		9C2C0862AAFBA2C9E9DC9674 /* Pods_Maze_with_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_with_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,7 @@
 			children = (
 				10728F141F1E863A003A18B1 /* PlayingAMaze.sks */,
 				103D8D061F226B3200918DA0 /* BuildingAMaze.sks */,
+				10E7AC571F2D745C00916759 /* myMazes.sks */,
 				1039AF261F2165E300AFC194 /* ToolBox.sks */,
 			);
 			name = Gameplay;
@@ -162,6 +167,7 @@
 		10728F1C1F1E8818003A18B1 /* Play */ = {
 			isa = PBXGroup;
 			children = (
+				10E7AC5B1F2D753400916759 /* LoadingMazes */,
 				10728F1A1F1E8810003A18B1 /* PlayingAMaze.swift */,
 			);
 			name = Play;
@@ -200,11 +206,10 @@
 		1076151D1F13E2FC00C46CAD /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				10E7AC5E1F2D772700916759 /* Helpers */,
 				10DC89BC1F2965C500C4E327 /* Login */,
 				107615051F13E2DE00C46CAD /* AppDelegate.swift */,
-				10DEB54F1F1ACCB3003A7B22 /* ToolBarNode.swift */,
 				10728F041F1D2E6E003A18B1 /* MainMenu */,
-				100300691F15E2A500C59159 /* MSButtonNode.swift */,
 				1076150D1F13E2DE00C46CAD /* GameViewController.swift */,
 				10728F1C1F1E8818003A18B1 /* Play */,
 				107615251F13F94100C46CAD /* Build */,
@@ -271,6 +276,23 @@
 				105386111F2BE134002813F1 /* Storyboard+Utility.swift */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		10E7AC5B1F2D753400916759 /* LoadingMazes */ = {
+			isa = PBXGroup;
+			children = (
+				10E7AC591F2D752200916759 /* myMazes.swift */,
+			);
+			name = LoadingMazes;
+			sourceTree = "<group>";
+		};
+		10E7AC5E1F2D772700916759 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				100300691F15E2A500C59159 /* MSButtonNode.swift */,
+				10DEB54F1F1ACCB3003A7B22 /* ToolBarNode.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		B67C9D837DB911620F828776 /* Pods */ = {
@@ -361,6 +383,7 @@
 				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
 				10728F0B1F1D7218003A18B1 /* MenuBar.sks in Resources */,
 				10DC89B61F29388100C4E327 /* GoogleService-Info.plist in Resources */,
+				10E7AC581F2D745C00916759 /* myMazes.sks in Resources */,
 				10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */,
 				1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */,
 				10DC89BA1F29467A00C4E327 /* Login.storyboard in Resources */,
@@ -445,6 +468,7 @@
 				10728F1B1F1E8810003A18B1 /* PlayingAMaze.swift in Sources */,
 				10DEB54C1F1AB2D7003A7B22 /* MouseHero.swift in Sources */,
 				105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */,
+				10E7AC5A1F2D752200916759 /* myMazes.swift in Sources */,
 				1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
