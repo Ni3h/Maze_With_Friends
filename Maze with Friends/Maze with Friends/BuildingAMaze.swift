@@ -24,6 +24,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
     var backMainMenu: MSButtonNode!
+    var saveMazeButton: MSButtonNode!
+    
     
     
     /* textInput */
@@ -55,6 +57,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
         backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         toolBoxButton = self.childNode(withName: "//toolBoxButton") as! MSButtonNode
+        saveMazeButton = self.childNode(withName: "//saveMazeButton") as! MSButtonNode
         
         /* Text stuff */
         
@@ -64,26 +67,12 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         toolBoxReference.addChildren()
         
         let width = self.size.width
-        print (width)
         toolBarHeight = toolBar.size.height
 
         
-        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
-        
-        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
-        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
 
-        self.addChild(mazeSave.mazeObject)
-        
-
-        
-        
-        
         textField()
         
-        
-
-      //  mazeSave.mazeObject.generateGrid(rows: 25, columns: 25, width: Int(width), yOffset: toolBarHeight)
         
         toolBoxButton.selectedHandler = { [unowned self] in
             self.toolBoxReference.alpha = 1
@@ -93,8 +82,18 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         saveButton.selectedHandler = { [unowned self] in
             self.inputText?.becomeFirstResponder()
             self.inputText?.alpha = 1
+            self.saveMazeButton.alpha = 1
+            
+        }
+        
+        saveMazeButton.selectedHandler = { [unowned self] in
+            self.saveText()
             self.mazeSave.save()
             self.mazeSave.saveToFirebase()
+            self.view?.endEditing(true)
+            self.view?.endEditing(true)
+            self.inputText?.alpha = 0
+            self.saveMazeButton.alpha = 0
         }
         
         backMainMenu.selectedHandler = { [unowned self] in
@@ -103,11 +102,22 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
     }
     
-    
-    /* a
-     
- */
-    
+    /* loadMaze Function */
+    func loadMaze(callback: @escaping () -> Void) {
+        //load your maze data
+        let width = self.size.width
+ //       toolBarHeight = toolBar.size.height
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
+        mazeSave.loadFromFirebase(mazeName: "MazeOne") {
+            callback()
+        }
+        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        
+        self.addChild(mazeSave.mazeObject)
+        
+        //once finished
+    }
     
     func textField() {
         inputText = UITextField( frame: CGRect(x: 20 , y: 100, width: 340, height: 40))
@@ -175,6 +185,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view?.endEditing(true)
         inputText?.alpha = 0
+        saveMazeButton.alpha = 0
 
         didItScroll = false
 
@@ -215,7 +226,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         if didItScroll == false {
             if toolBoxReference.currentTBState == .TBPlaceStartPosition {
                 mazeSave.mazeObject.placeStartingPosition(gridX: gridX, gridY: gridY, yOffset: toolBarHeight)
-                print("this occured")
                 
                 toolBoxReference.currentTBState = .TBInactive
                 return
@@ -223,7 +233,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
             
             if toolBoxReference.currentTBState == .TBFinishLinePosition {
                 mazeSave.mazeObject.placeStartingFinishLine(gridX: gridX, gridY: gridY, yOffset: toolBarHeight)
-                print("this occured")
                 toolBoxReference.currentTBState = .TBInactive
                 return
             }

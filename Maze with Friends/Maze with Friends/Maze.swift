@@ -37,6 +37,8 @@ class Maze: SKSpriteNode {
     
     /* Move this to top later or somewhere more fitting converting gridx/gridy into a cgpoint */
     
+    
+    
     func gridPosition(gridX: Int, gridY: Int, yOffset: CGFloat) -> CGPoint {
         let gridPosition = CGPoint(x: (CGFloat(gridX) * tileWidth) , y: ((CGFloat(gridY) * tileHeight) + yOffset))
         

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseStorage
+import FirebaseDatabase
 import SpriteKit
 
 class SaveMazeManager {
@@ -16,12 +17,16 @@ class SaveMazeManager {
     
     // Get a reference to the storage service using the default Firebase App
     let storage = Storage.storage()
+    let database = Database.database()
+    
 
     init(width: Int, yOffset: CGFloat) {
 
         //scene off
         mazeObject.generateGrid(rows: 25, columns: 25, width: width, yOffset: yOffset)
-        loadFromFirebase()
+        //loadFromFirebase(completion: {
+        //
+        //})
         //scene on
         
       
@@ -94,12 +99,12 @@ class SaveMazeManager {
         let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
         let uid = Auth.auth().currentUser!.uid
+        let fileData = NSData() // get data...
+        let dataRef = database.reference()
+        
         
 //        let nameRef = storageRef.child("mazes/\(mazeName)")
-        let nameRef = storageRef.child("\(uid)/mazes/firstMaze)")
-
-        
-        
+        let nameRef = storageRef.child("\(uid)/mazes/\(mazeName)")
         let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray);
 
         // Upload the file to the path "images/rivers.jpg"
@@ -110,19 +115,39 @@ class SaveMazeManager {
                 return
             }
             // Metadata contains file metadata such as size, content-type, and download URL.
-            let downloadURL = metadata.downloadURL
+            let downloadURL = metadata.downloadURL()
+            let dataNameRef = dataRef.child("mazes").child(uid)
+            dataNameRef.updateChildValues(["\(mazeName)" : "\(downloadURL!)"], withCompletionBlock: { (error, ref) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+            })
+            
         }
         
         
     }
     
-    func loadFromFirebase() {
+    func loadMazeArrayFromDatabase() {
+        let dataRef = database.reference()
+        let uid = Auth.auth().currentUser!.uid
+        
+        dataRef.child("mazes").child(uid).observe(.value, with: { (snapshot) in
+        })
+        
+    
+        
+    
+    }
+    
+    func loadFromFirebase(mazeName: String, completion: @escaping () -> Void) {
         // Create a storage reference from our storage service
-        let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
+        let uid = Auth.auth().currentUser!.uid
+
         
         //        let nameRef = storageRef.child("mazes/\(mazeName)")
-        let nameRef = storageRef.child("mazes/firstMaze)")
+        let nameRef = storageRef.child("\(uid)/mazes/\(mazeName)")
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         nameRef.getData(maxSize: 10 * 1024 * 1024) { rawData, error in
@@ -140,7 +165,9 @@ class SaveMazeManager {
                     }
                 }
             }
+            completion()
         }
+        
         
     }
     

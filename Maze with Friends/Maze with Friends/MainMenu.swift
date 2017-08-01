@@ -48,13 +48,23 @@ class MainMenu: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
+        scene.loadMaze() {
+            skView.presentScene(scene)
+        }
+        
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
         
         /* 4) Start game scene */
-        skView.presentScene(scene)
+//        skView.presentScene(scene)
+    }
+    
+    func loadMaze(callback: () -> Void) {
+        //load your maze data
+        //once finished
+        callback()
     }
     
     func loadPlayScene() {
@@ -66,7 +76,7 @@ class MainMenu: SKScene {
         
         /* 2) Load Game scene */
         //EDIT THIS
-        guard let scene = PlayingAMaze(fileNamed:"PlayingAMaze") else {
+        guard let scene = myMazes(fileNamed:"myMazes") else {
             print("Could not make PlayingAMaze, check the name is spelled correctly")
             return
         }

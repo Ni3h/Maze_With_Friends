@@ -47,6 +47,7 @@ class PlayingAMaze: SKScene {
     
     var mouseHeroObject: MouseHero!
     var finishLineObject: FinishLine!
+    var nameToUse: String!
     
 
     
@@ -67,17 +68,18 @@ class PlayingAMaze: SKScene {
 
         width = Int(self.size.width)
         toolBarHeight = toolBar.size.height
-        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
+//        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
         
+//        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        
+        
+//        self.addChild(mazeSave.mazeObject)
+//
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
-        
-        
-        self.addChild(mazeSave.mazeObject)
-
         mouseHeroObject = mazeSave.mazeObject.heroObject
         finishLineObject = mazeSave.mazeObject.finishLineObject
-        
-        mazeSave.mazeObject.gridLayer.zPosition = 0
+//
+//        mazeSave.mazeObject.gridLayer.zPosition = 0
         
   //      addMouse(row: 0, col: 1, yOffset: toolBarHeight)
         
@@ -96,6 +98,8 @@ class PlayingAMaze: SKScene {
                 print("Could not make MainMenu, check the name is spelled correctly")
                 return
             }
+            
+            
 
             /* 3) Ensure correct aspect mode */
             scene.scaleMode = .aspectFill
@@ -114,6 +118,26 @@ class PlayingAMaze: SKScene {
         victoryButton.state = .MSButtonNodeStateHidden
 
     }
+    
+    func getName(nameOfButton: String) {
+        nameToUse = nameOfButton
+    }
+    
+    func loadMaze(callback: @escaping () -> Void) {
+        //load your maze data
+        let width = self.size.width
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
+        mazeSave.mazeObject.gridLayer.zPosition = 0
+        mazeSave.loadFromFirebase(mazeName: nameToUse) {
+            callback()
+        }
+        self.addChild(mazeSave.mazeObject)
+        
+        //once finished
+    }
+    
+    
+    
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Disable touch if game state is not active */
@@ -256,8 +280,6 @@ class PlayingAMaze: SKScene {
         var nextY: Int
         var move: SKAction
         
-     //   print("direction:\(dir) hX\(hX) hY \(hY) gx\(gX) gy\(gY)")
-
 
         switch dir {
         case .N:
@@ -297,9 +319,6 @@ class PlayingAMaze: SKScene {
             return
 
         }
-        
-       // print("nextX: \(nextX) nextY \(nextY)")
-
         
         mouseHeroObject.run(move)
     }
