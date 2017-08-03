@@ -1,4 +1,4 @@
-//
+    //
 //  PlayingAMaze.swift
 //  Maze with Friends
 //
@@ -211,9 +211,7 @@ class PlayingAMaze: SKScene {
         let heroSize = mouseHeroObject.size
         let heroWidth = heroSize.width
         let heroHeight = heroSize.height
-        let tileSize = mazeSave.mazeObject.tileSize()
-        let tileWidth = tileSize.tileWidth
-        let tileHeight = tileSize.tileHeight
+
         
         let heroPosition = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
 
@@ -312,7 +310,16 @@ class PlayingAMaze: SKScene {
                 nextX -= 1
             }
             nextX += 1
+            
             nextY = hY
+            let count = hX - nextX
+            print (count)
+            
+            mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "MouseLeftWalk")!, count: count))
+            
+                
+           // mouseHeroObject.run(SKAction.init(named: "MouseLeftWalk")!)
+
             move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
             
         case .X:

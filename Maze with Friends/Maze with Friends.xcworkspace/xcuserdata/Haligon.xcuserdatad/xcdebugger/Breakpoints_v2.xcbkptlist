@@ -25,70 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/BuildingAMaze.swift"
-            timestampString = "523315369.235503"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/ToolBox.swift"
-            timestampString = "522622249.862967"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "init(coder:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.ToolBox.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Maze_with_Friends.ToolBox&gt;"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/ToolBox.swift"
-                  timestampString = "522352130.228346"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.ToolBox.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Maze_with_Friends.ToolBox&gt;"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/ToolBox.swift"
-                  timestampString = "522352130.232147"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Maze with Friends/Maze.swift"
             timestampString = "523231567.269868"
             startingColumnNumber = "9223372036854775807"
@@ -150,32 +86,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "523315369.235503"
+            filePath = "Maze with Friends/myMazes.swift"
+            timestampString = "523489853.323916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "523315369.235503"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "didMove(to:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

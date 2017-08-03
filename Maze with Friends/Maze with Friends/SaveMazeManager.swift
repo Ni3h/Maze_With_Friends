@@ -99,7 +99,6 @@ class SaveMazeManager {
         let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
         let uid = Auth.auth().currentUser!.uid
-        let fileData = NSData() // get data...
         let dataRef = database.reference()
         
         
@@ -119,7 +118,7 @@ class SaveMazeManager {
             let dataNameRef = dataRef.child("mazes").child(uid)
             dataNameRef.updateChildValues(["\(mazeName)" : "\(downloadURL!)"], withCompletionBlock: { (error, ref) in
                 if error != nil {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
                 }
             })
             
@@ -151,11 +150,11 @@ class SaveMazeManager {
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         nameRef.getData(maxSize: 10 * 1024 * 1024) { rawData, error in
-            if let error = error {
+            if error != nil {
                 // Uh-oh, an error occurred!
             } else {
                 // Data for "mazes/.." is returned
-                let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData as! Data)
+                let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData!)
                 self.mazeObject.wallArray = wallArray as! [[Wall]]
                 
                 for wall1d in self.mazeObject.wallArray {

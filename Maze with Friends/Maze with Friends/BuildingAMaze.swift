@@ -66,10 +66,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         toolBoxReference.addChildren()
         
-        let width = self.size.width
+   //     let width = self.size.width
         toolBarHeight = toolBar.size.height
-
-        
 
         textField()
         

@@ -11,8 +11,10 @@
 		1003006A1F15E2A500C59159 /* MSButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100300691F15E2A500C59159 /* MSButtonNode.swift */; };
 		1003006C1F168BFC00C59159 /* WallTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003006B1F168BFC00C59159 /* WallTop.swift */; };
 		1003006E1F16D74B00C59159 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003006D1F16D74B00C59159 /* Wall.swift */; };
-		1039AF271F2165E300AFC194 /* ToolBox.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1039AF261F2165E300AFC194 /* ToolBox.sks */; };
-		1039AF2B1F22628800AFC194 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039AF2A1F22628800AFC194 /* ToolBox.swift */; };
+		100A1BFB1F324C4500F9A7B4 /* Movement.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100A1BFA1F324C4500F9A7B4 /* Movement.sks */; };
+		100A1BFD1F32573400F9A7B4 /* PlayingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */; };
+		100A1C051F327D7800F9A7B4 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1C041F327D7800F9A7B4 /* ToolBox.swift */; };
+		100A1C0B1F327EA700F9A7B4 /* ToolBox.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100A1C0A1F327EA700F9A7B4 /* ToolBox.sks */; };
 		103D8D071F226B3200918DA0 /* BuildingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103D8D061F226B3200918DA0 /* BuildingAMaze.sks */; };
 		103D8D091F22A87E00918DA0 /* FinishLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103D8D081F22A87E00918DA0 /* FinishLine.swift */; };
 		105386081F2A8FC0002813F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386071F2A8FC0002813F1 /* User.swift */; };
@@ -21,13 +23,12 @@
 		105386101F2BB9F7002813F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860F1F2BB9F7002813F1 /* Constants.swift */; };
 		105386121F2BE134002813F1 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386111F2BE134002813F1 /* Storyboard+Utility.swift */; };
 		105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */; };
-		1060F7291F2FAAAE008E02BA /* mazeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1060F7281F2FAAAE008E02BA /* mazeName.swift */; };
-		1060F72B1F2FAACA008E02BA /* mazeName.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1060F72A1F2FAACA008E02BA /* mazeName.sks */; };
+		1060F7291F2FAAAE008E02BA /* mazeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1060F7281F2FAAAE008E02BA /* mazeButtons.swift */; };
+		1060F72B1F2FAACA008E02BA /* mazeButtons.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1060F72A1F2FAACA008E02BA /* mazeButtons.sks */; };
 		10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10728F001F1D247D003A18B1 /* MainMenu.sks */; };
 		10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10728F021F1D2E67003A18B1 /* MainMenu.swift */; };
 		10728F0B1F1D7218003A18B1 /* MenuBar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10728F0A1F1D7218003A18B1 /* MenuBar.sks */; };
 		10728F0D1F1D7527003A18B1 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10728F0C1F1D7527003A18B1 /* MenuBar.swift */; };
-		10728F151F1E863A003A18B1 /* PlayingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10728F141F1E863A003A18B1 /* PlayingAMaze.sks */; };
 		10728F1B1F1E8810003A18B1 /* PlayingAMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10728F1A1F1E8810003A18B1 /* PlayingAMaze.swift */; };
 		107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615051F13E2DE00C46CAD /* AppDelegate.swift */; };
 		1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 107615091F13E2DE00C46CAD /* Actions.sks */; };
@@ -55,8 +56,10 @@
 		100300691F15E2A500C59159 /* MSButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSButtonNode.swift; sourceTree = "<group>"; };
 		1003006B1F168BFC00C59159 /* WallTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallTop.swift; sourceTree = "<group>"; };
 		1003006D1F16D74B00C59159 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
-		1039AF261F2165E300AFC194 /* ToolBox.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ToolBox.sks; sourceTree = "<group>"; };
-		1039AF2A1F22628800AFC194 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
+		100A1BFA1F324C4500F9A7B4 /* Movement.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Movement.sks; sourceTree = "<group>"; };
+		100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayingAMaze.sks; sourceTree = "<group>"; };
+		100A1C041F327D7800F9A7B4 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
+		100A1C0A1F327EA700F9A7B4 /* ToolBox.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ToolBox.sks; sourceTree = "<group>"; };
 		103D8D061F226B3200918DA0 /* BuildingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BuildingAMaze.sks; sourceTree = "<group>"; };
 		103D8D081F22A87E00918DA0 /* FinishLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishLine.swift; sourceTree = "<group>"; };
 		105386071F2A8FC0002813F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -65,13 +68,12 @@
 		1053860F1F2BB9F7002813F1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		105386111F2BE134002813F1 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMazeManager.swift; sourceTree = "<group>"; };
-		1060F7281F2FAAAE008E02BA /* mazeName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mazeName.swift; sourceTree = "<group>"; };
-		1060F72A1F2FAACA008E02BA /* mazeName.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = mazeName.sks; sourceTree = "<group>"; };
+		1060F7281F2FAAAE008E02BA /* mazeButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mazeButtons.swift; sourceTree = "<group>"; };
+		1060F72A1F2FAACA008E02BA /* mazeButtons.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = mazeButtons.sks; sourceTree = "<group>"; };
 		10728F001F1D247D003A18B1 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		10728F021F1D2E67003A18B1 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		10728F0A1F1D7218003A18B1 /* MenuBar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuBar.sks; sourceTree = "<group>"; };
 		10728F0C1F1D7527003A18B1 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
-		10728F141F1E863A003A18B1 /* PlayingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayingAMaze.sks; sourceTree = "<group>"; };
 		10728F1A1F1E8810003A18B1 /* PlayingAMaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingAMaze.swift; sourceTree = "<group>"; };
 		107615021F13E2DE00C46CAD /* Maze with Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Maze with Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		107615051F13E2DE00C46CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,11 +115,11 @@
 		1039AF241F1FD05F00AFC194 /* Gameplay */ = {
 			isa = PBXGroup;
 			children = (
-				10728F141F1E863A003A18B1 /* PlayingAMaze.sks */,
+				100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */,
 				103D8D061F226B3200918DA0 /* BuildingAMaze.sks */,
 				10E7AC571F2D745C00916759 /* myMazes.sks */,
-				1060F72A1F2FAACA008E02BA /* mazeName.sks */,
-				1039AF261F2165E300AFC194 /* ToolBox.sks */,
+				1060F72A1F2FAACA008E02BA /* mazeButtons.sks */,
+				100A1C0A1F327EA700F9A7B4 /* ToolBox.sks */,
 			);
 			name = Gameplay;
 			sourceTree = "<group>";
@@ -231,6 +233,7 @@
 				1039AF241F1FD05F00AFC194 /* Gameplay */,
 				10728F071F1D348D003A18B1 /* MainMenu Scenes */,
 				107615091F13E2DE00C46CAD /* Actions.sks */,
+				100A1BFA1F324C4500F9A7B4 /* Movement.sks */,
 			);
 			name = SKS;
 			sourceTree = "<group>";
@@ -240,7 +243,7 @@
 			children = (
 				107615261F14202A00C46CAD /* BuildingAMaze.swift */,
 				107615211F13E6B800C46CAD /* Maze.swift */,
-				1039AF2A1F22628800AFC194 /* ToolBox.swift */,
+				100A1C041F327D7800F9A7B4 /* ToolBox.swift */,
 				10728F181F1E8759003A18B1 /* SKSpriteNode Classes */,
 			);
 			name = Build;
@@ -289,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				10E7AC591F2D752200916759 /* myMazes.swift */,
-				1060F7281F2FAAAE008E02BA /* mazeName.swift */,
+				1060F7281F2FAAAE008E02BA /* mazeButtons.swift */,
 			);
 			name = LoadingMazes;
 			sourceTree = "<group>";
@@ -385,10 +388,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				107615111F13E2DE00C46CAD /* Main.storyboard in Resources */,
-				1060F72B1F2FAACA008E02BA /* mazeName.sks in Resources */,
+				100A1C0B1F327EA700F9A7B4 /* ToolBox.sks in Resources */,
+				1060F72B1F2FAACA008E02BA /* mazeButtons.sks in Resources */,
+				100A1BFB1F324C4500F9A7B4 /* Movement.sks in Resources */,
 				103D8D071F226B3200918DA0 /* BuildingAMaze.sks in Resources */,
-				1039AF271F2165E300AFC194 /* ToolBox.sks in Resources */,
-				10728F151F1E863A003A18B1 /* PlayingAMaze.sks in Resources */,
+				100A1BFD1F32573400F9A7B4 /* PlayingAMaze.sks in Resources */,
 				107615131F13E2DE00C46CAD /* Assets.xcassets in Resources */,
 				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
 				10728F0B1F1D7218003A18B1 /* MenuBar.sks in Resources */,
@@ -457,9 +461,9 @@
 			files = (
 				1076150E1F13E2DE00C46CAD /* GameViewController.swift in Sources */,
 				10728F0D1F1D7527003A18B1 /* MenuBar.swift in Sources */,
-				1039AF2B1F22628800AFC194 /* ToolBox.swift in Sources */,
 				105386121F2BE134002813F1 /* Storyboard+Utility.swift in Sources */,
 				107615221F13E6B800C46CAD /* Maze.swift in Sources */,
+				100A1C051F327D7800F9A7B4 /* ToolBox.swift in Sources */,
 				10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */,
 				1003006E1F16D74B00C59159 /* Wall.swift in Sources */,
 				105386101F2BB9F7002813F1 /* Constants.swift in Sources */,
@@ -474,7 +478,7 @@
 				100300681F15B46700C59159 /* IsometricMazeWall.swift in Sources */,
 				10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */,
 				103D8D091F22A87E00918DA0 /* FinishLine.swift in Sources */,
-				1060F7291F2FAAAE008E02BA /* mazeName.swift in Sources */,
+				1060F7291F2FAAAE008E02BA /* mazeButtons.swift in Sources */,
 				108540191F147B5800BFF4FD /* FloorTiles.swift in Sources */,
 				10DEB5501F1ACCB3003A7B22 /* ToolBarNode.swift in Sources */,
 				10728F1B1F1E8810003A18B1 /* PlayingAMaze.swift in Sources */,
