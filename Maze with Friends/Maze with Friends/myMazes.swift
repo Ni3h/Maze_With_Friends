@@ -24,7 +24,7 @@ class myMazes: SKScene {
     
     
     var myMazeDictionary = [String: String]()
-    var buildButton: MSButtonNode!
+    var buildButton: BuildButtonNode!
     var toolBar: ToolBarNode!
     
     var buildButtonHeight: CGFloat = 0
@@ -45,7 +45,7 @@ class myMazes: SKScene {
         self.camera = cam
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        buildButton = self.childNode(withName: "//buildButton") as! MSButtonNode
+        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
         
         toolBarHeight = toolBar.size.height
         buildButtonHeight = buildButton.size.height
@@ -53,7 +53,8 @@ class myMazes: SKScene {
         yOffset = toolBarHeight + buildButtonHeight
         
         
-        
+        buildButton.SKSceneReference = self
+
         buildButton.selectedHandler = { [unowned self] in
             self.loadBuildScene()
         }
@@ -114,20 +115,14 @@ class myMazes: SKScene {
     func clampCamera(nameArray: [String], yOffset: CGFloat){
         let count = nameArray.count
         let heightOfButtons = CGFloat(count) * cgHeight
-        print (self.size.height)
-        print (heightOfButtons)
-        
         
         let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset
         let tBoundary = self.size.height/2
-        print (self.size.height)
-        
-        
+                
         let targetY = camera!.position.y
         
         let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
-        print (cam.position.y)
-
+        
         cam.position.y = y
     }
 

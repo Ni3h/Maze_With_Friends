@@ -7,8 +7,10 @@
 //
 
 
-
+import Foundation
 import SpriteKit
+import AudioToolbox
+import AVFoundation
 
 func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
     return min(max(value, lower), upper)
@@ -25,6 +27,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var saveButton: MSButtonNode!
     var backMainMenu: MSButtonNode!
     var saveMazeButton: MSButtonNode!
+    var player: AVAudioPlayer!
     
     
     
@@ -70,7 +73,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         toolBarHeight = toolBar.size.height
 
         textField()
-        
+        playSound()
         
         toolBoxButton.selectedHandler = { [unowned self] in
             self.toolBoxReference.alpha = 1
@@ -98,6 +101,22 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
             self.loadMainMenu()
         }
         
+    }
+    
+    //MARK:- PLAY SOUND
+    func playSound() {
+        let url = Bundle.main.url(forResource: "maze_building_01_v01", withExtension: "wav")!
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.numberOfLoops = -1
+            player.prepareToPlay()
+            player.play()
+        } catch let error as NSError {
+            print(error.description)
+        }
     }
     
     /* loadMaze Function */
@@ -258,7 +277,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         }
         
         /* 2) Load Game scene */
-        guard let scene = MainMenu(fileNamed:"MainMenu") else {
+        guard let scene = myMazes(fileNamed:"myMazes") else {
             print("Could not make MainMenu, check the name is spelled correctly")
             return
         }

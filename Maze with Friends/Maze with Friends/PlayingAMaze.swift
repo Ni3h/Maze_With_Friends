@@ -6,7 +6,10 @@
 //  Copyright © 2017 Ethan. All rights reserved.
 //
 
+import Foundation
 import SpriteKit
+import AudioToolbox
+import AVFoundation
 
 
 
@@ -30,6 +33,7 @@ class PlayingAMaze: SKScene {
     var gridY = 0
     var heroGridX = 0
     var heroGridY = 0
+    var player: AVAudioPlayer!
     
     var finishLineGridX = 0
     var finishLineGridY = 0
@@ -65,23 +69,28 @@ class PlayingAMaze: SKScene {
             self.loadMainMenu()
         }
         
+        playSound()
+        
 
         width = Int(self.size.width)
         toolBarHeight = toolBar.size.height
-//        mazeSave = SaveMazeManager( width: Int(width), yOffset: toolBarHeight )
-        
-//        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
-        
-        
-//        self.addChild(mazeSave.mazeObject)
-//
+
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
         mouseHeroObject = mazeSave.mazeObject.heroObject
-        finishLineObject = mazeSave.mazeObject.finishLineObject
-//
-//        mazeSave.mazeObject.gridLayer.zPosition = 0
         
-  //      addMouse(row: 0, col: 1, yOffset: toolBarHeight)
+        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        finishLineObject = mazeSave.mazeObject.finishLineObject
+
+        
+        let tileSize = mazeSave.mazeObject.tileSize()
+        
+        let finishLineLocation = finishLineObject.convert(CGPoint(x: 0, y: 0), to: self)
+
+        finishLineObject = mazeSave.mazeObject.finishLineObject
+        finishLineGridX = Int(finishLineLocation.x / tileSize.tileWidth)
+        finishLineGridY = Int((finishLineLocation.y - toolBarHeight) / tileSize.tileHeight)
+//
+//        mazeSave.mazeObject.gridLayer.zPosition =
         
         /* Setup restart button selection handler */
         victoryButton.selectedHandler = { [unowned self] in
@@ -118,6 +127,23 @@ class PlayingAMaze: SKScene {
         victoryButton.state = .MSButtonNodeStateHidden
 
     }
+    
+    //MARK:- PLAY SOUND
+    func playSound() {
+        let url = Bundle.main.url(forResource: "maze_explore_01_v01", withExtension: "wav")!
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.numberOfLoops = -1
+            player.prepareToPlay()
+            player.play()
+        } catch let error as NSError {
+            print(error.description)
+        }
+    }
+
     
     func getName(nameOfButton: String) {
         nameToUse = nameOfButton
@@ -196,7 +222,7 @@ class PlayingAMaze: SKScene {
         clampCameraToHero()
         clampCamera()
         
-        if heroGridX == 23 && heroGridY == 23 {
+        if heroGridX == finishLineGridX && heroGridY == finishLineGridY {
             gameState = .victory
             /* Show restart button */
             victoryButton.state = .MSButtonNodeStateActive
@@ -342,7 +368,7 @@ class PlayingAMaze: SKScene {
         }
         
         /* 2) Load Game scene */
-        guard let scene = MainMenu(fileNamed:"MainMenu") else {
+        guard let scene = myMazes(fileNamed:"myMazes") else {
             print("Could not make MainMenu, check the name is spelled correctly")
             return
         }

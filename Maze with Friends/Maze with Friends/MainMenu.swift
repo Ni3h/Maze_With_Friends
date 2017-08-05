@@ -11,54 +11,23 @@ import SpriteKit
 class MainMenu: SKScene {
     
     /* UI Connections */
-    var buildButton: MSButtonNode!
-    var playButton: MSButtonNode!
-    
+    var tapToBegin: SKLabelNode!
+ 
     
     override func didMove(to view: SKView) {
         /* Set UI connections */
-        buildButton = self.childNode(withName: "buildButton") as! MSButtonNode
-        playButton = self.childNode(withName: "playButton") as! MSButtonNode
         
-        buildButton.selectedHandler = { [unowned self] in
-            self.loadBuildScene()
-        }
+        tapToBegin = self.childNode(withName: "tapToBegin") as! SKLabelNode
         
-        playButton.selectedHandler = { [unowned self] in
-            self.loadPlayScene()
-        }
+        let animateList = SKAction.sequence([SKAction.fadeIn(withDuration: 1.0), SKAction.wait(forDuration: pei1.0), SKAction.fadeOut(withDuration: 1.0)])
+        
+        tapToBegin.run(SKAction.repeatForever(animateList))
+        
         
     }
     
-
-    
-    func loadBuildScene() {
-        /* 1) Grab reference to our SpriteKit view */
-        guard let skView = self.view as SKView! else {
-            print("Could not get Skview")
-            return
-        }
+    override func update(_ currentTime: TimeInterval) {
         
-        /* 2) Load Game scene */
-        guard let scene = BuildingAMaze(fileNamed:"BuildingAMaze") else {
-            print("Could not make BuildingAMaze, check the name is spelled correctly")
-            return
-        }
-        
-        /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
-        
-        scene.loadMaze() {
-            skView.presentScene(scene)
-        }
-        
-        /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
-        
-        /* 4) Start game scene */
-//        skView.presentScene(scene)
     }
     
     func loadMaze(callback: () -> Void) {
@@ -67,7 +36,13 @@ class MainMenu: SKScene {
         callback()
     }
     
-    func loadPlayScene() {
+
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        loadMyMazesScene()
+    }
+    
+    func loadMyMazesScene() {
         /* 1) Grab reference to our SpriteKit view */
         guard let skView = self.view as SKView! else {
             print("Could not get Skview")
