@@ -29,6 +29,10 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var saveMazeButton: MSButtonNode!
     var player: AVAudioPlayer!
     
+    var cancelButton: MSButtonNode!
+    var solveAndSave: MSButtonNode!
+    var playFromBuild = false
+    
     
     
     /* textInput */
@@ -62,17 +66,26 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         toolBoxButton = self.childNode(withName: "//toolBoxButton") as! MSButtonNode
         saveMazeButton = self.childNode(withName: "//saveMazeButton") as! MSButtonNode
         
+        
+        cancelButton = self.childNode(withName: "//cancelButton") as! MSButtonNode
+        solveAndSave = self.childNode(withName: "//solveAndSave") as! MSButtonNode
         /* Text stuff */
         
         
         toolBoxReference = self.childNode(withName: "//toolBoxNode") as! ToolBox
-        
         toolBoxReference.addChildren()
-        
         toolBarHeight = toolBar.size.height
 
         textField()
         playSound()
+        
+        let width = self.size.width
+
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
+        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        
+        self.addChild(mazeSave.mazeObject)
         
         toolBoxButton.selectedHandler = { [unowned self] in
             self.toolBoxReference.alpha = 1
@@ -80,20 +93,34 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         }
         
         saveButton.selectedHandler = { [unowned self] in
-            self.inputText?.becomeFirstResponder()
-            self.inputText?.alpha = 1
-            self.saveMazeButton.alpha = 1
+            self.solveAndSave.alpha = 1
+            self.solveAndSave.alpha = 1
+            self.mazeSave.save()
+
+            
+//            self.inputText?.becomeFirstResponder()
+//            self.inputText?.alpha = 1
+//            self.saveMazeButton.alpha = 1
             
         }
         
+        solveAndSave.selectedHandler = { [unowned self] in
+            self.playFromBuild = true
+            self.loadPlayScene()
+            
+            
+        }
+        
+        
+        
         saveMazeButton.selectedHandler = { [unowned self] in
-            self.saveText()
-            self.mazeSave.save()
-            self.mazeSave.saveToFirebase()
-            self.view?.endEditing(true)
-            self.view?.endEditing(true)
-            self.inputText?.alpha = 0
-            self.saveMazeButton.alpha = 0
+//            self.saveText()
+//            self.mazeSave.save()
+//            self.mazeSave.saveToFirebase()
+//            self.view?.endEditing(true)
+//            self.view?.endEditing(true)
+//            self.inputText?.alpha = 0
+//            self.saveMazeButton.alpha = 0
         }
         
         backMainMenu.selectedHandler = { [unowned self] in
@@ -123,9 +150,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         //load your maze data
         let width = self.size.width
         mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
-        mazeSave.loadFromFirebase(mazeName: "MazeOne") {
-            callback()
-        }
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
         mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
         
@@ -199,6 +223,9 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view?.endEditing(true)
+     
+        self.cancelButton.alpha = 0
+        self.solveAndSave.alpha = 0
         inputText?.alpha = 0
         saveMazeButton.alpha = 0
 
@@ -290,6 +317,36 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         /* 4) Start game scene */
         skView.presentScene(scene)
+    }
+    
+    
+    func loadPlayScene() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */        
+        
+        guard let scene = PlayingAMaze(fileNamed:"PlayingAMaze") else {
+            print("Could not make PlayingAMaze, check the name is spelled correctly")
+            return
+        }
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        scene.loadMazeWhileBuilding() {
+            skView.presentScene(scene)
+
+        }
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+     
+        /* 4) Start game scene */
     }
     
     

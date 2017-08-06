@@ -78,19 +78,24 @@ class PlayingAMaze: SKScene {
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
         mouseHeroObject = mazeSave.mazeObject.heroObject
         
-        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        
+        mazeSave.mazeObject.placeInitialFinishLine(row: 1, col: 1, yOffset: toolBarHeight)
         finishLineObject = mazeSave.mazeObject.finishLineObject
 
         
         let tileSize = mazeSave.mazeObject.tileSize()
         
         let finishLineLocation = finishLineObject.convert(CGPoint(x: 0, y: 0), to: self)
+        print(finishLineLocation.x)
+        print(finishLineLocation.y)
 
-        finishLineObject = mazeSave.mazeObject.finishLineObject
+        
+      //  finishLineObject = mazeSave.mazeObject.finishLineObject
         finishLineGridX = Int(finishLineLocation.x / tileSize.tileWidth)
+        print (finishLineGridX)
         finishLineGridY = Int((finishLineLocation.y - toolBarHeight) / tileSize.tileHeight)
+        print (finishLineGridY)
 //
-//        mazeSave.mazeObject.gridLayer.zPosition =
         
         /* Setup restart button selection handler */
         victoryButton.selectedHandler = { [unowned self] in
@@ -151,15 +156,35 @@ class PlayingAMaze: SKScene {
     
     func loadMaze(callback: @escaping () -> Void) {
         //load your maze data
+        
         let width = self.size.width
         mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
         mazeSave.mazeObject.gridLayer.zPosition = 0
+        
+        
+        
         mazeSave.loadFromFirebase(mazeName: nameToUse) {
             callback()
         }
         self.addChild(mazeSave.mazeObject)
         
         //once finished
+    }
+    
+    
+    
+    
+    func loadMazeWhileBuilding(callback: @escaping () -> Void) {
+        
+        let width = self.size.width
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
+        mazeSave.mazeObject.gridLayer.zPosition = 0
+        mazeSave.loadFromPlist {
+            callback()
+        }
+        
+        self.addChild(mazeSave.mazeObject)
+        
     }
     
     

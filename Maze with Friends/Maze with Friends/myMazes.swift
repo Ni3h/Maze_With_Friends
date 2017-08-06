@@ -172,9 +172,9 @@ class myMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        scene.loadMaze() {
-            skView.presentScene(scene)
-        }
+//        scene.loadMaze() {
+//            skView.presentScene(scene)
+//        }
         
         /* Show debug */
         skView.showsPhysics = true
@@ -182,7 +182,7 @@ class myMazes: SKScene {
         skView.showsFPS = true
         
         /* 4) Start game scene */
-        //        skView.presentScene(scene)
+        skView.presentScene(scene)
     }
     
 

@@ -97,7 +97,7 @@ class Maze: SKSpriteNode {
     
     /* Hero Starting Position Functions */
     func placeInitialHero(row: Int, col: Int, yOffset: CGFloat) {
-        let wallPiece = wallArray[0][0]
+        let wallPiece = wallArray[row][col]
         /* Add a new gridPiece at grid position*/
         
         /* Calculate position on screen */
@@ -150,7 +150,7 @@ class Maze: SKSpriteNode {
     /* End position functions */
     
     func placeInitialFinishLine(row: Int, col: Int, yOffset: CGFloat) {
-        let wallPiece = wallArray[0][0]
+        let wallPiece = wallArray[row][col]
         /* Add a new gridPiece at grid position*/
         
         /* Calculate position on screen */

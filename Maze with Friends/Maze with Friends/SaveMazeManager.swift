@@ -28,19 +28,17 @@ class SaveMazeManager {
         //
         //})
         //scene on
-        
-      
     }
     
-    func loadFromPlist() {
+    func loadFromPlist(completion: @escaping () -> Void) {
         
         // load existing high scores or set up an empty array
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0] as String
         
         let path = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("WallSaves.plist")
-      
-        
+
+    
         let fileManager = FileManager.default
         
         // check if file exists
@@ -69,6 +67,7 @@ class SaveMazeManager {
                     mazeObject.addChild(wall)
                 }
             }
+            completion()
         } catch {
             //whoops
         }
@@ -79,7 +78,6 @@ class SaveMazeManager {
     
     func save() {
         // find the save directory our app has permission to use, and save the serialized version of self.scores - the HighScores array.
-        print("Save occured")
 
         let saveData = NSKeyedArchiver.archivedData(withRootObject: self.mazeObject.wallArray);
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray;
@@ -88,9 +86,12 @@ class SaveMazeManager {
         
         do {
             try saveData.write(to: path)
+            print("Save occured")
+
         } catch {
             
         }
+
     }
     
     
@@ -133,9 +134,6 @@ class SaveMazeManager {
         
         dataRef.child("mazes").child(uid).observe(.value, with: { (snapshot) in
         })
-        
-    
-        
     
     }
     
