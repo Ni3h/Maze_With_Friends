@@ -12,7 +12,9 @@ class MouseHero: Wall {
     
     init(size: CGSize, position: CGPoint) {
         /* Initialize with 'FloorTiles' asset */
-        let texture = SKTexture(imageNamed: "MouseHero")
+        
+        let texture = SKTexture(imageNamed: "Dwarf_Side_IDLE_L")
+        
         super.init(texture: texture, color: UIColor.clear, size: size)
         
         self.position = position

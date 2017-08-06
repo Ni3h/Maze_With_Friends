@@ -19,7 +19,7 @@ class MainMenu: SKScene {
         
         tapToBegin = self.childNode(withName: "tapToBegin") as! SKLabelNode
         
-        let animateList = SKAction.sequence([SKAction.fadeIn(withDuration: 1.0), SKAction.wait(forDuration: pei1.0), SKAction.fadeOut(withDuration: 1.0)])
+        let animateList = SKAction.sequence([SKAction.fadeIn(withDuration: 1.0), SKAction.wait(forDuration: 1.0), SKAction.fadeOut(withDuration: 1.0)])
         
         tapToBegin.run(SKAction.repeatForever(animateList))
         

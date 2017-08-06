@@ -69,7 +69,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         toolBoxReference.addChildren()
         
-   //     let width = self.size.width
         toolBarHeight = toolBar.size.height
 
         textField()
@@ -123,7 +122,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     func loadMaze(callback: @escaping () -> Void) {
         //load your maze data
         let width = self.size.width
- //       toolBarHeight = toolBar.size.height
         mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
         mazeSave.loadFromFirebase(mazeName: "MazeOne") {
             callback()

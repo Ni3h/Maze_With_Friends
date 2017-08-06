@@ -299,7 +299,7 @@ class PlayingAMaze: SKScene {
         let tileSize = myMaze.tileSize()
         let tileWidth = tileSize.tileWidth
         let tileHeight = tileSize.tileHeight
-        let baseDuration = 0.2
+        let baseDuration = 0.4
         var nextX: Int
         var nextY: Int
         var move: SKAction
@@ -329,6 +329,11 @@ class PlayingAMaze: SKScene {
             }
             nextX -= 1
             nextY = hY
+            
+            let count = nextX - hX
+            
+            print(count)
+            mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfRightWalk")!, count: count))
             move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
         case .W:
             nextX = hX - 1
@@ -336,16 +341,10 @@ class PlayingAMaze: SKScene {
                 nextX -= 1
             }
             nextX += 1
-            
             nextY = hY
+            
             let count = hX - nextX
-            print (count)
-            
-            mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "MouseLeftWalk")!, count: count))
-            
-                
-           // mouseHeroObject.run(SKAction.init(named: "MouseLeftWalk")!)
-
+            mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfLeftWalk")!, count: count))
             move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
             
         case .X:
