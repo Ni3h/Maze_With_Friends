@@ -34,6 +34,9 @@ class globalMazes: SKScene {
     var cam: SKCameraNode!
     var cgHeight: CGFloat = 0
     
+    var goToMyMazes: MSButtonNode!
+    
+    
     
     //   var goFlag: Bool = false
     
@@ -44,12 +47,18 @@ class globalMazes: SKScene {
         self.camera = cam
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        goToMyMazes = self.childNode(withName: "//goToMyMazes") as! MSButtonNode
+        
+        goToMyMazes.selectedHandler = { [unowned self] in
+            self.loadMyMazesScene()
+        }
         
         toolBarHeight = toolBar.size.height
         
         yOffset = toolBarHeight
         
         loadMazeArrayFromDatabase()
+        
     }
     
     
@@ -174,6 +183,33 @@ class globalMazes: SKScene {
         /* 4) Start game scene */
         skView.presentScene(scene)
     }
+    
+    
+    func loadMyMazesScene() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = myMazes(fileNamed:"myMazes") else {
+            print("Could not make myMazes, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+
     
     
     
