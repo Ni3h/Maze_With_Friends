@@ -32,13 +32,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var cancelButton: MSButtonNode!
     var solveAndSave: MSButtonNode!
     var playFromBuild = false
-    
-    
-    
-    /* textInput */
-    var inputText: UITextField?
-    
-    
+
     /*Toolbox*/
     var toolBoxReference: ToolBox!
     
@@ -76,7 +70,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         toolBoxReference.addChildren()
         toolBarHeight = toolBar.size.height
 
-        textField()
         playSound()
         
         let width = self.size.width
@@ -94,34 +87,20 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         saveButton.selectedHandler = { [unowned self] in
             self.solveAndSave.alpha = 1
-            self.solveAndSave.alpha = 1
+            self.cancelButton.alpha = 1
             self.mazeSave.save()
-
-            
-//            self.inputText?.becomeFirstResponder()
-//            self.inputText?.alpha = 1
-//            self.saveMazeButton.alpha = 1
-            
         }
         
         solveAndSave.selectedHandler = { [unowned self] in
             self.playFromBuild = true
             self.loadPlayScene()
-            
-            
         }
         
-        
-        
-        saveMazeButton.selectedHandler = { [unowned self] in
-//            self.saveText()
-//            self.mazeSave.save()
-//            self.mazeSave.saveToFirebase()
-//            self.view?.endEditing(true)
-//            self.view?.endEditing(true)
-//            self.inputText?.alpha = 0
-//            self.saveMazeButton.alpha = 0
+        cancelButton.selectedHandler = { [unowned self] in
+            self.solveAndSave.alpha = 0
+            self.cancelButton.alpha = 0
         }
+        
         
         backMainMenu.selectedHandler = { [unowned self] in
             self.loadMainMenu()
@@ -156,31 +135,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         self.addChild(mazeSave.mazeObject)
         
         //once finished
-    }
-    
-    func textField() {
-        inputText = UITextField( frame: CGRect(x: 20 , y: 100, width: 340, height: 40))
-        self.view!.addSubview(inputText!)
-        inputText?.backgroundColor = UIColor.white
-        inputText?.alpha = 0
-        inputText?.placeholder = "Enter Maze Name"
-        inputText?.borderStyle = UITextBorderStyle.roundedRect
-        inputText?.delegate = self
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        inputText?.resignFirstResponder()
-        saveText()
-        inputText?.alpha = 0
-        return true
-    }
-    
-    func saveText() {
-        if inputText?.text != "" {
-            mazeSave.mazeObject.mazeName = (inputText?.text)!
-            inputText!.text = ""
-        }
     }
     
     
@@ -222,12 +176,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view?.endEditing(true)
-     
         self.cancelButton.alpha = 0
         self.solveAndSave.alpha = 0
-        inputText?.alpha = 0
-        saveMazeButton.alpha = 0
 
         didItScroll = false
 

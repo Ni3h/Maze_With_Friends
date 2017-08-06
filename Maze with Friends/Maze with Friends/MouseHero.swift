@@ -19,6 +19,7 @@ class MouseHero: Wall {
         
         self.position = position
         self.type = "hero"
+        self.zPosition = 4
     }
     
     
