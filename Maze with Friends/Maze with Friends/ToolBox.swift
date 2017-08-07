@@ -16,8 +16,6 @@ class ToolBox: SKNode {
     
     
     /* UI Connections */
-    var toolBoxLeft: MSButtonNode!
-    var toolBoxRight: MSButtonNode!
     var closeButton: MSButtonNode!
     var startPosition: MSButtonNode!
     var finishLinePosition: MSButtonNode!
@@ -40,10 +38,7 @@ class ToolBox: SKNode {
     }
     
     func addChildren() {
-        toolBoxLeft = self.childNode(withName: "//toolBoxLeft") as! MSButtonNode
-        toolBoxRight = self.childNode(withName: "//toolBoxRight") as! MSButtonNode
         closeButton = self.childNode(withName: "//closeButton") as! MSButtonNode
-        
         startPosition = self.childNode(withName: "//startPosition") as! MSButtonNode
         finishLinePosition = self.childNode(withName: "//finishLinePosition") as! MSButtonNode
         toolBoxInside = self.childNode(withName: "//toolBoxInside") as! ToolBarNode

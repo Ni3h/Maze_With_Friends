@@ -208,7 +208,7 @@
             
             let width = self.size.width
             mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
-            mazeSave.mazeObject.gridLayer.zPosition = 0
+            mazeSave.mazeObject.gridLayer.zPosition = -10
             
             
             
@@ -227,7 +227,7 @@
             
             let width = self.size.width
             mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-            mazeSave.mazeObject.gridLayer.zPosition = 0
+            mazeSave.mazeObject.gridLayer.zPosition = -10
             mazeSave.loadFromPlist {
                 callback()
             }
@@ -279,7 +279,7 @@
         func saveMazeAfterBeating(callback: @escaping() -> Void) {
             let width = self.size.width
             mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-            mazeSave.mazeObject.gridLayer.zPosition = 0
+            mazeSave.mazeObject.gridLayer.zPosition = -10
             mazeSave.loadFromPlist {
                 callback()
             }
@@ -460,6 +460,10 @@
                 }
                 nextY -= 1
                 nextX = hX
+
+                let count = nextY - hY
+                print(count)
+                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfBackWalk")!, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
             case .S:
                 nextY = hY - 1
