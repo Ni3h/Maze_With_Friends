@@ -34,7 +34,15 @@ class globalMazes: SKScene {
     var cam: SKCameraNode!
     var cgHeight: CGFloat = 0
     
-    var goToMyMazes: MSButtonNode!
+    var goToGlobalMazesFromGlobal: MSButtonNode!
+    var goToMyMazesFromGlobal: MSButtonNode!
+    var menuButtonGlobal
+    : MSButtonNode!
+    var globalMazesBottomToolBar: ToolBarNode!
+    
+    var navOptionsMenuReference: NavOptionsMenu!
+
+    
     
     override func didMove(to view: SKView) {
         /* Create a new Camera */
@@ -42,15 +50,36 @@ class globalMazes: SKScene {
         self.camera = cam
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        goToMyMazes = self.childNode(withName: "//goToMyMazes") as! MSButtonNode
         
-        goToMyMazes.selectedHandler = { [unowned self] in
+        
+        globalMazesBottomToolBar = self.childNode(withName: "//globalMazesBottomToolBar") as! ToolBarNode
+        goToGlobalMazesFromGlobal = self.childNode(withName: "//goToGlobalMazesFromGlobal") as! MSButtonNode
+         goToMyMazesFromGlobal = self.childNode(withName: "//goToMyMazesFromGlobal") as! MSButtonNode
+         menuButtonGlobal = self.childNode(withName: "//menuButtonGlobal") as! MSButtonNode
+        
+        /*Nav Options Menu Info!*/
+        navOptionsMenuReference = self.childNode(withName: "//navOptionsMenuNode") as! NavOptionsMenu
+        navOptionsMenuReference.addChildren()
+
+        
+        menuButtonGlobal.selectedHandler = { [unowned self] in
+            if self.navOptionsMenuReference.alpha == 1 {
+                self.navOptionsMenuReference.alpha = 0
+            } else {
+                self.navOptionsMenuReference.alpha = 1
+            }
+        }
+        
+        
+        
+        goToMyMazesFromGlobal.selectedHandler = { [unowned self] in
             self.loadMyMazesScene()
         }
         
         toolBarHeight = toolBar.size.height
         
         yOffset = toolBarHeight
+        
         
         loadMazeArrayFromDatabase()
         
@@ -62,7 +91,8 @@ class globalMazes: SKScene {
         let dataRef = database.reference()
         let uid = "JwrgQHpedAh8UEAWylf2hKIGu572"
         
-        dataRef.child("mazes").child(uid).observe(.value, with: { (snapshot) in
+        dataRef.child("mazes").child(uid).observe(.value, with: {
+            [unowned self] (snapshot) in
             
             if let value = snapshot.value as? NSDictionary {
                 for key in value {
@@ -88,7 +118,7 @@ class globalMazes: SKScene {
             mazeNameObject.playMaze()
             cgHeight = mazeNameObject.backroundNode.size.height
             mazeNameObject.mazeNameLabel.text = nameArray[i]
-            mazeNameObject.selectedHandler = {
+            mazeNameObject.selectedHandler = { [unowned self] in 
                 self.loadPlayScene(nameOfButton: nameArray[i])
             }
             
