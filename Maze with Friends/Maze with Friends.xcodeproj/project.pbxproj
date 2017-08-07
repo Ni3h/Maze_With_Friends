@@ -24,6 +24,12 @@
 		100CC0BE1F36F7EB00B5A605 /* globalMazeButtons.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100CC0BD1F36F7EB00B5A605 /* globalMazeButtons.sks */; };
 		103D8D071F226B3200918DA0 /* BuildingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103D8D061F226B3200918DA0 /* BuildingAMaze.sks */; };
 		103D8D091F22A87E00918DA0 /* FinishLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103D8D081F22A87E00918DA0 /* FinishLine.swift */; };
+		103DB4051F37E43E00DC3CAA /* OptionsMenuSmall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103DB4041F37E43E00DC3CAA /* OptionsMenuSmall.sks */; };
+		103DB4071F37E57B00DC3CAA /* OptionsMenuSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DB4061F37E57B00DC3CAA /* OptionsMenuSmall.swift */; };
+		103DB4091F37E82300DC3CAA /* OptionsMenuBig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DB4081F37E82300DC3CAA /* OptionsMenuBig.swift */; };
+		103DB40B1F37E84D00DC3CAA /* OptionsMenuBig.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103DB40A1F37E84D00DC3CAA /* OptionsMenuBig.sks */; };
+		103DB4131F3831EE00DC3CAA /* OptionsMenuVictory.sks in Resources */ = {isa = PBXBuildFile; fileRef = 103DB4121F3831EE00DC3CAA /* OptionsMenuVictory.sks */; };
+		103DB4151F38342300DC3CAA /* OptionsMenuVictory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DB4141F38342300DC3CAA /* OptionsMenuVictory.swift */; };
 		105386081F2A8FC0002813F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386071F2A8FC0002813F1 /* User.swift */; };
 		1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */; };
 		1053860C1F2AB44E002813F1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053860B1F2AB44E002813F1 /* UserService.swift */; };
@@ -74,6 +80,12 @@
 		100CC0BD1F36F7EB00B5A605 /* globalMazeButtons.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = globalMazeButtons.sks; sourceTree = "<group>"; };
 		103D8D061F226B3200918DA0 /* BuildingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BuildingAMaze.sks; sourceTree = "<group>"; };
 		103D8D081F22A87E00918DA0 /* FinishLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishLine.swift; sourceTree = "<group>"; };
+		103DB4041F37E43E00DC3CAA /* OptionsMenuSmall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OptionsMenuSmall.sks; sourceTree = "<group>"; };
+		103DB4061F37E57B00DC3CAA /* OptionsMenuSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenuSmall.swift; sourceTree = "<group>"; };
+		103DB4081F37E82300DC3CAA /* OptionsMenuBig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenuBig.swift; sourceTree = "<group>"; };
+		103DB40A1F37E84D00DC3CAA /* OptionsMenuBig.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OptionsMenuBig.sks; sourceTree = "<group>"; };
+		103DB4121F3831EE00DC3CAA /* OptionsMenuVictory.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OptionsMenuVictory.sks; sourceTree = "<group>"; };
+		103DB4141F38342300DC3CAA /* OptionsMenuVictory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenuVictory.swift; sourceTree = "<group>"; };
 		105386071F2A8FC0002813F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		105386091F2A9F3A002813F1 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUsernameViewController.swift; sourceTree = "<group>"; };
 		1053860B1F2AB44E002813F1 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -131,7 +143,7 @@
 			name = Music;
 			sourceTree = "<group>";
 		};
-		100CC0B61F36E43300B5A605 /* New Group */ = {
+		100CC0B61F36E43300B5A605 /* Maze Navigators */ = {
 			isa = PBXGroup;
 			children = (
 				10E7AC571F2D745C00916759 /* myMazes.sks */,
@@ -139,7 +151,7 @@
 				100A1C101F33EF9A00F9A7B4 /* globalMazes.sks */,
 				100CC0BD1F36F7EB00B5A605 /* globalMazeButtons.sks */,
 			);
-			name = "New Group";
+			name = "Maze Navigators";
 			sourceTree = "<group>";
 		};
 		100CC0BB1F36EB2700B5A605 /* globalMazes */ = {
@@ -165,8 +177,8 @@
 			children = (
 				100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */,
 				103D8D061F226B3200918DA0 /* BuildingAMaze.sks */,
-				100CC0B61F36E43300B5A605 /* New Group */,
-				100A1C0A1F327EA700F9A7B4 /* ToolBox.sks */,
+				100CC0B61F36E43300B5A605 /* Maze Navigators */,
+				103DB40C1F37EB5200DC3CAA /* Menu's */,
 			);
 			name = Gameplay;
 			sourceTree = "<group>";
@@ -177,6 +189,27 @@
 				105B200C1F17F3EB00DD8523 /* SaveMazeManager.swift */,
 			);
 			name = Save;
+			sourceTree = "<group>";
+		};
+		103DB40C1F37EB5200DC3CAA /* Menu's */ = {
+			isa = PBXGroup;
+			children = (
+				100A1C0A1F327EA700F9A7B4 /* ToolBox.sks */,
+				103DB4041F37E43E00DC3CAA /* OptionsMenuSmall.sks */,
+				103DB40A1F37E84D00DC3CAA /* OptionsMenuBig.sks */,
+				103DB4121F3831EE00DC3CAA /* OptionsMenuVictory.sks */,
+			);
+			name = "Menu's";
+			sourceTree = "<group>";
+		};
+		103DB40F1F382D4100DC3CAA /* OptionsStuff */ = {
+			isa = PBXGroup;
+			children = (
+				103DB4061F37E57B00DC3CAA /* OptionsMenuSmall.swift */,
+				103DB4081F37E82300DC3CAA /* OptionsMenuBig.swift */,
+				103DB4141F38342300DC3CAA /* OptionsMenuVictory.swift */,
+			);
+			name = OptionsStuff;
 			sourceTree = "<group>";
 		};
 		10728F041F1D2E6E003A18B1 /* MainMenu */ = {
@@ -289,6 +322,7 @@
 				107615261F14202A00C46CAD /* BuildingAMaze.swift */,
 				107615211F13E6B800C46CAD /* Maze.swift */,
 				100A1C041F327D7800F9A7B4 /* ToolBox.swift */,
+				103DB40F1F382D4100DC3CAA /* OptionsStuff */,
 				10728F181F1E8759003A18B1 /* SKSpriteNode Classes */,
 			);
 			name = Build;
@@ -428,6 +462,7 @@
 			files = (
 				107615111F13E2DE00C46CAD /* Main.storyboard in Resources */,
 				100A1C0B1F327EA700F9A7B4 /* ToolBox.sks in Resources */,
+				103DB40B1F37E84D00DC3CAA /* OptionsMenuBig.sks in Resources */,
 				1060F72B1F2FAACA008E02BA /* mazeButtons.sks in Resources */,
 				100A1BFB1F324C4500F9A7B4 /* Movement.sks in Resources */,
 				100A1C181F34EBF600F9A7B4 /* maze_building_01_v01.wav in Resources */,
@@ -435,6 +470,7 @@
 				103D8D071F226B3200918DA0 /* BuildingAMaze.sks in Resources */,
 				100A1BFD1F32573400F9A7B4 /* PlayingAMaze.sks in Resources */,
 				107615131F13E2DE00C46CAD /* Assets.xcassets in Resources */,
+				103DB4131F3831EE00DC3CAA /* OptionsMenuVictory.sks in Resources */,
 				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
 				10DC89B61F29388100C4E327 /* GoogleService-Info.plist in Resources */,
 				10E7AC581F2D745C00916759 /* myMazes.sks in Resources */,
@@ -443,6 +479,7 @@
 				100CC0BE1F36F7EB00B5A605 /* globalMazeButtons.sks in Resources */,
 				1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */,
 				10DC89BA1F29467A00C4E327 /* Login.storyboard in Resources */,
+				103DB4051F37E43E00DC3CAA /* OptionsMenuSmall.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +542,7 @@
 				105386121F2BE134002813F1 /* Storyboard+Utility.swift in Sources */,
 				107615221F13E6B800C46CAD /* Maze.swift in Sources */,
 				100A1C051F327D7800F9A7B4 /* ToolBox.swift in Sources */,
+				103DB4151F38342300DC3CAA /* OptionsMenuVictory.swift in Sources */,
 				10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */,
 				100A1C0D1F33D34E00F9A7B4 /* BuildButtonNode.swift in Sources */,
 				1003006E1F16D74B00C59159 /* Wall.swift in Sources */,
@@ -520,6 +558,7 @@
 				10E7AC601F2D791700916759 /* SwiftySKScrollView.swift in Sources */,
 				100300681F15B46700C59159 /* IsometricMazeWall.swift in Sources */,
 				10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */,
+				103DB4071F37E57B00DC3CAA /* OptionsMenuSmall.swift in Sources */,
 				103D8D091F22A87E00918DA0 /* FinishLine.swift in Sources */,
 				1060F7291F2FAAAE008E02BA /* mazeButtons.swift in Sources */,
 				108540191F147B5800BFF4FD /* FloorTiles.swift in Sources */,
@@ -529,6 +568,7 @@
 				10DEB54C1F1AB2D7003A7B22 /* MouseHero.swift in Sources */,
 				105B200D1F17F3EB00DD8523 /* SaveMazeManager.swift in Sources */,
 				10E7AC5A1F2D752200916759 /* myMazes.swift in Sources */,
+				103DB4091F37E82300DC3CAA /* OptionsMenuBig.swift in Sources */,
 				1053860A1F2A9F3A002813F1 /* CreateUsernameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

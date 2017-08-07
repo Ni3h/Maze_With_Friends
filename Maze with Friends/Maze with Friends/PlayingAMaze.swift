@@ -43,13 +43,16 @@
         var cam: SKCameraNode!
         
         var toolBar: ToolBarNode!
-        var backMainMenu: MSButtonNode!
         var victoryButton: MSButtonNode!
+        var settingsButton: MSButtonNode!
         
         var toolBarHeight: CGFloat = 0
         var width = 0
         
-        
+        var optionsMenuSmallReference: OptionsMenuSmall!
+        var optionsMenuBigReference: OptionsMenuBig!
+        var optionsMenuVictoryReference: OptionsMenuVictory!
+
         var mouseHeroObject: MouseHero!
         var finishLineObject: FinishLine!
         var nameToUse: String!
@@ -67,16 +70,58 @@
             self.camera = cam
             
             toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-            backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
             victoryButton = self.childNode(withName: "//victoryButton") as! MSButtonNode
-            
-            
-            backMainMenu.selectedHandler = { [unowned self] in
-                self.loadMainMenu()
-            }
+            settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
             
             textField()
             playSound()
+            
+            /* OptionsMenuSmall Information */
+            optionsMenuSmallReference = self.childNode(withName: "//optionsMenuSmallNode") as! OptionsMenuSmall
+            optionsMenuSmallReference.addChildren()
+            optionsMenuSmallReference.backToMenuButton.selectedHandler = { [unowned self] in
+                self.loadMainMenu()
+            }
+            
+            /* OptionsMenuBig Information */
+            optionsMenuBigReference = self.childNode(withName: "//optionsMenuBigNode") as! OptionsMenuBig
+            optionsMenuBigReference.addChildren()
+            optionsMenuBigReference.backToBuildButton.selectedHandler = { [unowned self] in
+                self.loadBuildFromPlay()
+                print("options big build pressed")
+
+            }
+            optionsMenuBigReference.myMazesButton.selectedHandler = { [unowned self] in
+                self.loadMainMenu()
+            }
+            
+            /* OptionsMenuVictory Information */
+            optionsMenuVictoryReference = self.childNode(withName: "//optionsMenuVictoryNode") as! OptionsMenuVictory
+            optionsMenuVictoryReference.addChildren()
+            optionsMenuVictoryReference.buildFromVictoryButton.selectedHandler = { [unowned self] in
+                self.loadBuildFromPlay()
+                print("options victory build pressed")
+            }
+         
+
+            optionsMenuVictoryReference.saveButton.selectedHandler = { [unowned self] in
+                self.optionsMenuVictoryReference.alpha = 0
+                self.inputText?.becomeFirstResponder()
+                self.inputText?.alpha = 1
+                self.saveText()
+            }
+            
+            
+            
+            settingsButton.selectedHandler = { [unowned self] in
+                if self.playingBuiltMaze {
+                self.optionsMenuBigReference.alpha = 1
+                } else {
+                self.optionsMenuSmallReference.alpha = 1
+                }
+            }
+            
+
             
             
             width = Int(self.size.width)
@@ -93,10 +138,7 @@
             let tileSize = mazeSave.mazeObject.tileSize()
             
             let finishLineLocation = finishLineObject.convert(CGPoint(x: 0, y: 0), to: self)
-            print(finishLineLocation.x)
-            print(finishLineLocation.y)
-            
-            
+       
             //  finishLineObject = mazeSave.mazeObject.finishLineObject
             finishLineGridX = Int(finishLineLocation.x / tileSize.tileWidth)
             print (finishLineGridX)
@@ -216,6 +258,8 @@
                 inputText?.alpha = 0
                 self.mazeSave.loadFromPlist { }
                 self.mazeSave.saveToFirebase()
+                self.loadMainMenu()
+
                 return true
                 
             }
@@ -311,10 +355,8 @@
             
             if heroGridX == finishLineGridX && heroGridY == finishLineGridY {
                 if playingBuiltMaze == true {
-                    
-                    self.inputText?.becomeFirstResponder()
-                    self.inputText?.alpha = 1
-                    self.saveText()
+                    optionsMenuVictoryReference.alpha = 1
+
 //                    self.mazeSave.loadFromPlist { }
 //                    self.mazeSave.saveToFirebase()
                     
@@ -426,6 +468,11 @@
                 }
                 nextY += 1
                 nextX = hX
+
+                let count = hY - nextY
+                print(count)
+
+                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfFrontWalk")!, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
             case .E:
                 nextX = hX + 1
@@ -437,7 +484,6 @@
                 
                 let count = nextX - hX
                 
-                print(count)
                 mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfRightWalk")!, count: count))
                 move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
             case .W:
@@ -449,9 +495,9 @@
                 nextY = hY
                 
                 let count = hX - nextX
+                
                 mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfLeftWalk")!, count: count))
                 move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
-                
             case .X:
                 return
                 
@@ -460,7 +506,35 @@
             mouseHeroObject.run(move)
         }
         
-        
+        func loadBuildFromPlay() {
+            /* 1) Grab reference to our SpriteKit view */
+            guard let skView = self.view as SKView! else {
+                print("Could not get Skview")
+                return
+            }
+            
+            /* 2) Load Game scene */
+            guard let scene = BuildingAMaze(fileNamed:"BuildingAMaze") else {
+                print("Could not make BuildingAMaze, check the name is spelled correctly")
+                return
+            }
+            
+            
+            
+            /* 3) Ensure correct aspect mode */
+            scene.scaleMode = .aspectFill
+
+            
+            scene.keepBuildingCurrentMaze() {
+                skView.presentScene(scene)
+                
+            }
+            
+            /* Show debug */
+            skView.showsPhysics = true
+            skView.showsDrawCount = true
+            skView.showsFPS = true            
+        }
         
         
         /* Button handlers */

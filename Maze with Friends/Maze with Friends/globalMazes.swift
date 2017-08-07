@@ -36,11 +36,6 @@ class globalMazes: SKScene {
     
     var goToMyMazes: MSButtonNode!
     
-    
-    
-    //   var goFlag: Bool = false
-    
-    
     override func didMove(to view: SKView) {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode

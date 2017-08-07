@@ -34,7 +34,7 @@ class mazeButtons: MSButtonNode {
     }
     
     
-    required init?(coder aDecoder: NSCoder) {
+    override required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

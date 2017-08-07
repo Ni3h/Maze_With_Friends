@@ -69,6 +69,7 @@ class SaveMazeManager {
             }
             completion()
         } catch {
+            print("this occured")
             //whoops
         }
         

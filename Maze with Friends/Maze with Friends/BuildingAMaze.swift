@@ -25,7 +25,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var toolBoxButton: MSButtonNode!
     var settingsButton: MSButtonNode!
     var saveButton: MSButtonNode!
-    var backMainMenu: MSButtonNode!
     var saveMazeButton: MSButtonNode!
     var player: AVAudioPlayer!
     
@@ -35,6 +34,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
 
     /*Toolbox*/
     var toolBoxReference: ToolBox!
+    var optionsMenuSmallReference: OptionsMenuSmall!
+    
     
     
     
@@ -42,6 +43,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     var gridX = 0
     var gridY = 0
     
+    var keepBuilding = false
+    var hideCancelButton = false
     var didItScroll = false
     
     
@@ -56,7 +59,6 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
         settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
         saveButton = self.childNode(withName: "//saveButton") as! MSButtonNode
-        backMainMenu = self.childNode(withName: "//backMainMenu") as! MSButtonNode
         toolBoxButton = self.childNode(withName: "//toolBoxButton") as! MSButtonNode
         saveMazeButton = self.childNode(withName: "//saveMazeButton") as! MSButtonNode
         
@@ -68,24 +70,45 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         toolBoxReference = self.childNode(withName: "//toolBoxNode") as! ToolBox
         toolBoxReference.addChildren()
+        
+        optionsMenuSmallReference = self.childNode(withName: "//optionsMenuSmallNode") as! OptionsMenuSmall
+        optionsMenuSmallReference.addChildren()
+        
+        optionsMenuSmallReference.backToMenuButton.selectedHandler = { [unowned self] in
+            self.loadMainMenu()
+        }
+        
+        
+        
         toolBarHeight = toolBar.size.height
 
         playSound()
         
         let width = self.size.width
 
-        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
-        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
-        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        if keepBuilding {
+            
+        } else {
+            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200 )
+            mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+            mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+            
+            self.addChild(mazeSave.mazeObject)
+        }
         
-        self.addChild(mazeSave.mazeObject)
         
         toolBoxButton.selectedHandler = { [unowned self] in
             self.toolBoxReference.alpha = 1
             
         }
         
+        settingsButton.selectedHandler = { [unowned self] in
+            self.optionsMenuSmallReference.alpha = 1
+            
+        }
+        
         saveButton.selectedHandler = { [unowned self] in
+            self.hideCancelButton = false
             self.solveAndSave.alpha = 1
             self.cancelButton.alpha = 1
             self.mazeSave.save()
@@ -98,13 +121,24 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         
         cancelButton.selectedHandler = { [unowned self] in
             self.solveAndSave.alpha = 0
-            self.cancelButton.alpha = 0
+            self.hideCancelButton = true
         }
         
         
-        backMainMenu.selectedHandler = { [unowned self] in
-            self.loadMainMenu()
+    }
+    
+    func keepBuildingCurrentMaze(callback: @escaping () -> Void) {
+        keepBuilding = true
+        let width = self.size.width
+        mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
+        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
+        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+        mazeSave.mazeObject.gridLayer.zPosition = 0
+        mazeSave.loadFromPlist {
+            callback()
         }
+        
+        self.addChild(mazeSave.mazeObject)
         
     }
     
@@ -147,6 +181,10 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
     /* Update override */
     
     override func update(_ currentTime: TimeInterval) {
+        if hideCancelButton == true {
+            self.cancelButton.alpha = 0
+        }
+        
         clampCamera()
     }
     

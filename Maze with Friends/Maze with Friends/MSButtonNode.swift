@@ -1,6 +1,6 @@
 //
 //  MSButtonNode.swift
-//  PeeevedPenguins
+//  Maze Maker
 //
 //  Created by mitchell hudson on 5/23/17.
 //  Copyright © 2017 Mitchell Hudson. All rights reserved.
