@@ -290,21 +290,20 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         }
         
         /* 2) Load Game scene */
-        guard let scene = myMazes(fileNamed:"myMazes") else {
-            print("Could not make MainMenu, check the name is spelled correctly")
-            return
-        }
-        
+        var scene = myMazes(fileNamed:"myMazes")
+
         /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
+        scene?.scaleMode = .aspectFill
+        
+        scene?.loadMyMazes {
+            skView.presentScene(scene)
+            scene = nil
+        }
         
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
-        
-        /* 4) Start game scene */
-        skView.presentScene(scene)
     }
     
     
