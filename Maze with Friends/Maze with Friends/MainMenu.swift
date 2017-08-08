@@ -49,19 +49,18 @@ class MainMenu: SKScene {
             return
         }
         
-        /* 2) Load Game scene */
-        //EDIT THIS
-        var scene = myMazes(fileNamed:"myMazes")
-
-        
-        /* 3) Ensure correct aspect mode */
-        scene?.scaleMode = .aspectFill
-        
-        
-        scene?.loadMyMazes() {
-            skView.presentScene(scene)
-            scene = nil
+        guard let scene = myMazes(fileNamed:"myMazes") else {
+            print("Could not make MainMenu, check the name is spelled correctly")
+            return
         }
+        
+        //          3) Ensure correct aspect mode
+        scene.scaleMode = .aspectFill
+        
+        scene.loadMyMazes {
+            skView.presentScene(scene)
+        }
+
         
         
         /* Show debug */

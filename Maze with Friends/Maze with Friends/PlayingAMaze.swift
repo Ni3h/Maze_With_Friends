@@ -58,7 +58,7 @@
         var optionsMenuSmallReference: OptionsMenuSmall!
         var optionsMenuBigReference: OptionsMenuBig!
         var optionsMenuVictoryReference: OptionsMenuVictory!
-
+        
         var mouseHeroObject: MouseHero!
         var finishLineObject: FinishLine!
         var nameToUse: String!
@@ -95,7 +95,7 @@
             optionsMenuBigReference.backToBuildButton.selectedHandler = { [unowned self] in
                 self.loadBuildFromPlay()
                 print("options big build pressed")
-
+                
             }
             optionsMenuBigReference.myMazesButton.selectedHandler = { [unowned self] in
                 self.loadMainMenu()
@@ -108,26 +108,26 @@
                 self.loadBuildFromPlay()
                 print("options victory build pressed")
             }
-         
-
+            
+            
             optionsMenuVictoryReference.saveButton.selectedHandler = { [unowned self] in
                 self.optionsMenuVictoryReference.alpha = 0
                 self.inputText?.becomeFirstResponder()
                 self.inputText?.alpha = 1
-         //       self.saveText()
+                //       self.saveText()
             }
             
             
             
             settingsButton.selectedHandler = { [unowned self] in
                 if self.playingBuiltMaze {
-                self.optionsMenuBigReference.alpha = 1
+                    self.optionsMenuBigReference.alpha = 1
                 } else {
-                self.optionsMenuSmallReference.alpha = 1
+                    self.optionsMenuSmallReference.alpha = 1
                 }
             }
             
-
+            
             
             
             width = Int(self.size.width)
@@ -144,7 +144,7 @@
             let tileSize = mazeSave.mazeObject.tileSize()
             
             let finishLineLocation = finishLineObject.convert(CGPoint(x: 0, y: 0), to: self)
-       
+            
             //  finishLineObject = mazeSave.mazeObject.finishLineObject
             finishLineGridX = Int(finishLineLocation.x / tileSize.tileWidth)
             print (finishLineGridX)
@@ -288,12 +288,12 @@
                 self.mazeSave.saveToFirebase(completion: {
                     dispatchGroup.leave()
                 })
-                dispatchGroup.notify(queue: .main, execute: { 
+                dispatchGroup.notify(queue: .main, execute: {
                     self.loadMainMenu()
-
+                    
                 })
-//                self.loadMainMenu()
-
+                //                self.loadMainMenu()
+                
                 return true
                 
             }
@@ -309,17 +309,17 @@
         
         
         
-//        
-//        func saveMazeAfterBeating(callback: @escaping() -> Void) {
-//            let width = self.size.width
-//            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-//            mazeSave.mazeObject.gridLayer.zPosition = -10
-//            mazeSave.loadFromPlist {
-//                callback()
-//            }
-//            
-////            mazeSave.saveToFirebase()
-//        }
+        //
+        //        func saveMazeAfterBeating(callback: @escaping() -> Void) {
+        //            let width = self.size.width
+        //            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
+        //            mazeSave.mazeObject.gridLayer.zPosition = -10
+        //            mazeSave.loadFromPlist {
+        //                callback()
+        //            }
+        //
+        ////            mazeSave.saveToFirebase()
+        //        }
         
         
         
@@ -334,11 +334,11 @@
             let tileSize = mazeSave.mazeObject.tileSize()
             let touch = touches.first!
             let location = touch.location(in: self)
-     //       let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
+            //       let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
             
             gridX = Int(location.x / tileSize.tileWidth)
             gridY = Int((location.y - toolBarHeight) / tileSize.tileHeight)
-        
+            
         }
         
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -374,7 +374,7 @@
                 heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
                 let aHeroX = CGFloat(heroGridX) * tileSize.tileWidth
                 let aHeroY = CGFloat(heroGridY) * tileSize.tileHeight
-
+                
                 let dir = travelDirection(gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY)
                 
                 moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY, aHeroX: aHeroX, aHeroY: aHeroY )
@@ -391,11 +391,11 @@
             let heroGridXUpdate = Int(heroLocation.x / tileSize.tileWidth)
             let heroGridYUpdate = Int((heroLocation.y - toolBarHeight) / tileSize.tileWidth)
             
-//            heroGridX = Int(heroLocation.x / tileSize.tileWidth)
-//            heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
-//            
-//            print(heroGridX)
-//            print(heroGridY)
+            //            heroGridX = Int(heroLocation.x / tileSize.tileWidth)
+            //            heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
+            //
+            //            print(heroGridX)
+            //            print(heroGridY)
             
             clampCameraToHero()
             clampCamera()
@@ -486,10 +486,10 @@
             var move: SKAction
             var yAdjust: SKAction
             var xAdjust: SKAction
-
+            
             mouseHeroObject.removeAllActions()
-//            let aCGPoint = CGPoint(x: aHeroX, y: aHeroY)
-//            adjust = SKAction.move(to: aCGPoint, duration: 0.2)
+            //            let aCGPoint = CGPoint(x: aHeroX, y: aHeroY)
+            //            adjust = SKAction.move(to: aCGPoint, duration: 0.2)
             xAdjust = SKAction.moveTo(x: aHeroX, duration: 0.2)
             yAdjust = SKAction.moveTo(y: aHeroY, duration: 0.2)
             
@@ -502,7 +502,7 @@
                 nextY -= 1
                 nextX = hX
                 let dwarfNWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Back1"), SKTexture(imageNamed: "Dwarf_Back2"),SKTexture(imageNamed: "Dwarf_Back3"),SKTexture(imageNamed: "Dwarf_Back4"),SKTexture(imageNamed: "Dwarf_Back_IDLE"),], timePerFrame: 0.08)
-
+                
                 let count = nextY - hY
                 mouseHeroObject.run(SKAction.repeat(dwarfNWalk, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
@@ -516,7 +516,7 @@
                 let dwarfSWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Front1"), SKTexture(imageNamed: "Dwarf_Front2"),SKTexture(imageNamed: "Dwarf_Front3"),SKTexture(imageNamed: "Dwarf_Front4"),SKTexture(imageNamed: "Dwarf_Front_IDLE"),], timePerFrame: 0.08)
                 
                 let count = hY - nextY
-
+                
                 mouseHeroObject.run(SKAction.repeat(dwarfSWalk, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
             case .E:
@@ -549,9 +549,11 @@
                 
             }
             let sequence = SKAction.sequence ([xAdjust, yAdjust, move])
-//            mouseHeroObject.run(sequence)
+            //            mouseHeroObject.run(sequence)
             mouseHeroObject.run(move)
         }
+        
+        
         
         func loadBuildFromPlay() {
             /* 1) Grab reference to our SpriteKit view */
@@ -570,7 +572,7 @@
             
             /* 3) Ensure correct aspect mode */
             scene.scaleMode = .aspectFill
-
+            
             
             scene.keepBuildingCurrentMaze() {
                 skView.presentScene(scene)
@@ -580,7 +582,7 @@
             /* Show debug */
             skView.showsPhysics = true
             skView.showsDrawCount = true
-            skView.showsFPS = true            
+            skView.showsFPS = true
         }
         
         
@@ -592,50 +594,35 @@
                 return
             }
             
-            var scene = myMazes(fileNamed:"myMazes")
-            scene?.scaleMode = .aspectFill
-            scene?.loadMyMazes {
-                skView.presentScene(scene)
-//                scene = nil
-                
+            //            var scene = myMazes(fileNamed:"myMazes")
+            //            scene?.scaleMode = .aspectFill
+            //            scene?.loadMyMazes {
+            //                skView.presentScene(scene)
+            ////                scene = nil
+            //
+            //            }
+            
+            
+            guard let scene = myMazes(fileNamed:"myMazes") else {
+                print("Could not make MainMenu, check the name is spelled correctly")
+                return
             }
-
-
-//            guard let scene = myMazes(fileNamed:"myMazes") else {
-//                print("Could not make MainMenu, check the name is spelled correctly")
-//                return
-//            }
             
-            /* 3) Ensure correct aspect mode */
-//            scene.scaleMode = .aspectFill
-//            
-//            scene.loadMyMazes {
-//                skView.presentScene(scene)
-//            }
-
+            //          3) Ensure correct aspect mode
+            scene.scaleMode = .aspectFill
             
+            scene.loadMyMazes {
+                skView.presentScene(scene)
+            }
             
-//            
-//            /* 2) Load Game scene */
-//            var scene = myMazes(fileNamed:"myMazes")
-//
-//            
-//            /* 3) Ensure correct aspect mode */
-//            scene?.scaleMode = .aspectFill
-//            
-//            scene?.loadMyMazes {
-//                skView.presentScene(scene)
-//                scene = nil
-//                
-//            }
             
             /* Show debug */
             skView.showsPhysics = true
             skView.showsDrawCount = true
             skView.showsFPS = true
             
-
+            
         }
-
-}
+        
+    }
     

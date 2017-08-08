@@ -104,7 +104,7 @@ class globalMazes: SKScene {
     
     func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
         let dataRef = database.reference()
-        let uid = "JwrgQHpedAh8UEAWylf2hKIGu572"
+        let uid = "iqCmuw3ZhUcgw2Xj8zNptLs1CTA2"
         
         dataRef.child("mazes").child(uid).observe(.value, with: {
             [unowned self] (snapshot) in
@@ -233,15 +233,16 @@ class globalMazes: SKScene {
             return
         }
         
-        /* 2) Load Game scene */
-        var scene = myMazes(fileNamed:"myMazes")
+        guard let scene = myMazes(fileNamed:"myMazes") else {
+            print("Could not make MainMenu, check the name is spelled correctly")
+            return
+        }
         
-        /* 3) Ensure correct aspect mode */
-        scene?.scaleMode = .aspectFill
+        //          3) Ensure correct aspect mode
+        scene.scaleMode = .aspectFill
         
-        scene?.loadMyMazes {
+        scene.loadMyMazes {
             skView.presentScene(scene)
-            scene = nil
         }
         
         
@@ -252,6 +253,12 @@ class globalMazes: SKScene {
 //        skView.presentScene(scene)
 
 
+    }
+    
+    override func willMove(from view: SKView) {
+        let dataRef = database.reference()
+        let uid = "iqCmuw3ZhUcgw2Xj8zNptLs1CTA2"
+        dataRef.child("mazes").child(uid).removeAllObservers()
     }
 
     

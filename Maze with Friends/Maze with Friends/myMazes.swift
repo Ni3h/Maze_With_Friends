@@ -48,21 +48,21 @@ class myMazes: SKScene {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
-    
+        
         
         /*Bottom Toolbar and buttons code connections */
         goToGlobalMazes = self.childNode(withName: "//goToGlobalMazes") as! MSButtonNode
         goToMyMazes = self.childNode(withName: "//goToMyMazes") as! MSButtonNode
         menuButton = self.childNode(withName: "//menuButton") as! MSButtonNode
         
-//        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-//        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
-//        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
-//        
-//        toolBarHeight = toolBar.size.height
-//        buildButtonHeight = buildButton.size.height
-//        yOffset = toolBarHeight + buildButtonHeight
-//        bottomYOffset = bottomToolBar.size.height
+        //        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        //        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
+        //        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
+        //
+        //        toolBarHeight = toolBar.size.height
+        //        buildButtonHeight = buildButton.size.height
+        //        yOffset = toolBarHeight + buildButtonHeight
+        //        bottomYOffset = bottomToolBar.size.height
         
         /*Nav Options Menu Info!*/
         navOptionsMenuReference = self.childNode(withName: "//navOptionsMenuNode") as! NavOptionsMenu
@@ -80,44 +80,44 @@ class myMazes: SKScene {
             self.loadGlobalMazesScene()
         }
         
-
+        
         buildButton.SKSceneReference = self
-
+        
         buildButton.selectedHandler = { [unowned self] in
             self.loadBuildScene()
         }
         
- 
-//        loadMazeArrayFromDatabase(){}
+        
+        //        loadMazeArrayFromDatabase(){}
         
     }
     
     
     func loadMyMazes (callback: @escaping () -> Void)  {
-       
+        
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
         buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
         bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
-
+        
         toolBarHeight = toolBar.size.height
         buildButtonHeight = buildButton.size.height
         yOffset = toolBarHeight + buildButtonHeight
         bottomYOffset = bottomToolBar.size.height
-       
-
+        
+        
         self.loadMazeArrayFromDatabase {
-
+            
             callback()
         }
-    
+        
     }
     // completion: @escaping () -> Void
     func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
-
+        
         let dataRef = database.reference()
         let uid = Auth.auth().currentUser!.uid
-     
+        
         dataRef.child("mazes").child(uid).observe(.value, with: {
             [unowned self] (snapshot) in
             
@@ -130,14 +130,14 @@ class myMazes: SKScene {
                 self.addButtonsToScene(nameArray: self.mazeNameArray, yOffset: self.yOffset)
             }
             completion()
-
+            
         })
     }
     
     func addButtonsToScene(nameArray: [String], yOffset: CGFloat) {
         let count = nameArray.count
         let height = self.size.height
-
+        
         for i in 0 ..< count {
             let path = Bundle.main.path(forResource: "mazeButtons", ofType: "sks")
             let mazeButtonObject = SKReferenceNode (url: NSURL (fileURLWithPath: path!) as URL)
@@ -160,7 +160,7 @@ class myMazes: SKScene {
     func scrollScene(deltaY: CGFloat) {
         cam.position.y += deltaY
         clampCamera(nameArray: self.mazeNameArray, yOffset: self.yOffset, bottomYOffset: self.bottomYOffset)
-
+        
     }
     
     func clampCamera(nameArray: [String], yOffset: CGFloat, bottomYOffset: CGFloat){
@@ -169,7 +169,7 @@ class myMazes: SKScene {
         
         let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset - bottomYOffset
         let tBoundary = self.size.height/2
-                
+        
         let targetY = camera!.position.y
         
         let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
@@ -201,7 +201,7 @@ class myMazes: SKScene {
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
-
+        
     }
     
     func loadBuildScene() {
@@ -220,9 +220,9 @@ class myMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-//        scene.loadMaze() {
-//            skView.presentScene(scene)
-//        }
+        //        scene.loadMaze() {
+        //            skView.presentScene(scene)
+        //        }
         
         /* Show debug */
         skView.showsPhysics = true
@@ -241,21 +241,30 @@ class myMazes: SKScene {
         }
         
         /* 2) Load Game scene */
-        var scene = globalMazes(fileNamed:"globalMazes")
-        
-        /* 3) Ensure correct aspect mode */
-        scene?.scaleMode = .aspectFill
-        
-        
-        scene?.loadGlobalMazes {
-            skView.presentScene(scene)
-            scene = nil
+        guard let scene = globalMazes(fileNamed:"globalMazes") else {
+            print("Could not make MainMenu, check the name is spelled correctly")
+            return
         }
+        
+        //          3) Ensure correct aspect mode
+        scene.scaleMode = .aspectFill
+        
+        scene.loadGlobalMazes {
+            skView.presentScene(scene)
+            
+        }
+        
         
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
     }
-
+    
+    override func willMove(from view: SKView) {
+        let dataRef = database.reference()
+        let uid = Auth.auth().currentUser!.uid
+        dataRef.child("mazes").child(uid).removeAllObservers()
+    }
+    
 }
