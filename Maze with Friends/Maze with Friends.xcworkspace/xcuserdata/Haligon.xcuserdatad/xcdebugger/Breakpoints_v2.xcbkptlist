@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/BuildingAMaze.swift"
-            timestampString = "523771832.28083"
+            filePath = "Maze with Friends/globalMazes.swift"
+            timestampString = "523909700.83434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "loadMyMazesScene()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,137 +25,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/OptionsMenuVictory.swift"
-            timestampString = "523777410.480403"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.OptionsMenuVictory.saveButton.getter : Swift.ImplicitlyUnwrappedOptional&lt;Maze_with_Friends.MSButtonNode&gt;"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/OptionsMenuVictory.swift"
-                  timestampString = "523776410.628785"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.OptionsMenuVictory.saveButton.setter : Swift.ImplicitlyUnwrappedOptional&lt;Maze_with_Friends.MSButtonNode&gt;"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/OptionsMenuVictory.swift"
-                  timestampString = "523776410.632506"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.OptionsMenuVictory.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Maze_with_Friends.OptionsMenuVictory&gt;"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/OptionsMenuVictory.swift"
-                  timestampString = "523776410.636063"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "523863418.204701"
+            timestampString = "523913280.918966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "didMove(to:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.PlayingAMaze.didMove (to : __ObjC.SKView) -&gt; ()"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/PlayingAMaze.swift"
-                  timestampString = "523778974.075659"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
-                  offsetFromSymbolStart = "2588">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Maze_with_Friends.PlayingAMaze.(didMove (to : __ObjC.SKView) -&gt; ()).(closure #2)"
-                  moduleName = "Maze with Friends"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Haligon/Desktop/Developer/GitHub/Maze_With_Friends/Maze%20with%20Friends/Maze%20with%20Friends/PlayingAMaze.swift"
-                  timestampString = "523778974.078579"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "523865464.911886"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
-            landmarkName = "moveHero(dir:gX:gY:hX:hY:aHeroX:aHeroY:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maze with Friends/PlayingAMaze.swift"
-            timestampString = "523872053.847574"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "textFieldShouldReturn(_:)"
             landmarkType = "7">
          </BreakpointContent>

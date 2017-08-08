@@ -114,7 +114,7 @@
                 self.optionsMenuVictoryReference.alpha = 0
                 self.inputText?.becomeFirstResponder()
                 self.inputText?.alpha = 1
-                self.saveText()
+         //       self.saveText()
             }
             
             
@@ -276,13 +276,23 @@
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             if inputText?.text != "" {
+                var dispatchGroup = DispatchGroup()
+                
                 
                 inputText?.resignFirstResponder()
                 saveText()
+                print(saveText)
                 inputText?.alpha = 0
                 self.mazeSave.loadFromPlist { }
-                self.mazeSave.saveToFirebase()
-                self.loadMainMenu()
+                dispatchGroup.enter()
+                self.mazeSave.saveToFirebase(completion: {
+                    dispatchGroup.leave()
+                })
+                dispatchGroup.notify(queue: .main, execute: { 
+                    self.loadMainMenu()
+
+                })
+//                self.loadMainMenu()
 
                 return true
                 
@@ -299,17 +309,17 @@
         
         
         
-        
-        func saveMazeAfterBeating(callback: @escaping() -> Void) {
-            let width = self.size.width
-            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-            mazeSave.mazeObject.gridLayer.zPosition = -10
-            mazeSave.loadFromPlist {
-                callback()
-            }
-            
-            mazeSave.saveToFirebase()
-        }
+//        
+//        func saveMazeAfterBeating(callback: @escaping() -> Void) {
+//            let width = self.size.width
+//            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
+//            mazeSave.mazeObject.gridLayer.zPosition = -10
+//            mazeSave.loadFromPlist {
+//                callback()
+//            }
+//            
+////            mazeSave.saveToFirebase()
+//        }
         
         
         
@@ -393,19 +403,6 @@
             if heroGridXUpdate == finishLineGridX && heroGridYUpdate == finishLineGridY {
                 if playingBuiltMaze == true {
                     optionsMenuVictoryReference.alpha = 1
-
-//                    self.mazeSave.loadFromPlist { }
-//                    self.mazeSave.saveToFirebase()
-                    
-                    //            self.saveText()
-                    //            self.mazeSave.save()
-                    //            self.mazeSave.saveToFirebase()
-                    //            self.view?.endEditing(true)
-                    //            self.view?.endEditing(true)
-                    //            self.inputText?.alpha = 0
-                    //            self.saveMazeButton.alpha = 0
-                    // mazeSave.loadFromPlist {}
-                    // mazeSave.saveToFirebase()
                 }
                 gameState = .victory
                 /* Show restart button */
@@ -504,9 +501,10 @@
                 }
                 nextY -= 1
                 nextX = hX
+                let dwarfNWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Back1"), SKTexture(imageNamed: "Dwarf_Back2"),SKTexture(imageNamed: "Dwarf_Back3"),SKTexture(imageNamed: "Dwarf_Back4"),SKTexture(imageNamed: "Dwarf_Back_IDLE"),], timePerFrame: 0.08)
 
                 let count = nextY - hY
-                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfBackWalk")!, count: count))
+                mouseHeroObject.run(SKAction.repeat(dwarfNWalk, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
             case .S:
                 nextY = hY - 1
@@ -515,10 +513,11 @@
                 }
                 nextY += 1
                 nextX = hX
-
+                let dwarfSWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Front1"), SKTexture(imageNamed: "Dwarf_Front2"),SKTexture(imageNamed: "Dwarf_Front3"),SKTexture(imageNamed: "Dwarf_Front4"),SKTexture(imageNamed: "Dwarf_Front_IDLE"),], timePerFrame: 0.08)
+                
                 let count = hY - nextY
 
-                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfFrontWalk")!, count: count))
+                mouseHeroObject.run(SKAction.repeat(dwarfSWalk, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
             case .E:
                 nextX = hX + 1
@@ -527,10 +526,10 @@
                 }
                 nextX -= 1
                 nextY = hY
+                let dwarfEWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Side1_R"), SKTexture(imageNamed: "Dwarf_Side2_R"),SKTexture(imageNamed: "Dwarf_Side3_R"),SKTexture(imageNamed: "Dwarf_Side4_R"),SKTexture(imageNamed: "Dwarf_Side_IDLE_R"),], timePerFrame: 0.08)
                 
                 let count = nextX - hX
-                
-                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfRightWalk")!, count: count))
+                mouseHeroObject.run(SKAction.repeat(dwarfEWalk, count: count))
                 move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
             case .W:
                 nextX = hX - 1
@@ -539,10 +538,11 @@
                 }
                 nextX += 1
                 nextY = hY
+                let dwarfWWalk = SKAction.animate(with: [SKTexture(imageNamed: "Dwarf_Side1_L"), SKTexture(imageNamed: "Dwarf_Side2_L"),SKTexture(imageNamed: "Dwarf_Side3_L"),SKTexture(imageNamed: "Dwarf_Side4_L"),SKTexture(imageNamed: "Dwarf_Side_IDLE_L"),], timePerFrame: 0.08)
                 
                 let count = hX - nextX
                 
-                mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfLeftWalk")!, count: count))
+                mouseHeroObject.run(SKAction.repeat(dwarfWWalk, count: count))
                 move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
             case .X:
                 return
@@ -592,18 +592,42 @@
                 return
             }
             
-            /* 2) Load Game scene */
             var scene = myMazes(fileNamed:"myMazes")
-
-            
-            /* 3) Ensure correct aspect mode */
             scene?.scaleMode = .aspectFill
-            
             scene?.loadMyMazes {
                 skView.presentScene(scene)
-                scene = nil
+//                scene = nil
                 
             }
+
+
+//            guard let scene = myMazes(fileNamed:"myMazes") else {
+//                print("Could not make MainMenu, check the name is spelled correctly")
+//                return
+//            }
+            
+            /* 3) Ensure correct aspect mode */
+//            scene.scaleMode = .aspectFill
+//            
+//            scene.loadMyMazes {
+//                skView.presentScene(scene)
+//            }
+
+            
+            
+//            
+//            /* 2) Load Game scene */
+//            var scene = myMazes(fileNamed:"myMazes")
+//
+//            
+//            /* 3) Ensure correct aspect mode */
+//            scene?.scaleMode = .aspectFill
+//            
+//            scene?.loadMyMazes {
+//                skView.presentScene(scene)
+//                scene = nil
+//                
+//            }
             
             /* Show debug */
             skView.showsPhysics = true
@@ -614,3 +638,4 @@
         }
 
 }
+    

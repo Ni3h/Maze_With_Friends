@@ -93,8 +93,7 @@ class myMazes: SKScene {
     }
     
     
-//     ccallback: @escaping () -> Void
-    func loadMyMazes  (callback: @escaping () -> Void)  {
+    func loadMyMazes (callback: @escaping () -> Void)  {
        
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
@@ -242,21 +241,21 @@ class myMazes: SKScene {
         }
         
         /* 2) Load Game scene */
-        guard let scene = globalMazes(fileNamed:"globalMazes") else {
-            print("Could not make BuildingAMaze, check the name is spelled correctly")
-            return
-        }
+        var scene = globalMazes(fileNamed:"globalMazes")
         
         /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
+        scene?.scaleMode = .aspectFill
+        
+        
+        scene?.loadGlobalMazes {
+            skView.presentScene(scene)
+            scene = nil
+        }
         
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
-        
-        /* 4) Start game scene */
-        skView.presentScene(scene)
     }
 
 }

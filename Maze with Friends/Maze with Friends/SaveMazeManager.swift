@@ -96,7 +96,7 @@ class SaveMazeManager {
     }
     
     
-    func saveToFirebase() {
+    func saveToFirebase(completion: @escaping () -> Void) {
         // Create a storage reference from our storage service
         let mazeName = mazeObject.mazeName
         let storageRef = storage.reference()
@@ -122,6 +122,7 @@ class SaveMazeManager {
                 if error != nil {
                     print(error?.localizedDescription as Any)
                 }
+                completion()
             })
             
         }

@@ -49,10 +49,10 @@ class globalMazes: SKScene {
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
         
-        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        
-        
-        globalMazesBottomToolBar = self.childNode(withName: "//globalMazesBottomToolBar") as! ToolBarNode
+//        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+//        
+//        
+//        globalMazesBottomToolBar = self.childNode(withName: "//globalMazesBottomToolBar") as! ToolBarNode
         goToGlobalMazesFromGlobal = self.childNode(withName: "//goToGlobalMazesFromGlobal") as! MSButtonNode
          goToMyMazesFromGlobal = self.childNode(withName: "//goToMyMazesFromGlobal") as! MSButtonNode
          menuButtonGlobal = self.childNode(withName: "//menuButtonGlobal") as! MSButtonNode
@@ -76,18 +76,33 @@ class globalMazes: SKScene {
             self.loadMyMazesScene()
         }
         
-        toolBarHeight = toolBar.size.height
+//        toolBarHeight = toolBar.size.height
+//        
+//        yOffset = toolBarHeight
         
+        
+//        loadMazeArrayFromDatabase()
+        
+    }
+    
+    func loadGlobalMazes (callback: @escaping () -> Void) {
+        
+        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        globalMazesBottomToolBar = self.childNode(withName: "//globalMazesBottomToolBar") as! ToolBarNode
+            
+        toolBarHeight = toolBar.size.height
         yOffset = toolBarHeight
         
         
-        loadMazeArrayFromDatabase()
         
+        self.loadMazeArrayFromDatabase() {
+            callback()
+        }
     }
     
     
     
-    func loadMazeArrayFromDatabase() {
+    func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
         let dataRef = database.reference()
         let uid = "JwrgQHpedAh8UEAWylf2hKIGu572"
         
@@ -103,6 +118,7 @@ class globalMazes: SKScene {
                 self.addButtonsToScene(nameArray: self.mazeNameArray, yOffset: self.yOffset)
                 
             }
+            completion()
         })
         
     }
