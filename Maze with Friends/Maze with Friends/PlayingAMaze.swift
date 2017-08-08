@@ -601,10 +601,10 @@
             /* 3) Ensure correct aspect mode */
             scene.scaleMode = .aspectFill
             
-//            scene.loadMyMazes {
-//                skView.presentScene(scene)
-//                
-//            }
+            scene.loadMyMazes {
+                skView.presentScene(scene)
+                
+            }
             
             /* Show debug */
             skView.showsPhysics = true
@@ -612,7 +612,7 @@
             skView.showsFPS = true
             
             /* 4) Start game scene */
-            skView.presentScene(scene)
+//            skView.presentScene(scene)
         }
         
         
