@@ -31,6 +31,7 @@ class myMazes: SKScene {
     var buildButtonHeight: CGFloat = 0
     var toolBarHeight: CGFloat = 0
     var yOffset: CGFloat = 0
+    var bottomYOffset: CGFloat = 0
     
     var nameOfButton = ""
     var cam: SKCameraNode!
@@ -47,13 +48,9 @@ class myMazes: SKScene {
         /* Create a new Camera */
         cam = childNode(withName: "cameraNode") as! SKCameraNode
         self.camera = cam
-        
-        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        
-        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
+    
         
         /*Bottom Toolbar and buttons code connections */
-        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
         goToGlobalMazes = self.childNode(withName: "//goToGlobalMazes") as! MSButtonNode
         goToMyMazes = self.childNode(withName: "//goToMyMazes") as! MSButtonNode
         menuButton = self.childNode(withName: "//menuButton") as! MSButtonNode
@@ -75,10 +72,10 @@ class myMazes: SKScene {
         }
         
         
-        toolBarHeight = toolBar.size.height
-        buildButtonHeight = buildButton.size.height
+  //    toolBarHeight = toolBar.size.height
+  //    buildButtonHeight = buildButton.size.height
         
-        yOffset = toolBarHeight + buildButtonHeight
+  //      yOffset = toolBarHeight + buildButtonHeight
         
         
         buildButton.SKSceneReference = self
@@ -87,13 +84,34 @@ class myMazes: SKScene {
             self.loadBuildScene()
         }
         
-        loadMazeArrayFromDatabase()
+    //    loadMazeArrayFromDatabase(){ }
         
     }
     
     
+    // ccallback: @escaping () -> Void
+    func loadMyMazes  (callback: @escaping () -> Void)  { 
+       
+        
+        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
+        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
+
+        toolBarHeight = toolBar.size.height
+        buildButtonHeight = buildButton.size.height
+        yOffset = toolBarHeight + buildButtonHeight
+        bottomYOffset = bottomToolBar.size.height
+       
+
+        self.loadMazeArrayFromDatabase {
+
+            callback()
+        }
     
-    func loadMazeArrayFromDatabase() {
+    }
+    
+    func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
+
         let dataRef = database.reference()
         let uid = Auth.auth().currentUser!.uid
      
@@ -107,10 +125,10 @@ class myMazes: SKScene {
                 
                 
                 self.addButtonsToScene(nameArray: self.mazeNameArray, yOffset: self.yOffset)
-                
             }
+            completion()
+
         })
-     
     }
     
     func addButtonsToScene(nameArray: [String], yOffset: CGFloat) {
@@ -138,15 +156,15 @@ class myMazes: SKScene {
     
     func scrollScene(deltaY: CGFloat) {
         cam.position.y += deltaY
-        clampCamera(nameArray: self.mazeNameArray, yOffset: self.yOffset)
+        clampCamera(nameArray: self.mazeNameArray, yOffset: self.yOffset, bottomYOffset: self.bottomYOffset)
 
     }
     
-    func clampCamera(nameArray: [String], yOffset: CGFloat){
+    func clampCamera(nameArray: [String], yOffset: CGFloat, bottomYOffset: CGFloat){
         let count = nameArray.count
         let heightOfButtons = CGFloat(count) * cgHeight
         
-        let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset
+        let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset - bottomYOffset
         let tBoundary = self.size.height/2
                 
         let targetY = camera!.position.y
@@ -164,9 +182,6 @@ class myMazes: SKScene {
         }
         
         /* 2) Load Game scene */
-        //EDIT THIS
-        
-        
         guard let scene = PlayingAMaze(fileNamed:"PlayingAMaze") else {
             print("Could not make PlayingAMaze, check the name is spelled correctly")
             return

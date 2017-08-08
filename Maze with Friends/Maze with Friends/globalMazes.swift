@@ -119,7 +119,7 @@ class globalMazes: SKScene {
             cgHeight = mazeNameObject.backroundNode.size.height
             mazeNameObject.mazeNameLabel.text = nameArray[i]
             mazeNameObject.selectedHandler = { [unowned self] in 
-                self.loadPlayScene(nameOfButton: nameArray[i])
+                self.loadPlaySceneGlobal(nameOfButton: nameArray[i])
             }
             
             let objectPosition  = CGPoint(x: 0, y: ((CGFloat(height) - yOffset - (cgHeight * CGFloat(i + 1)))))
@@ -150,7 +150,7 @@ class globalMazes: SKScene {
         cam.position.y = y
     }
     
-    func loadPlayScene(nameOfButton: String) {
+    func loadPlaySceneGlobal(nameOfButton: String) {
         /* 1) Grab reference to our SpriteKit view */
         guard let skView = self.view as SKView! else {
             print("Could not get Skview")
@@ -169,7 +169,7 @@ class globalMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        scene.loadMaze() {
+        scene.loadMazeGlobal() {
             skView.presentScene(scene)
         }
         
@@ -222,17 +222,21 @@ class globalMazes: SKScene {
             print("Could not make myMazes, check the name is spelled correctly")
             return
         }
-        
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
+        scene.loadMyMazes {
+//            self.scene?.removeFromParent()
+            skView.presentScene(scene)
+            
+        }
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
-        
-        /* 4) Start game scene */
-        skView.presentScene(scene)
+//        skView.presentScene(scene)
+
+
     }
 
     

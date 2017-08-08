@@ -129,6 +129,11 @@ class SaveMazeManager {
         
     }
     
+    /*finish this at future date */
+//    func deleteFromFireBase() {
+//    
+//    }
+    
     func loadMazeArrayFromDatabase() {
         let dataRef = database.reference()
         let uid = Auth.auth().currentUser!.uid
@@ -138,11 +143,50 @@ class SaveMazeManager {
     
     }
     
+//    func loadMazeArrayFromDatabaseGlobal() {
+//        let dataRef = database.reference()
+//        let uid = "JwrgQHpedAh8UEAWylf2hKIGu572"
+//        
+//        dataRef.child("mazes").child(uid).observe(.value, with: { (snapshot)
+//        })
+//    }
+    
     func loadFromFirebase(mazeName: String, completion: @escaping () -> Void) {
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
         let uid = Auth.auth().currentUser!.uid
 
+        
+        //        let nameRef = storageRef.child("mazes/\(mazeName)")
+        let nameRef = storageRef.child("\(uid)/mazes/\(mazeName)")
+        
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        nameRef.getData(maxSize: 10 * 1024 * 1024) { rawData, error in
+            if error != nil {
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "mazes/.." is returned
+                let wallArray: Any? = NSKeyedUnarchiver.unarchiveObject(with: rawData!)
+                self.mazeObject.wallArray = wallArray as! [[Wall]]
+                
+                for wall1d in self.mazeObject.wallArray {
+                    for wall in wall1d{
+                        
+                        self.mazeObject.addChild(wall)
+                    }
+                }
+            }
+            completion()
+        }
+        
+        
+    }
+    
+    func loadFromFireBaseGlobal(mazeName: String, completion: @escaping () -> Void) {
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        let uid = "JwrgQHpedAh8UEAWylf2hKIGu572"
+        
         
         //        let nameRef = storageRef.child("mazes/\(mazeName)")
         let nameRef = storageRef.child("\(uid)/mazes/\(mazeName)")
