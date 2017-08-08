@@ -55,6 +55,15 @@ class myMazes: SKScene {
         goToMyMazes = self.childNode(withName: "//goToMyMazes") as! MSButtonNode
         menuButton = self.childNode(withName: "//menuButton") as! MSButtonNode
         
+        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
+        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
+        
+        toolBarHeight = toolBar.size.height
+        buildButtonHeight = buildButton.size.height
+        yOffset = toolBarHeight + buildButtonHeight
+        bottomYOffset = bottomToolBar.size.height
+        
         /*Nav Options Menu Info!*/
         navOptionsMenuReference = self.childNode(withName: "//navOptionsMenuNode") as! NavOptionsMenu
         navOptionsMenuReference.addChildren()
@@ -84,33 +93,35 @@ class myMazes: SKScene {
             self.loadBuildScene()
         }
         
-    //    loadMazeArrayFromDatabase(){ }
+ 
+        loadMazeArrayFromDatabase()
+//            {}
         
     }
     
     
     // ccallback: @escaping () -> Void
-    func loadMyMazes  (callback: @escaping () -> Void)  { 
-       
-        
-        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
-        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
-
-        toolBarHeight = toolBar.size.height
-        buildButtonHeight = buildButton.size.height
-        yOffset = toolBarHeight + buildButtonHeight
-        bottomYOffset = bottomToolBar.size.height
-       
-
-        self.loadMazeArrayFromDatabase {
-
-            callback()
-        }
-    
-    }
-    
-    func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
+//    func loadMyMazes  (callback: @escaping () -> Void)  { 
+//       
+//        
+//        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
+//        buildButton = self.childNode(withName: "//buildButton") as! BuildButtonNode
+//        bottomToolBar = self.childNode(withName: "//bottomToolBar") as! ToolBarNode
+//
+//        toolBarHeight = toolBar.size.height
+//        buildButtonHeight = buildButton.size.height
+//        yOffset = toolBarHeight + buildButtonHeight
+//        bottomYOffset = bottomToolBar.size.height
+//       
+////
+////        self.loadMazeArrayFromDatabase {
+////
+////            callback()
+////        }
+//    
+//    }
+    // completion: @escaping () -> Void
+    func loadMazeArrayFromDatabase() {
 
         let dataRef = database.reference()
         let uid = Auth.auth().currentUser!.uid
@@ -126,7 +137,7 @@ class myMazes: SKScene {
                 
                 self.addButtonsToScene(nameArray: self.mazeNameArray, yOffset: self.yOffset)
             }
-            completion()
+         //   completion()
 
         })
     }

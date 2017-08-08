@@ -59,10 +59,10 @@ class MainMenu: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        
-        scene.loadMyMazes() {
-            skView.presentScene(scene)
-        }
+//        
+//        scene.loadMyMazes() {
+//            skView.presentScene(scene)
+//        }
         
         
         /* Show debug */
@@ -71,7 +71,7 @@ class MainMenu: SKScene {
         skView.showsFPS = true
         
         /* 4) Start game scene */
-//        skView.presentScene(scene)
+        skView.presentScene(scene)
     }
     
     

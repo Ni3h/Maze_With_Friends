@@ -33,10 +33,16 @@
         var gridY = 0
         var heroGridX = 0
         var heroGridY = 0
+        
+        var targetHeroGridX = 0
+        var targetHeroGridY = 0
+        
         var player: AVAudioPlayer!
         
         var finishLineGridX = 0
         var finishLineGridY = 0
+        
+        
         
         var didItScroll = false
         let screenSize = UIScreen.main.bounds
@@ -318,12 +324,11 @@
             let tileSize = mazeSave.mazeObject.tileSize()
             let touch = touches.first!
             let location = touch.location(in: self)
-            let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
+     //       let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
             
             gridX = Int(location.x / tileSize.tileWidth)
             gridY = Int((location.y - toolBarHeight) / tileSize.tileHeight)
-            heroGridX = Int(heroLocation.x / tileSize.tileWidth)
-            heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
+        
         }
         
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -351,8 +356,18 @@
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             if gameState != .active { return }
             if didItScroll == false {
+                print("heroGridX\(heroGridX)heroGridY\(heroGridY)")
+                
+                let tileSize = mazeSave.mazeObject.tileSize()
+                let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
+                heroGridX = Int(heroLocation.x / tileSize.tileWidth)
+                heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
+                let aHeroX = CGFloat(heroGridX) * tileSize.tileWidth
+                let aHeroY = CGFloat(heroGridY) * tileSize.tileHeight
+
                 let dir = travelDirection(gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY)
-                moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY )
+                
+                moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY, aHeroX: aHeroX, aHeroY: aHeroY )
             }
         }
         
@@ -365,6 +380,12 @@
             let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
             let heroGridXUpdate = Int(heroLocation.x / tileSize.tileWidth)
             let heroGridYUpdate = Int((heroLocation.y - toolBarHeight) / tileSize.tileWidth)
+            
+//            heroGridX = Int(heroLocation.x / tileSize.tileWidth)
+//            heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
+//            
+//            print(heroGridX)
+//            print(heroGridY)
             
             clampCameraToHero()
             clampCamera()
@@ -457,7 +478,7 @@
         }
         
         
-        func moveHero( dir: direction, gX: Int, gY: Int, hX: Int, hY: Int ) {
+        func moveHero( dir: direction, gX: Int, gY: Int, hX: Int, hY: Int, aHeroX: CGFloat, aHeroY: CGFloat ) {
             let myMaze = mazeSave.mazeObject
             let tileSize = myMaze.tileSize()
             let tileWidth = tileSize.tileWidth
@@ -466,7 +487,14 @@
             var nextX: Int
             var nextY: Int
             var move: SKAction
-            
+            var yAdjust: SKAction
+            var xAdjust: SKAction
+
+            mouseHeroObject.removeAllActions()
+//            let aCGPoint = CGPoint(x: aHeroX, y: aHeroY)
+//            adjust = SKAction.move(to: aCGPoint, duration: 0.2)
+            xAdjust = SKAction.moveTo(x: aHeroX, duration: 0.2)
+            yAdjust = SKAction.moveTo(y: aHeroY, duration: 0.2)
             
             switch dir {
             case .N:
@@ -489,7 +517,6 @@
                 nextX = hX
 
                 let count = hY - nextY
-                print(count)
 
                 mouseHeroObject.run(SKAction.repeat(SKAction.init(named: "DwarfFrontWalk")!, count: count))
                 move = SKAction.moveTo(y: (CGFloat(nextY) * tileHeight) + toolBarHeight, duration: Double(abs(nextY - hY)) * baseDuration)
@@ -521,7 +548,8 @@
                 return
                 
             }
-            
+            let sequence = SKAction.sequence ([xAdjust, yAdjust, move])
+//            mouseHeroObject.run(sequence)
             mouseHeroObject.run(move)
         }
         
@@ -573,10 +601,10 @@
             /* 3) Ensure correct aspect mode */
             scene.scaleMode = .aspectFill
             
-            scene.loadMyMazes {
-                skView.presentScene(scene)
-                
-            }
+//            scene.loadMyMazes {
+//                skView.presentScene(scene)
+//                
+//            }
             
             /* Show debug */
             skView.showsPhysics = true
@@ -584,7 +612,7 @@
             skView.showsFPS = true
             
             /* 4) Start game scene */
-//            skView.presentScene(scene)
+            skView.presentScene(scene)
         }
         
         

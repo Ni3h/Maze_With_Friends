@@ -10,7 +10,7 @@ import SpriteKit
 
 class MouseHero: Wall {
     
-    init(size: CGSize, position: CGPoint) {
+    init(size: CGSize, position: CGPoint) { 
         /* Initialize with 'FloorTiles' asset */
         
         let texture = SKTexture(imageNamed: "Dwarf_Front_IDLE")
@@ -19,7 +19,7 @@ class MouseHero: Wall {
         
         self.position = position
         self.type = "hero"
-        self.zPosition = 10
+        self.zPosition = 6
     }
     
     

@@ -225,16 +225,16 @@ class globalMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        scene.loadMyMazes {
-//            self.scene?.removeFromParent()
-            skView.presentScene(scene)
-            
-        }
+//        scene.loadMyMazes {
+////            self.scene?.removeFromParent()
+//            skView.presentScene(scene)
+//            
+//        }
         /* Show debug */
         skView.showsPhysics = true
         skView.showsDrawCount = true
         skView.showsFPS = true
-//        skView.presentScene(scene)
+        skView.presentScene(scene)
 
 
     }
