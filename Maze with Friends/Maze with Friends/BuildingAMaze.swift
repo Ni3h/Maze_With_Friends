@@ -131,26 +131,14 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         keepBuilding = true
         let width = self.size.width
         mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-        mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
-        mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
-//        mazeSave.mazeObject.heroObject.isAlive = false
-//        mazeSave.mazeObject.finishLineObject.isAlive = false
-        mazeSave.mazeObject.gridLayer.zPosition = 0
-        mazeSave.loadFromPlist {
-//            let gridPositions = self.mazeSave.mazeObject.gridLocation(location: self.mazeSave.mazeObject.heroObject.position, yOffset: self.toolBarHeight)
-//            print(gridPositions.gridX)
-//             self.mazeSave.mazeObject.placeStartingPosition(gridX: gridPositions.gridX, gridY: gridPositions.gridY, yOffset: self.toolBarHeight)
-            callback()
 
+        mazeSave.mazeObject.gridLayer.zPosition = 0
+        mazeSave.loadFromPlist { [unowned self] in
+            self.mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: self.toolBarHeight)
+            self.mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: self.toolBarHeight)
+            callback()
         }
         
-//        let gridPositions = mazeSave.mazeObject.gridLocation(location: mazeSave.mazeObject.heroObject.position, yOffset: toolBarHeight)
-       
-        
-        //mazeSave.mazeObject.heroObject
-
-//        mazeSave.mazeObject.placeStartingPosition(gridX: Int(mazeSave.mazeObject.heroObject.position.x), gridY: Int(mazeSave.mazeObject.heroObject.position.y), yOffset: toolBarHeight)
-//        mazeSave.mazeObject.placeStartingFinishLine(gridX: Int(mazeSave.mazeObject.finishLineObject.position.x), gridY: Int(mazeSave.mazeObject.finishLineObject.position.y), yOffset: toolBarHeight)
         print(mazeSave.mazeObject.finishLineObject.position.y)
         
         self.addChild(mazeSave.mazeObject)
@@ -316,10 +304,10 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
             skView.presentScene(scene)
         }
 
-        /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        /* Show debug */
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
     }
     
     
@@ -344,12 +332,11 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
 
         }
         
-        /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        /* Show debug */
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
      
-        /* 4) Start game scene */
     }
     
     

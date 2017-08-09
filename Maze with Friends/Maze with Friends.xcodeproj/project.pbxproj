@@ -715,9 +715,10 @@
 				DEVELOPMENT_TEAM = SKVKVL3U56;
 				INFOPLIST_FILE = "Maze with Friends/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-with-Friends";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-Builder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -729,9 +730,10 @@
 				DEVELOPMENT_TEAM = SKVKVL3U56;
 				INFOPLIST_FILE = "Maze with Friends/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-with-Friends";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ethan.2017.Maze-Builder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

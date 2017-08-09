@@ -60,16 +60,12 @@ class MainMenu: SKScene {
         scene.loadMyMazes {
             skView.presentScene(scene)
         }
-
-        
         
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
-        
-        /* 4) Start game scene */
-//        skView.presentScene(scene)
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
+
     }
     
     

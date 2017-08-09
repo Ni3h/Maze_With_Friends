@@ -198,9 +198,9 @@ class myMazes: SKScene {
         }
         
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
         
     }
     
@@ -220,14 +220,11 @@ class myMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        //        scene.loadMaze() {
-        //            skView.presentScene(scene)
-        //        }
-        
+
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
         
         /* 4) Start game scene */
         skView.presentScene(scene)
@@ -256,9 +253,9 @@ class myMazes: SKScene {
         
         
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
     }
     
     override func willMove(from view: SKView) {

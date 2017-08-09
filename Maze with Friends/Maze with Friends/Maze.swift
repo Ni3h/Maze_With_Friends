@@ -137,6 +137,7 @@ class Maze: SKSpriteNode {
         
         heroObject.size.width = CGFloat(tileWidth)
         heroObject.size.height = CGFloat(tileHeight)
+        wallArray[gridY][gridX].removeFromParent()
         wallArray[gridY][gridX] = heroObject
         
         heroObject.position = gridPosition
@@ -188,6 +189,7 @@ class Maze: SKSpriteNode {
         
         finishLineObject.size.width = CGFloat(tileWidth)
         finishLineObject.size.height = CGFloat(tileHeight)
+        wallArray[gridY][gridX].removeFromParent()
         wallArray[gridY][gridX] = finishLineObject
         
         finishLineObject.position = gridPosition

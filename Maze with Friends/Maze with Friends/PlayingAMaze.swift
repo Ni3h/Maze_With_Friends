@@ -20,7 +20,7 @@
         }
         
         enum direction {
-            case N, E, S, W, X
+            case N, E, S, W, B, X
         }
         
         
@@ -144,7 +144,7 @@
             mouseHeroObject = mazeSave.mazeObject.heroObject
             
             
-            mazeSave.mazeObject.placeInitialFinishLine(row: 1, col: 1, yOffset: toolBarHeight)
+            mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
             finishLineObject = mazeSave.mazeObject.finishLineObject
             
             
@@ -153,9 +153,9 @@
             let finishLineLocation = finishLineObject.convert(CGPoint(x: 0, y: 0), to: self)
             
             //  finishLineObject = mazeSave.mazeObject.finishLineObject
-            finishLineGridX = Int(finishLineLocation.x / tileSize.tileWidth)
+            finishLineGridX = Int((finishLineLocation.x + tileSize.tileWidth/2) / tileSize.tileWidth)
             print (finishLineGridX)
-            finishLineGridY = Int((finishLineLocation.y - toolBarHeight) / tileSize.tileHeight)
+            finishLineGridY = Int((finishLineLocation.y - toolBarHeight + (tileSize.tileHeight/2)) / tileSize.tileHeight)
             print (finishLineGridY)
             //
             
@@ -336,10 +336,15 @@
                 let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
                 heroGridX = Int(heroLocation.x / tileSize.tileWidth)
                 heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
-                let aHeroX = CGFloat(heroGridX) * tileSize.tileWidth
-                let aHeroY = CGFloat(heroGridY) * tileSize.tileHeight
+                let aHeroX = ( CGFloat(heroGridX) * tileSize.tileWidth ) - heroLocation.x
+                let aHeroY = (( CGFloat(heroGridY) * tileSize.tileHeight ) + toolBarHeight) - heroLocation.y
                 
                 let dir = travelDirection(gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY)
+                
+                print("\ntouch: (\(gridX),\(gridY))  dir: \(dir)")
+                print("heroGrid: (\(heroGridX),\(heroGridY))")
+                print("heroLocation: (\(heroLocation.x),\(heroLocation.y))")
+                print("aHero: (\(aHeroX),\(aHeroY))")
                 
                 moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY, aHeroX: aHeroX, aHeroY: aHeroY )
             }
@@ -354,12 +359,23 @@
             let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
             let heroGridXUpdate = Int(heroLocation.x / tileSize.tileWidth)
             let heroGridYUpdate = Int((heroLocation.y - toolBarHeight) / tileSize.tileWidth)
+            let finishLineLocation = finishLineObject.convert(CGPoint(x:0, y:0), to: self)
+            let finishLineGridXUpdate = Int(finishLineLocation.x / tileSize.tileWidth)
+            let finishLineGridYUpdate = Int((heroLocation.y - toolBarHeight) / tileSize.tileWidth)
     
             
             clampCameraToHero()
             clampCamera()
             
-            if heroGridXUpdate == finishLineGridX && heroGridYUpdate == finishLineGridY {
+            print("finishLineX/Y")
+            print(finishLineGridXUpdate)
+            print(finishLineGridYUpdate)
+            
+            print("heroGridX/Y")
+            print(heroGridXUpdate)
+            print(heroGridYUpdate)
+            
+            if heroGridXUpdate == finishLineGridX && heroGridYUpdate == finishLineGridY && mazeSave.mazeObject.finishLineObject.isAlive {
                 if playingBuiltMaze == true {
                     optionsMenuVictoryReference.alpha = 1
                 } else {
@@ -445,15 +461,14 @@
             let baseDuration = 0.4
             var nextX: Int
             var nextY: Int
-            var move: SKAction
-            var yAdjust: SKAction
-            var xAdjust: SKAction
+            var move: SKAction?
+            var adjust: SKAction?
+            var herosequence: SKAction
+
+            if dir == .X { return } // Avoid stopping or adjusting anything in this case
             
-//            mouseHeroObject.removeAllActions()
-            //            let aCGPoint = CGPoint(x: aHeroX, y: aHeroY)
-            //            adjust = SKAction.move(to: aCGPoint, duration: 0.2)
-            xAdjust = SKAction.moveTo(x: aHeroX, duration: 0.2)
-            yAdjust = SKAction.moveTo(y: aHeroY, duration: 0.2)
+            mouseHeroObject.removeAllActions() // STOP what we are doing, adjusting to where we now are below
+            
             
             switch dir {
             case .N:
@@ -506,13 +521,33 @@
                 
                 mouseHeroObject.run(SKAction.repeat(dwarfWWalk, count: count))
                 move = SKAction.moveTo(x: CGFloat(nextX) * tileWidth, duration: Double(abs(nextX - hX)) * baseDuration)
+            case .B:
+                // Bullseye, we are already at the grid location
+                move = nil
             case .X:
+                // Already returned above at start of func
                 return
                 
             }
-            let sequence = SKAction.sequence ([xAdjust, yAdjust, move])
-            //            mouseHeroObject.run(sequence)
-            mouseHeroObject.run(move)
+            
+            if aHeroX > 0 && dir == .W  || aHeroX < 0 && dir == .E || aHeroY > 0 && dir == .S || aHeroY < 0 && dir == .N{
+                
+            } else {
+                adjust = ((aHeroX == 0.0 && aHeroY == 0.0) ? nil : SKAction.moveBy(x: aHeroX, y: aHeroY, duration: 0.2))
+            }
+            
+            
+            if adjust == nil && move == nil {
+                return
+            } else if adjust == nil {
+                herosequence = move!
+            } else if move == nil {
+                herosequence = adjust!
+            } else {
+                herosequence = SKAction.sequence([adjust!, move!])
+            }
+            
+            mouseHeroObject.run(herosequence)
         }
         
         
@@ -542,9 +577,9 @@
             }
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+//            skView.showsPhysics = true
+//            skView.showsDrawCount = true
+//            skView.showsFPS = true
         }
         
         
@@ -555,15 +590,6 @@
                 print("Could not get Skview")
                 return
             }
-            
-            //            var scene = myMazes(fileNamed:"myMazes")
-            //            scene?.scaleMode = .aspectFill
-            //            scene?.loadMyMazes {
-            //                skView.presentScene(scene)
-            ////                scene = nil
-            //
-            //            }
-            
             
             guard let scene = myMazes(fileNamed:"myMazes") else {
                 print("Could not make MainMenu, check the name is spelled correctly")
@@ -579,11 +605,9 @@
             
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
-            
-            
+//            skView.showsPhysics = true
+//            skView.showsDrawCount = true
+//            skView.showsFPS = true
         }
         
     }

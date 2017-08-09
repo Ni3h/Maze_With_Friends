@@ -189,10 +189,10 @@ class globalMazes: SKScene {
             skView.presentScene(scene)
         }
         
-        /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        /* Show debug */
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
         
     }
     
@@ -212,14 +212,12 @@ class globalMazes: SKScene {
         /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
-        //        scene.loadMaze() {
-        //            skView.presentScene(scene)
-        //        }
+
         
-        /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+//        /* Show debug */
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
         
         /* 4) Start game scene */
         skView.presentScene(scene)
@@ -238,7 +236,7 @@ class globalMazes: SKScene {
             return
         }
         
-        //          3) Ensure correct aspect mode
+        /* 3) Ensure correct aspect mode */
         scene.scaleMode = .aspectFill
         
         scene.loadMyMazes {
@@ -247,10 +245,9 @@ class globalMazes: SKScene {
         
         
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
-//        skView.presentScene(scene)
+//        skView.showsPhysics = true
+//        skView.showsDrawCount = true
+//        skView.showsFPS = true
 
 
     }
