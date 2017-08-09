@@ -133,10 +133,25 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
         mazeSave.mazeObject.placeInitialHero(row: 0, col: 0, yOffset: toolBarHeight)
         mazeSave.mazeObject.placeInitialFinishLine(row: 0, col: 0, yOffset: toolBarHeight)
+//        mazeSave.mazeObject.heroObject.isAlive = false
+//        mazeSave.mazeObject.finishLineObject.isAlive = false
         mazeSave.mazeObject.gridLayer.zPosition = 0
         mazeSave.loadFromPlist {
+//            let gridPositions = self.mazeSave.mazeObject.gridLocation(location: self.mazeSave.mazeObject.heroObject.position, yOffset: self.toolBarHeight)
+//            print(gridPositions.gridX)
+//             self.mazeSave.mazeObject.placeStartingPosition(gridX: gridPositions.gridX, gridY: gridPositions.gridY, yOffset: self.toolBarHeight)
             callback()
+
         }
+        
+//        let gridPositions = mazeSave.mazeObject.gridLocation(location: mazeSave.mazeObject.heroObject.position, yOffset: toolBarHeight)
+       
+        
+        //mazeSave.mazeObject.heroObject
+
+//        mazeSave.mazeObject.placeStartingPosition(gridX: Int(mazeSave.mazeObject.heroObject.position.x), gridY: Int(mazeSave.mazeObject.heroObject.position.y), yOffset: toolBarHeight)
+//        mazeSave.mazeObject.placeStartingFinishLine(gridX: Int(mazeSave.mazeObject.finishLineObject.position.x), gridY: Int(mazeSave.mazeObject.finishLineObject.position.y), yOffset: toolBarHeight)
+        print(mazeSave.mazeObject.finishLineObject.position.y)
         
         self.addChild(mazeSave.mazeObject)
         

@@ -11,6 +11,8 @@
 		1003006A1F15E2A500C59159 /* MSButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100300691F15E2A500C59159 /* MSButtonNode.swift */; };
 		1003006C1F168BFC00C59159 /* WallTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003006B1F168BFC00C59159 /* WallTop.swift */; };
 		1003006E1F16D74B00C59159 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003006D1F16D74B00C59159 /* Wall.swift */; };
+		1009E0901F3A7DE000E4FF31 /* VictoryMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1009E08F1F3A7DE000E4FF31 /* VictoryMenu.sks */; };
+		1009E0921F3A82A200E4FF31 /* VictoryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1009E0911F3A82A200E4FF31 /* VictoryMenu.swift */; };
 		100A1BFB1F324C4500F9A7B4 /* Movement.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100A1BFA1F324C4500F9A7B4 /* Movement.sks */; };
 		100A1BFD1F32573400F9A7B4 /* PlayingAMaze.sks in Resources */ = {isa = PBXBuildFile; fileRef = 100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */; };
 		100A1C051F327D7800F9A7B4 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A1C041F327D7800F9A7B4 /* ToolBox.swift */; };
@@ -69,6 +71,8 @@
 		100300691F15E2A500C59159 /* MSButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSButtonNode.swift; sourceTree = "<group>"; };
 		1003006B1F168BFC00C59159 /* WallTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallTop.swift; sourceTree = "<group>"; };
 		1003006D1F16D74B00C59159 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		1009E08F1F3A7DE000E4FF31 /* VictoryMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = VictoryMenu.sks; sourceTree = "<group>"; };
+		1009E0911F3A82A200E4FF31 /* VictoryMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryMenu.swift; sourceTree = "<group>"; };
 		100A1BFA1F324C4500F9A7B4 /* Movement.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Movement.sks; sourceTree = "<group>"; };
 		100A1BFC1F32573400F9A7B4 /* PlayingAMaze.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayingAMaze.sks; sourceTree = "<group>"; };
 		100A1C041F327D7800F9A7B4 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				103DB40A1F37E84D00DC3CAA /* OptionsMenuBig.sks */,
 				103DB4121F3831EE00DC3CAA /* OptionsMenuVictory.sks */,
 				103DB4161F38C7CA00DC3CAA /* NavOptionsMenu.sks */,
+				1009E08F1F3A7DE000E4FF31 /* VictoryMenu.sks */,
 			);
 			name = "Menu's";
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				103DB4081F37E82300DC3CAA /* OptionsMenuBig.swift */,
 				103DB4141F38342300DC3CAA /* OptionsMenuVictory.swift */,
 				103DB4181F38CE2100DC3CAA /* NavOptionsMenu.swift */,
+				1009E0911F3A82A200E4FF31 /* VictoryMenu.swift */,
 			);
 			name = OptionsStuff;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
 				10DC89B61F29388100C4E327 /* GoogleService-Info.plist in Resources */,
 				10E7AC581F2D745C00916759 /* myMazes.sks in Resources */,
+				1009E0901F3A7DE000E4FF31 /* VictoryMenu.sks in Resources */,
 				100A1C111F33EF9A00F9A7B4 /* globalMazes.sks in Resources */,
 				10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */,
 				100CC0BE1F36F7EB00B5A605 /* globalMazeButtons.sks in Resources */,
@@ -564,6 +571,7 @@
 				103DB4191F38CE2100DC3CAA /* NavOptionsMenu.swift in Sources */,
 				107615061F13E2DE00C46CAD /* AppDelegate.swift in Sources */,
 				10E7AC601F2D791700916759 /* SwiftySKScrollView.swift in Sources */,
+				1009E0921F3A82A200E4FF31 /* VictoryMenu.swift in Sources */,
 				100300681F15B46700C59159 /* IsometricMazeWall.swift in Sources */,
 				10728F031F1D2E67003A18B1 /* MainMenu.swift in Sources */,
 				103DB4071F37E57B00DC3CAA /* OptionsMenuSmall.swift in Sources */,

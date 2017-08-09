@@ -49,7 +49,6 @@
         var cam: SKCameraNode!
         
         var toolBar: ToolBarNode!
-        var victoryButton: MSButtonNode!
         var settingsButton: MSButtonNode!
         
         var toolBarHeight: CGFloat = 0
@@ -58,10 +57,12 @@
         var optionsMenuSmallReference: OptionsMenuSmall!
         var optionsMenuBigReference: OptionsMenuBig!
         var optionsMenuVictoryReference: OptionsMenuVictory!
+        var victoryMenuReference: VictoryMenu!
         
         var mouseHeroObject: MouseHero!
         var finishLineObject: FinishLine!
         var nameToUse: String!
+        var underlyingPosition = (0, 0)
         
         var playingBuiltMaze = false
         
@@ -76,7 +77,6 @@
             self.camera = cam
             
             toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
-            victoryButton = self.childNode(withName: "//victoryButton") as! MSButtonNode
             settingsButton = self.childNode(withName: "//settingsButton") as! MSButtonNode
             
             textField()
@@ -118,6 +118,13 @@
             }
             
             
+            victoryMenuReference = self.childNode(withName: "//victoryMenuNode") as! VictoryMenu
+            victoryMenuReference.addChildren()
+            victoryMenuReference.victoryButton.selectedHandler = { [unowned self] in
+                self.loadMainMenu()
+            }
+            
+            
             
             settingsButton.selectedHandler = { [unowned self] in
                 if self.playingBuiltMaze {
@@ -152,39 +159,8 @@
             print (finishLineGridY)
             //
             
-            /* Setup restart button selection handler */
-            victoryButton.selectedHandler = { [unowned self] in
-                
-                /* 1) Grab reference to our SpriteKit view */
-                guard let skView = self.view as SKView! else {
-                    print("Could not get Skview")
-                    return
-                }
-                
-                
-                /* 2) Load Game scene */
-                guard let scene = MainMenu(fileNamed:"MainMenu") else {
-                    print("Could not make MainMenu, check the name is spelled correctly")
-                    return
-                }
-                
-                
-                
-                /* 3) Ensure correct aspect mode */
-                scene.scaleMode = .aspectFill
-                
-                /* Show debug */
-                skView.showsPhysics = true
-                skView.showsDrawCount = true
-                skView.showsFPS = true
-                
-                /* 4) Start game scene */
-                skView.presentScene(scene)
-                
-            }
+    
             
-            /* Hide restart button */
-            victoryButton.state = .MSButtonNodeStateHidden
             
         }
         
@@ -252,6 +228,7 @@
             let width = self.size.width
             mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
             mazeSave.mazeObject.gridLayer.zPosition = -10
+//            mazeSave.mazeObject.heroObject.isAlive
             mazeSave.loadFromPlist {
                 callback()
             }
@@ -284,6 +261,7 @@
                 print(saveText)
                 inputText?.alpha = 0
                 self.mazeSave.loadFromPlist { }
+                self.mazeSave.mazeObject.heroObject.isAlive = false
                 dispatchGroup.enter()
                 self.mazeSave.saveToFirebase(completion: {
                     dispatchGroup.leave()
@@ -306,20 +284,6 @@
                 inputText!.text = ""
             }
         }
-        
-        
-        
-        //
-        //        func saveMazeAfterBeating(callback: @escaping() -> Void) {
-        //            let width = self.size.width
-        //            mazeSave = SaveMazeManager( width: Int(width), yOffset: 200)
-        //            mazeSave.mazeObject.gridLayer.zPosition = -10
-        //            mazeSave.loadFromPlist {
-        //                callback()
-        //            }
-        //
-        ////            mazeSave.saveToFirebase()
-        //        }
         
         
         
@@ -390,12 +354,7 @@
             let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
             let heroGridXUpdate = Int(heroLocation.x / tileSize.tileWidth)
             let heroGridYUpdate = Int((heroLocation.y - toolBarHeight) / tileSize.tileWidth)
-            
-            //            heroGridX = Int(heroLocation.x / tileSize.tileWidth)
-            //            heroGridY = Int((heroLocation.y - toolBarHeight) / tileSize.tileHeight)
-            //
-            //            print(heroGridX)
-            //            print(heroGridY)
+    
             
             clampCameraToHero()
             clampCamera()
@@ -403,10 +362,13 @@
             if heroGridXUpdate == finishLineGridX && heroGridYUpdate == finishLineGridY {
                 if playingBuiltMaze == true {
                     optionsMenuVictoryReference.alpha = 1
+                } else {
+                    victoryMenuReference.alpha = 1
+
                 }
                 gameState = .victory
+
                 /* Show restart button */
-                victoryButton.state = .MSButtonNodeStateActive
             } else {
                 return
             }
@@ -487,7 +449,7 @@
             var yAdjust: SKAction
             var xAdjust: SKAction
             
-            mouseHeroObject.removeAllActions()
+//            mouseHeroObject.removeAllActions()
             //            let aCGPoint = CGPoint(x: aHeroX, y: aHeroY)
             //            adjust = SKAction.move(to: aCGPoint, duration: 0.2)
             xAdjust = SKAction.moveTo(x: aHeroX, duration: 0.2)
