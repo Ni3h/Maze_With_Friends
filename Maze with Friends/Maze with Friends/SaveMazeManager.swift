@@ -186,7 +186,7 @@ class SaveMazeManager {
     func loadFromFireBaseGlobal(mazeName: String, completion: @escaping () -> Void) {
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
-        let uid = "iqCmuw3ZhUcgw2Xj8zNptLs1CTA2"
+        let uid = "kw6fkHPw9ITNUyHYtFN4ClkUtAX2"
         
         
         //        let nameRef = storageRef.child("mazes/\(mazeName)")

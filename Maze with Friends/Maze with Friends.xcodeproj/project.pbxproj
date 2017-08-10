@@ -55,7 +55,6 @@
 		107615241F13F93C00C46CAD /* GridPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615231F13F93C00C46CAD /* GridPiece.swift */; };
 		107615271F14202A00C46CAD /* BuildingAMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107615261F14202A00C46CAD /* BuildingAMaze.swift */; };
 		108540191F147B5800BFF4FD /* FloorTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108540181F147B5800BFF4FD /* FloorTiles.swift */; };
-		10DC89B61F29388100C4E327 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10DC89B51F29388100C4E327 /* GoogleService-Info.plist */; };
 		10DC89BA1F29467A00C4E327 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10DC89B91F29467A00C4E327 /* Login.storyboard */; };
 		10DC89C01F2966BA00C4E327 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */; };
 		10DEB54C1F1AB2D7003A7B22 /* MouseHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DEB54B1F1AB2D7003A7B22 /* MouseHero.swift */; };
@@ -63,6 +62,7 @@
 		10E7AC581F2D745C00916759 /* myMazes.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10E7AC571F2D745C00916759 /* myMazes.sks */; };
 		10E7AC5A1F2D752200916759 /* myMazes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E7AC591F2D752200916759 /* myMazes.swift */; };
 		10E7AC601F2D791700916759 /* SwiftySKScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E7AC5F1F2D791700916759 /* SwiftySKScrollView.swift */; };
+		10F707011F3BD21B00E4A582 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10F707001F3BD21B00E4A582 /* GoogleService-Info.plist */; };
 		2AD26E4E8764199F2E31AF07 /* Pods_Maze_with_Friends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C2C0862AAFBA2C9E9DC9674 /* Pods_Maze_with_Friends.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,7 +117,6 @@
 		107615231F13F93C00C46CAD /* GridPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPiece.swift; sourceTree = "<group>"; };
 		107615261F14202A00C46CAD /* BuildingAMaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingAMaze.swift; sourceTree = "<group>"; };
 		108540181F147B5800BFF4FD /* FloorTiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorTiles.swift; sourceTree = "<group>"; };
-		10DC89B51F29388100C4E327 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10DC89B91F29467A00C4E327 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		10DC89BF1F2966BA00C4E327 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		10DEB54B1F1AB2D7003A7B22 /* MouseHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MouseHero.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		10E7AC571F2D745C00916759 /* myMazes.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = myMazes.sks; sourceTree = "<group>"; };
 		10E7AC591F2D752200916759 /* myMazes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myMazes.swift; sourceTree = "<group>"; };
 		10E7AC5F1F2D791700916759 /* SwiftySKScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftySKScrollView.swift; sourceTree = "<group>"; };
+		10F707001F3BD21B00E4A582 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69D4399F62D7DD41B0CB3813 /* Pods-Maze with Friends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze with Friends.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maze with Friends/Pods-Maze with Friends.release.xcconfig"; sourceTree = "<group>"; };
 		8169AE70260A04104B69070E /* Pods-Maze with Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze with Friends.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maze with Friends/Pods-Maze with Friends.debug.xcconfig"; sourceTree = "<group>"; };
 		9C2C0862AAFBA2C9E9DC9674 /* Pods_Maze_with_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maze_with_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,7 +343,7 @@
 		10DC89B71F29388800C4E327 /* Info */ = {
 			isa = PBXGroup;
 			children = (
-				10DC89B51F29388100C4E327 /* GoogleService-Info.plist */,
+				10F707001F3BD21B00E4A582 /* GoogleService-Info.plist */,
 				107615171F13E2DE00C46CAD /* Info.plist */,
 			);
 			name = Info;
@@ -485,13 +485,13 @@
 				107615131F13E2DE00C46CAD /* Assets.xcassets in Resources */,
 				103DB4131F3831EE00DC3CAA /* OptionsMenuVictory.sks in Resources */,
 				107615161F13E2DE00C46CAD /* LaunchScreen.storyboard in Resources */,
-				10DC89B61F29388100C4E327 /* GoogleService-Info.plist in Resources */,
 				10E7AC581F2D745C00916759 /* myMazes.sks in Resources */,
 				1009E0901F3A7DE000E4FF31 /* VictoryMenu.sks in Resources */,
 				100A1C111F33EF9A00F9A7B4 /* globalMazes.sks in Resources */,
 				10728F011F1D247D003A18B1 /* MainMenu.sks in Resources */,
 				100CC0BE1F36F7EB00B5A605 /* globalMazeButtons.sks in Resources */,
 				1076150A1F13E2DE00C46CAD /* Actions.sks in Resources */,
+				10F707011F3BD21B00E4A582 /* GoogleService-Info.plist in Resources */,
 				10DC89BA1F29467A00C4E327 /* Login.storyboard in Resources */,
 				103DB4051F37E43E00DC3CAA /* OptionsMenuSmall.sks in Resources */,
 			);

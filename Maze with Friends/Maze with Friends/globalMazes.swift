@@ -104,7 +104,7 @@ class globalMazes: SKScene {
     
     func loadMazeArrayFromDatabase(completion: @escaping () -> Void) {
         let dataRef = database.reference()
-        let uid = "iqCmuw3ZhUcgw2Xj8zNptLs1CTA2"
+        let uid = "kw6fkHPw9ITNUyHYtFN4ClkUtAX2"
         
         dataRef.child("mazes").child(uid).observe(.value, with: {
             [unowned self] (snapshot) in
@@ -254,7 +254,7 @@ class globalMazes: SKScene {
     
     override func willMove(from view: SKView) {
         let dataRef = database.reference()
-        let uid = "iqCmuw3ZhUcgw2Xj8zNptLs1CTA2"
+        let uid = "kw6fkHPw9ITNUyHYtFN4ClkUtAX2"
         dataRef.child("mazes").child(uid).removeAllObservers()
     }
 

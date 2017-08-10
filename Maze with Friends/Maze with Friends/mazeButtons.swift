@@ -71,12 +71,6 @@ class mazeButtons: MSButtonNode {
 
     }
 
-    
-    
-    
-    
-    
-    
 }
 
 
