@@ -29,9 +29,10 @@ class globalMazes: SKScene {
     
     var toolBarHeight: CGFloat = 0
     var yOffset: CGFloat = 0
+    var globalBottomYOffset: CGFloat = 0
     
     var nameOfButton = ""
-    var cam: SKCameraNode!
+    var globalCam: SKCameraNode!
     var cgHeight: CGFloat = 0
     
     var goToGlobalMazesFromGlobal: MSButtonNode!
@@ -46,8 +47,8 @@ class globalMazes: SKScene {
     
     override func didMove(to view: SKView) {
         /* Create a new Camera */
-        cam = childNode(withName: "cameraNode") as! SKCameraNode
-        self.camera = cam
+        globalCam = childNode(withName: "globalCameraNode") as! SKCameraNode
+        self.camera = globalCam
         
 //        toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
 //        
@@ -89,9 +90,11 @@ class globalMazes: SKScene {
         
         toolBar = self.childNode(withName: "//toolBar") as! ToolBarNode
         globalMazesBottomToolBar = self.childNode(withName: "//globalMazesBottomToolBar") as! ToolBarNode
-            
+        
+        
         toolBarHeight = toolBar.size.height
         yOffset = toolBarHeight
+        globalBottomYOffset = globalMazesBottomToolBar.size.height
         
         
         
@@ -147,23 +150,23 @@ class globalMazes: SKScene {
     }
     
     func scrollScene(deltaY: CGFloat) {
-        cam.position.y += deltaY
-        clampCamera(nameArray: self.mazeNameArray, yOffset: self.yOffset)
+        globalCam.position.y += deltaY
+        clampCamera(nameArray: self.mazeNameArray, yOffset: self.yOffset, bottomYOffset: self.globalBottomYOffset)
         
     }
     
-    func clampCamera(nameArray: [String], yOffset: CGFloat){
+    func clampCamera(nameArray: [String], yOffset: CGFloat, bottomYOffset: CGFloat){
         let count = nameArray.count
         let heightOfButtons = CGFloat(count) * cgHeight
         
-        let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset
+        let bBoundary = (self.size.height + (self.size.height/2)) - heightOfButtons - yOffset - bottomYOffset
         let tBoundary = self.size.height/2
         
         let targetY = camera!.position.y
         
         let y = clamp(value: targetY, lower: bBoundary, upper: tBoundary)
         
-        cam.position.y = y
+        globalCam.position.y = y
     }
     
     func loadPlaySceneGlobal(nameOfButton: String) {

@@ -7,14 +7,6 @@
 //
 
 import Foundation
-//
-//  ToolBox.swift
-//  Maze with Friends
-//
-//  Created by Ethan on 7/21/17.
-//  Copyright © 2017 Ethan. All rights reserved.
-//
-
 import SpriteKit
 
 class mazeButtons: MSButtonNode {
@@ -34,7 +26,7 @@ class mazeButtons: MSButtonNode {
     }
     
     
-    override required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

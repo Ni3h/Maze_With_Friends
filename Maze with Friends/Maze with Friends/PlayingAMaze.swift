@@ -127,6 +127,7 @@
             
             
             settingsButton.selectedHandler = { [unowned self] in
+                if self.gameState != .active { return }
                 if self.playingBuiltMaze {
                     self.optionsMenuBigReference.alpha = 1
                 } else {
@@ -154,10 +155,7 @@
             
             //  finishLineObject = mazeSave.mazeObject.finishLineObject
             finishLineGridX = Int((finishLineLocation.x + tileSize.tileWidth/2) / tileSize.tileWidth)
-            print (finishLineGridX)
             finishLineGridY = Int((finishLineLocation.y - toolBarHeight + (tileSize.tileHeight/2)) / tileSize.tileHeight)
-            print (finishLineGridY)
-            //
             
     
             
@@ -330,7 +328,7 @@
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             if gameState != .active { return }
             if didItScroll == false {
-                print("heroGridX\(heroGridX)heroGridY\(heroGridY)")
+//                print("heroGridX\(heroGridX)heroGridY\(heroGridY)")
                 
                 let tileSize = mazeSave.mazeObject.tileSize()
                 let heroLocation = mouseHeroObject.convert(CGPoint(x: 0, y: 0), to: self)
@@ -341,10 +339,10 @@
                 
                 let dir = travelDirection(gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY)
                 
-                print("\ntouch: (\(gridX),\(gridY))  dir: \(dir)")
-                print("heroGrid: (\(heroGridX),\(heroGridY))")
-                print("heroLocation: (\(heroLocation.x),\(heroLocation.y))")
-                print("aHero: (\(aHeroX),\(aHeroY))")
+//                print("\ntouch: (\(gridX),\(gridY))  dir: \(dir)")
+//                print("heroGrid: (\(heroGridX),\(heroGridY))")
+//                print("heroLocation: (\(heroLocation.x),\(heroLocation.y))")
+//                print("aHero: (\(aHeroX),\(aHeroY))")
                 
                 moveHero( dir: dir, gX: gridX, gY: gridY, hX: heroGridX, hY: heroGridY, aHeroX: aHeroX, aHeroY: aHeroY )
             }
@@ -366,14 +364,6 @@
             
             clampCameraToHero()
             clampCamera()
-            
-            print("finishLineX/Y")
-            print(finishLineGridXUpdate)
-            print(finishLineGridYUpdate)
-            
-            print("heroGridX/Y")
-            print(heroGridXUpdate)
-            print(heroGridYUpdate)
             
             if heroGridXUpdate == finishLineGridX && heroGridYUpdate == finishLineGridY && mazeSave.mazeObject.finishLineObject.isAlive {
                 if playingBuiltMaze == true {
