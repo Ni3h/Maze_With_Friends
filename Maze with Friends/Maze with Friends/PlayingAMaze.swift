@@ -558,7 +558,7 @@
             
             
             /* 3) Ensure correct aspect mode */
-            scene.scaleMode = .aspectFill
+            scene.scaleMode = .aspectFit
             
             
             scene.keepBuildingCurrentMaze() {
@@ -587,7 +587,7 @@
             }
             
             //          3) Ensure correct aspect mode
-            scene.scaleMode = .aspectFill
+            scene.scaleMode = .aspectFit
             
             scene.loadMyMazes {
                 skView.presentScene(scene)

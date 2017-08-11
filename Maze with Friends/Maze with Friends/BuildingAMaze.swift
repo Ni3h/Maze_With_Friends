@@ -298,7 +298,8 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
         }
         
         //          3) Ensure correct aspect mode
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
+        
         
         scene.loadMyMazes {
             skView.presentScene(scene)
@@ -325,7 +326,7 @@ class BuildingAMaze: SKScene, UITextFieldDelegate {
             return
         }
         /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         
         scene.loadMazeWhileBuilding() {
             skView.presentScene(scene)

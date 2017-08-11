@@ -27,10 +27,13 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mazebuilder" translatesAutoresizingMaskIntoConstraints="NO" id="KYY-Lp-gqb">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srE-f8-lfa">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srE-f8-lfa">
                                         <rect key="frame" x="51" y="511" width="273" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.2196078431372549" green="0.59215686274509804" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="ka2-Vk-5wj"/>
+                                            <constraint firstAttribute="width" constant="273" id="uhf-bT-9X5"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Register or Log In "/>
                                         <connections>
@@ -40,7 +43,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="srE-f8-lfa" firstAttribute="centerX" secondItem="VbH-LQ-SyE" secondAttribute="centerX" id="G8z-9J-T3D"/>
                                     <constraint firstAttribute="trailing" secondItem="KYY-Lp-gqb" secondAttribute="trailing" id="SaS-qU-H0C"/>
+                                    <constraint firstAttribute="bottom" secondItem="srE-f8-lfa" secondAttribute="bottom" constant="61" id="gv0-rb-Z5L"/>
                                     <constraint firstAttribute="bottom" secondItem="KYY-Lp-gqb" secondAttribute="bottom" id="gx0-I8-fIz"/>
                                     <constraint firstItem="KYY-Lp-gqb" firstAttribute="leading" secondItem="VbH-LQ-SyE" secondAttribute="leading" id="wuz-Yl-95p"/>
                                     <constraint firstItem="KYY-Lp-gqb" firstAttribute="top" secondItem="VbH-LQ-SyE" secondAttribute="top" id="xT8-l2-Zvc"/>

@@ -191,7 +191,7 @@ class myMazes: SKScene {
         }
         scene.getName(nameOfButton: nameOfButton)
         /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         
         scene.loadMaze() {
             skView.presentScene(scene)
@@ -218,7 +218,7 @@ class myMazes: SKScene {
         }
         
         /* 3) Ensure correct aspect mode */
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         
 
         /* Show debug */
@@ -244,7 +244,7 @@ class myMazes: SKScene {
         }
         
         //          3) Ensure correct aspect mode
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         
         scene.loadGlobalMazes {
             skView.presentScene(scene)
